@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+$primary: #ffe4c4;
+
+body {
+   padding: 0;
+   margin: 0;
+}
+
+a { 
+   color: inherit;
+   text-decoration: inherit;
+}
+.container {
+   padding-left: 32px;
+   padding-right: 32px;
+}
+@for $i from 1 through 20 {
+   .mr-#{$i} {
+      margin-right: #{$i * 0.25}rem ;
+   }
+}

@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet, RouterLinkActive, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup,  } from '@angular/forms';
 
-import { LabelComponent } from './forms/label/label.component';
-import { InputComponent } from './forms/input/input.component';
+import { SellerFormComponent } from './seller-form/seller-form.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLinkActive, RouterLink, ReactiveFormsModule, LabelComponent, InputComponent],
+  imports: [RouterOutlet, RouterLinkActive, RouterLink, SellerFormComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

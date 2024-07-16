@@ -1,0 +1,67 @@
+@import '../../styles.scss';
+
+$height: 64px;
+.header {
+   position: fixed;
+   left: 0;
+   right: 0;
+   top: 0;
+}
+.container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid rgb(227, 228, 229);
+}
+.logo {
+
+}
+.accounts {
+   display: flex;
+}
+.dropdown {
+   height: $height;
+   position: relative;
+   display: flex;
+   align-items: center;
+
+   .dropdown-text {
+      padding: 4px 8px;
+      border-radius: 8px;   
+   }
+
+   .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc($height - 5px );
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+
+      width: 200px;
+      border-radius: 8px;
+      padding: 8px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgb(227, 228, 229);
+
+      .dropdown-item {
+         list-style: none;
+         text-align: center;
+         padding: 4px 8px;
+         font-weight: 700;
+         &:hover {
+            background-color: $primary;
+            cursor: pointer;
+         }
+      }
+   }
+
+   &:hover {
+      .dropdown-menu{
+         display: block;
+      }
+      .dropdown-text {
+         background-color: $primary;
+      }
+   }
+}
