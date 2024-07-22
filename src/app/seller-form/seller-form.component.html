@@ -1,20 +1,22 @@
-<h1>Create Account for Seller</h1>
-<form action="" [formGroup]="sellerForm">
-   <app-label for="name" text="Name">
-      <app-input id="name" [control]="sellerForm.controls.name" />
-   </app-label>
-
-   <app-label for="email" text="Email">
-      <app-input id="email" [control]="sellerForm.controls.email"/>
-   </app-label>
-
-   <app-label for="password" text="Password">
-      <app-input id="password" [control]="sellerForm.controls.password"/>
-   </app-label>
-
-   <app-label for="re-password" text="Re-type password">
-      <app-input id="re-password" [control]="sellerForm.controls.rePassword"/>
-   </app-label>
-
-</form>
-<button (click)="checkValue()">Check value</button>
+<div class="container">
+   <h1>Create Account for Seller</h1>
+   <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm()">
+      <app-label for="name" text="Name" className="mb-4">
+         <app-input id="name" [control]="sellerForm.controls.name" />
+      </app-label>
+   
+      <app-label for="email" text="Email" className="mb-4">
+         <app-input id="email" [control]="sellerForm.controls.email"/>
+      </app-label>
+   
+      <app-label for="password" text="Password" className="mb-4">
+         <app-input id="password" [control]="sellerForm.controls.password"/>
+      </app-label>
+   
+      <app-label for="re-password" text="Re-type password" className="mb-4">
+         <app-input id="re-password" [control]="sellerForm.controls.rePassword"/>
+      </app-label>
+   
+      <app-button text="Submit" />
+   </form>
+</div>

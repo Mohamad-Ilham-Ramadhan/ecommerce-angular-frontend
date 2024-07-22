@@ -1,0 +1,16 @@
+@import '../../styles.scss';
+
+button {
+   padding: 8px;
+   display: block;
+   background-color: $primary;
+   border-radius: 8px;
+   border: none;
+
+   &:active {
+      background-color: darken($color: $primary, $amount: 5);
+   }
+   &:hover {
+      cursor: pointer;
+   }
+}

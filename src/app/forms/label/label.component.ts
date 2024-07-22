@@ -10,5 +10,5 @@ import { Component, Input } from '@angular/core';
 export class LabelComponent {
   @Input() for = '';
   @Input() text = '';
-
+  @Input() className = '';
 }

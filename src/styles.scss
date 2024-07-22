@@ -21,3 +21,8 @@ a {
       margin-right: #{$i * 0.25}rem ;
    }
 }
+@for $i from 1 through 20 {
+   .mb-#{$i} {
+      margin-bottom: #{$i * 0.25}rem ;
+   }
+}
