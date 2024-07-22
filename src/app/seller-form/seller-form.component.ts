@@ -20,4 +20,14 @@ export class SellerFormComponent {
     email: new FormControl(''),
     image: new FormControl<File | null>(null),
   });
+
+  checkValue() {
+    for (const key in this.sellerForm.controls) {
+      if (Object.prototype.hasOwnProperty.call(this.sellerForm.controls, key)) {
+        // @ts-ignore
+        const element = this.sellerForm.controls[key];
+        console.log(element.value)
+      }
+    }
+  }
 }
