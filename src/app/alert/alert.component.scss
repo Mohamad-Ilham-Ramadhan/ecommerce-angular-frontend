@@ -1,0 +1,24 @@
+.alert {
+   display: flex;
+   padding: 8px;
+   border-radius: 8px;
+   border: 2px solid rgb(53, 188, 143);
+   background-color: rgb(138, 238, 191);
+
+   align-items: center;
+}
+.alert-text {
+   flex-grow: 1;
+}
+.alert-close {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   &:hover {
+      cursor: pointer;
+   }
+}
+svg {
+   width: 16px;
+   height: 16px;
+}

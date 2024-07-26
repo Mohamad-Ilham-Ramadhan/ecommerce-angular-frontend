@@ -19,4 +19,10 @@
    
       <app-button text="Submit" />
    </form>
+
+   @if (showAlert) {
+      <div>
+         <app-alert text="alert nih bos" (onCloseClick)="closeAlert($event)" />      
+      </div>
+   }
 </div>
