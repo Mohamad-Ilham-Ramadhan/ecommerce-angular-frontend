@@ -22,7 +22,12 @@
 
    @if (showAlert) {
       <div>
-         <app-alert text="alert nih bos" (onCloseClick)="closeAlert($event)" />      
+         <app-alert 
+            [text]="alertText" 
+            (onCloseClick)="closeAlert($event)" 
+            [variant]="alertVariant"
+            [onSale]="true"
+         />      
       </div>
    }
 </div>

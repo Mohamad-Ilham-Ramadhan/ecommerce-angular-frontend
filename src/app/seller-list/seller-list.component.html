@@ -1,1 +1,24 @@
-<p>seller-list works!</p>
+<div class="container">
+   <h1>List of sellers</h1>
+   
+   <div class="delete-wrapper">
+      <button (click)="deleteAll()" class="delete-btn">Delete all</button>
+   </div>
+   
+   <table>
+      <thead>
+         <tr>
+            <th>Name</th>
+            <th>Email</th>
+         </tr>
+      </thead>
+      <tbody>
+         @for (seller of sellers; track $index) {
+            <tr>
+               <td>{{seller.name}}</td>
+               <td>{{seller.email}}</td>
+            </tr>
+         }
+      </tbody>
+   </table>
+</div>

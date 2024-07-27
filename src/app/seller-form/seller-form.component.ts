@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
 import { ButtonComponent } from '../button/button.component';
-import { AlertComponent } from '../alert/alert.component';
+import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 @Component({
   selector: 'app-seller-form',
@@ -17,8 +16,9 @@ import { AlertComponent } from '../alert/alert.component';
 })
 export class SellerFormComponent {
 
-  submitMessage = '';
-  showAlert = true;
+  alertText = '';
+  showAlert = false;
+  alertVariant: AlertVariant = 'primary';
   
   closeAlert($event: any) {
     this.showAlert = false;
@@ -53,16 +53,23 @@ export class SellerFormComponent {
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
 
-    this.http.post('http://localhost:3000/sellers/create', data).subscribe( async (res: any) => {
-      console.log('submit response', res)
-      try {
+    this.http.post('http://localhost:3000/sellers/create', data).subscribe({
+      next: (res: any) => {
+        console.log('submit response', res)
         if (res.message) {
-          this.submitMessage = res.message;
+          this.alertText = res.message;
+          this.alertVariant = 'primary';
         } else {
-          this.submitMessage = 'Something went wrong'
+          this.alertText = 'Something went wrong';
+          this.alertVariant = 'danger';
         }
-      } catch (error) {
-        
+        this.showAlert = true;
+      },
+      error: (e: HttpErrorResponse) => {
+        console.log('THIS IS ERROR', e);
+        this.alertText = e.error.message;
+        this.alertVariant = 'danger';
+        this.showAlert = true;
       }
     })
   }

@@ -2,10 +2,16 @@
    display: flex;
    padding: 8px;
    border-radius: 8px;
-   border: 2px solid rgb(53, 188, 143);
-   background-color: rgb(138, 238, 191);
-
    align-items: center;
+   
+   &.primary {
+      border: 2px solid rgb(53, 188, 143);
+      background-color: rgb(138, 238, 191);
+   }
+   &.danger {
+      border: 2px solid rgb(221, 87, 87);
+      background-color: rgb(248, 200, 212);
+   }
 }
 .alert-text {
    flex-grow: 1;

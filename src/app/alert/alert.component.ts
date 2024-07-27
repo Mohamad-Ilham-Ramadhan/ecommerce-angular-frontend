@@ -1,4 +1,6 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, Input, output, OnChanges, SimpleChanges } from '@angular/core';
+
+export type AlertVariant = 'primary' | 'danger';
 
 @Component({
   selector: 'app-alert',
@@ -7,9 +9,22 @@ import { Component, Input, output } from '@angular/core';
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.scss'
 })
-export class AlertComponent {
-  @Input() variant: 'primary' | 'danger' = 'primary';
+export class AlertComponent implements OnChanges {
+  @Input() variant: AlertVariant = 'primary';
   @Input() text: string = '';
+  @Input() onSale: boolean = false;
+  classes: string[] = ['alert']; 
+
+  constructor() {
+    this.classes = ['alert', this.variant];
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const variant = changes['variant'];
+    if (variant.currentValue !== variant.previousValue) {
+      this.classes = ['alert', variant.currentValue]
+    }
+  }
 
   onCloseClick = output<boolean>();
 
