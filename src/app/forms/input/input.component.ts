@@ -13,4 +13,5 @@ export class InputComponent {
   @Input() id = '';
   @Input() control!: FormControl;
   @Input() className!: string;
+  @Input() type: string = 'text';
 }
