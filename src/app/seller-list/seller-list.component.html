@@ -4,26 +4,31 @@
    <div class="delete-wrapper">
       <button (click)="deleteAll()" class="delete-btn">Delete all</button>
    </div>
-   
-   <table>
-      <thead>
-         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-         </tr>
-      </thead>
-      <tbody>
-         @for (seller of sellers; track $index) {
+
+   @if (sellers.length === 0) {
+      <h2>No seller yet !</h2>
+   } @else {
+      <table>
+         <thead>
             <tr>
-               <td>{{seller.name}}</td>
-               <td>{{seller.email}}</td>
-               <td>
-                  <button>Edit</button>
-                  <button (click)="deleteSingle(seller.id)" [disabled]="deleteLoading">Delete</button>
-               </td>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Action</th>
             </tr>
-         }
-      </tbody>
-   </table>
+         </thead>
+         <tbody>
+            @for (seller of sellers; track $index) {
+               <tr>
+                  <td>{{seller.name}}</td>
+                  <td>{{seller.email}}</td>
+                  <td>
+                     <button>Edit</button>
+                     <button (click)="deleteSingle(seller.id)" [disabled]="deleteLoading">Delete</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   }
+   
 </div>
