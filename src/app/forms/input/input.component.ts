@@ -12,4 +12,5 @@ import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 export class InputComponent {
   @Input() id = '';
   @Input() control!: FormControl;
+  @Input() className!: string;
 }

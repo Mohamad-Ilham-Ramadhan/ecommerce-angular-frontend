@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { LabelComponent } from '../forms/label/label.component';
@@ -7,10 +7,13 @@ import { InputComponent } from '../forms/input/input.component';
 import { ButtonComponent } from '../button/button.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
+import { HighlightDirective } from './highlight.directive';
+import { matchPasswordsValidator } from './password.validator';
+
 @Component({
   selector: 'app-seller-form',
   standalone: true,
-  imports: [ReactiveFormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent, HighlightDirective],
   templateUrl: './seller-form.component.html',
   styleUrl: './seller-form.component.scss'
 })
@@ -19,20 +22,30 @@ export class SellerFormComponent {
   alertText = '';
   showAlert = false;
   alertVariant: AlertVariant = 'primary';
+
+  coba = '';
+
   
   closeAlert($event: any) {
     this.showAlert = false;
   }
 
   sellerForm = new FormGroup({
-    name: new FormControl('ilham'),
+    name: new FormControl('rob', [
+      Validators.required, Validators.minLength(4), Validators.maxLength(40)
+    ]),
     password: new FormControl('lodash'),
     rePassword: new FormControl('lodash'),
-    email: new FormControl('ilham@lodash.com'),
+    email: new FormControl('ilham@lodash.com', [
+      Validators.required, Validators.email
+    ]),
     image: new FormControl<File | null>(null),
-  });
+  }, { validators: matchPasswordsValidator});
 
   constructor(private http: HttpClient) {}
+
+  get name() { return this.sellerForm.get('name')}
+  get email() { return this.sellerForm.get('email')}
 
   checkValue() {
     for (const key in this.sellerForm.controls) {

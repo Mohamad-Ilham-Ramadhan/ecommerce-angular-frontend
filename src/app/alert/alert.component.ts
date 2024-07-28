@@ -15,6 +15,10 @@ export class AlertComponent implements OnChanges {
   @Input() onSale: boolean = false;
   classes: string[] = ['alert']; 
 
+  setCurrentClasses() {
+
+  }
+
   constructor() {
     this.classes = ['alert', this.variant];
   }

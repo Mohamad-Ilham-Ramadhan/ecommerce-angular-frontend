@@ -1,0 +1,3 @@
+features:
+   - seller-form form validation
+   - seller-form submit loading (disabled state)

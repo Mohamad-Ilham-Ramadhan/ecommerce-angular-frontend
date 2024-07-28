@@ -16,6 +16,15 @@ a {
    padding-left: 32px;
    padding-right: 32px;
 }
+
+.form-alert {
+   width: fit-content;
+   padding: 4px;
+   border-radius: 8px;
+   border: 2px solid rgb(221, 87, 87);
+   background-color: rgb(248, 200, 212);
+}
+
 @for $i from 1 through 20 {
    .mr-#{$i} {
       margin-right: #{$i * 0.25}rem ;
