@@ -1,2 +1,9 @@
 features:
-   - seller-form button show password and re-password (done)
+   - seller-form clear inputs after submit success
+
+   - seller-list delete single item (done)
+   - selelr-list update list after delete
+   - seller-list open modal confirmation before delete item
+
+component:
+   - create modal component

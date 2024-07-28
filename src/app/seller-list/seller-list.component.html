@@ -10,6 +10,7 @@
          <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Action</th>
          </tr>
       </thead>
       <tbody>
@@ -17,6 +18,10 @@
             <tr>
                <td>{{seller.name}}</td>
                <td>{{seller.email}}</td>
+               <td>
+                  <button>Edit</button>
+                  <button (click)="deleteSingle(seller.id)" [disabled]="deleteLoading">Delete</button>
+               </td>
             </tr>
          }
       </tbody>
