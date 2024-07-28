@@ -24,6 +24,19 @@ export class SellerFormComponent {
   alertVariant: AlertVariant = 'primary';
   isFormLoading = false;
 
+  showPassword = false;
+  showRePassword = false;
+  toggleShowPassword(controlName: 'password' | 're-password') {
+    switch (controlName) {
+      case 'password':
+        this.showPassword = !this.showPassword;
+        return
+      case 're-password':
+        this.showRePassword = !this.showRePassword;
+        return
+    } 
+  }
+
   coba = '';
 
   

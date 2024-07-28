@@ -1,2 +1,2 @@
 features:
-   - seller-form submit loading (done)
+   - seller-form button show password and re-password (done)
