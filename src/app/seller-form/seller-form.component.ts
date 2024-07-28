@@ -58,6 +58,7 @@ export class SellerFormComponent {
 
   constructor(private http: HttpClient) {}
 
+  // shorten formControl
   get name() { return this.sellerForm.get('name')}
   get email() { return this.sellerForm.get('email')}
   get password() { return this.sellerForm.get('password')}
@@ -91,7 +92,6 @@ export class SellerFormComponent {
 
     this.http.post('http://localhost:3000/sellers/create', data).subscribe({
       next: (res: any) => {
-        console.log('submit response', res)
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';
@@ -101,6 +101,8 @@ export class SellerFormComponent {
         }
         this.showAlert = true;
         this.isFormLoading = false;
+
+        this.sellerForm.reset()
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);
