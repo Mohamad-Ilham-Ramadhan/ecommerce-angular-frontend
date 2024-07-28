@@ -1,3 +1,2 @@
 features:
-   - seller-form form validation (done)
-   - seller-form submit loading (disabled state)
+   - seller-form submit loading (done)

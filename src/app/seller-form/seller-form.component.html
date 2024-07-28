@@ -1,13 +1,9 @@
 <div class="container">
 
-   <h1 appHighlight>Coba highlight nih bos senggol dong!</h1>
-   
-   <input type="text" [(ngModel)]="coba">
-   {{ coba }}
    <h1>Create Account for Seller</h1>
    <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm()">
       <app-label for="name" text="Name" className="mb-4">
-         <app-input id="name" [control]="sellerForm.controls.name" className="mb-2" />
+         <app-input id="name" [control]="sellerForm.controls.name" className="mb-1" />
          @if (name?.invalid) {
             @if (name?.hasError('required')) {
                <div  class="form-alert">Name is required.</div>
@@ -20,7 +16,7 @@
       </app-label>
    
       <app-label for="email" text="Email" className="mb-4">
-         <app-input id="email" [control]="sellerForm.controls.email" className="mb-2"/>
+         <app-input id="email" [control]="sellerForm.controls.email" className="mb-1"/>
          @if (email?.invalid) {
             @if (email?.hasError('required')) {
                <div  class="form-alert">Email is required.</div>
@@ -31,18 +27,24 @@
       </app-label>
    
       <app-label for="password" text="Password" className="mb-4">
-         <app-input id="password" [control]="sellerForm.controls.password"/>
+         <app-input id="password" type="password" [control]="sellerForm.controls.password" className="mb-1"/>
+         @if (password?.invalid) {
+            <div  class="form-alert">Password is required and min 4 characters.</div>
+         }
       </app-label>
    
       <app-label for="re-password" text="Re-type password" className="mb-2">
-         <app-input id="re-password" [control]="sellerForm.controls.rePassword"/>
+         <app-input id="re-password" type="password" [control]="sellerForm.controls.rePassword" className="mb-1"/>
+         @if (sellerForm.hasError('passwordsDoesNotMatch') && (sellerForm.touched || sellerForm.dirty)) {
+            <div  class="form-alert">Password does not match.</div>
+         }
+         @if (rePassword?.invalid) {
+            <div  class="form-alert">Re-password is required and min 4 characters.</div>
+         }
       </app-label>
 
-      @if (sellerForm.hasError('passwordsDoesNotMatch') && (sellerForm.touched || sellerForm.dirty)) {
-         <div  class="form-alert">Password does not match.</div>
-      }
    
-      <app-button text="Submit" />
+      <app-button text="Submit" [disabled]="isFormLoading" />
    </form>
 
    @if (showAlert) {

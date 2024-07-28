@@ -7,10 +7,13 @@ button {
    border-radius: 8px;
    border: none;
 
-   &:active {
+   &:active:not(:disabled) {
       background-color: darken($color: $primary, $amount: 5);
    }
    &:hover {
       cursor: pointer;
+   }
+   &:disabled {
+      cursor: wait;
    }
 }

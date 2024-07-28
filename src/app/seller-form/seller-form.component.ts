@@ -22,6 +22,7 @@ export class SellerFormComponent {
   alertText = '';
   showAlert = false;
   alertVariant: AlertVariant = 'primary';
+  isFormLoading = false;
 
   coba = '';
 
@@ -31,12 +32,12 @@ export class SellerFormComponent {
   }
 
   sellerForm = new FormGroup({
-    name: new FormControl('rob', [
+    name: new FormControl('', [
       Validators.required, Validators.minLength(4), Validators.maxLength(40)
     ]),
-    password: new FormControl('lodash'),
-    rePassword: new FormControl('lodash'),
-    email: new FormControl('ilham@lodash.com', [
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    rePassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [
       Validators.required, Validators.email
     ]),
     image: new FormControl<File | null>(null),
@@ -46,6 +47,8 @@ export class SellerFormComponent {
 
   get name() { return this.sellerForm.get('name')}
   get email() { return this.sellerForm.get('email')}
+  get password() { return this.sellerForm.get('password')}
+  get rePassword() { return this.sellerForm.get('rePassword')}
 
   checkValue() {
     for (const key in this.sellerForm.controls) {
@@ -58,6 +61,7 @@ export class SellerFormComponent {
   }
 
   submitForm() {
+    this.isFormLoading = true;
 
     const {name, email, password} = this.sellerForm.controls;
     const data = new FormData();
@@ -68,6 +72,7 @@ export class SellerFormComponent {
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
 
     if (this.sellerForm.invalid) {
+      this.isFormLoading = false;
       return;
     }
 
@@ -82,13 +87,15 @@ export class SellerFormComponent {
           this.alertVariant = 'danger';
         }
         this.showAlert = true;
+        this.isFormLoading = false;
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);
         this.alertText = e.error.message;
         this.alertVariant = 'danger';
         this.showAlert = true;
-      }
+        this.isFormLoading = false;
+      },
     })
   }
 }
