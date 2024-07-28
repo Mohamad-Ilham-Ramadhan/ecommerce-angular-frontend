@@ -58,6 +58,7 @@ export class SellerFormComponent {
   }
 
   submitForm() {
+
     const {name, email, password} = this.sellerForm.controls;
     const data = new FormData();
     data.append('name', name.value !== null ? name.value : '')
@@ -65,6 +66,10 @@ export class SellerFormComponent {
     data.append('password', password.value !== null ? password.value : '');
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
+
+    if (this.sellerForm.invalid) {
+      return;
+    }
 
     this.http.post('http://localhost:3000/sellers/create', data).subscribe({
       next: (res: any) => {
