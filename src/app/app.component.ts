@@ -1,19 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RouterOutlet, RouterLinkActive, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormControl, FormGroup,  } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule  } from '@angular/forms';
 
 import { SellerFormComponent } from './seller-form/seller-form.component';
 import { HeaderComponent } from './header/header.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLinkActive, RouterLink, SellerFormComponent, HeaderComponent],
+  imports: [RouterOutlet, RouterLinkActive, RouterLink, FormsModule, SellerFormComponent, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   dataName = '';
   dataEmail = '';
 

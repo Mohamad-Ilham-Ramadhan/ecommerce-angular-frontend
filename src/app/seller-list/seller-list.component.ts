@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment as env } from '../../environments/environment.development';
+
 @Component({
   selector: 'app-seller-list',
   standalone: true,
@@ -8,18 +10,24 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './seller-list.component.html',
   styleUrl: './seller-list.component.scss'
 })
-export class SellerListComponent {
+export class SellerListComponent  {
 
-  sellers: any;
+  sellers: any = [];
+  fetchLoading: boolean = true;
   deleteLoading: boolean = false;
 
+
   constructor(private http: HttpClient) {
-    http.get('http://localhost:3000/sellers').subscribe({
+    console.log('constructor called')
+    http.get(env.apiUrl+'/sellers').subscribe({
       next: (response) => {
-        this.sellers = response
+        console.log('response', response)
+        this.sellers = response;
+        this.fetchLoading = false;
       },
       error: (error) => {
-
+        console.log('error', error);
+        this.fetchLoading = false;
       }
     })
   }
@@ -27,7 +35,7 @@ export class SellerListComponent {
   deleteAll() {
     this.deleteLoading = true;
 
-    this.http.delete('http://localhost:3000/sellers/truncate').subscribe({
+    this.http.delete(env.apiUrl+'/sellers/truncate').subscribe({
       next: (response) => {
         console.log('deleteAll() response', response)
         this.sellers = [];

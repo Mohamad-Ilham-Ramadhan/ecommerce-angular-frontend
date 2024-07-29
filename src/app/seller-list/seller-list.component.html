@@ -4,8 +4,10 @@
    <div class="delete-wrapper">
       <button (click)="deleteAll()" class="delete-btn">Delete all</button>
    </div>
-
-   @if (sellers.length === 0) {
+   @if (fetchLoading) {
+      <h2>Fetching data...</h2>
+   }
+   @else if (sellers.length === 0) {
       <h2>No seller yet !</h2>
    } @else {
       <table>
