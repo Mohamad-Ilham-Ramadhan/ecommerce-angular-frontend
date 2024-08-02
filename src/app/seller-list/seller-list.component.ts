@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { NgIf } from '@angular/common';
 import { environment as env } from '../../environments/environment.development';
+
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-seller-list',
   standalone: true,
-  imports: [],
+  imports: [ModalComponent, NgIf],
   templateUrl: './seller-list.component.html',
   styleUrl: './seller-list.component.scss'
 })
 export class SellerListComponent  {
+  
+  showModal1 = true;
+  toggleModal1() {
+    this.showModal1 = !this.showModal1;
+  }
 
   sellers: any = [];
   fetchLoading: boolean = true;

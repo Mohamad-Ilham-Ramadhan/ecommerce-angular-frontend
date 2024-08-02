@@ -1,0 +1,20 @@
+<h1>See console to see ViewContainer</h1>
+
+<div class="keranjang">
+   <ng-template #keranjang></ng-template>
+</div>
+
+<ul>
+   <li><span #span>This is html element (span)</span></li>
+   <li><button (click)="destroySpan()">Destroy span</button></li>
+   <li><app-coba #custom></app-coba></li>
+   <li><ng-template #template [ngIf]="true">This is template</ng-template></li>
+</ul>
+
+<div #langris>Langris</div>
+
+<ng-template #sudo let-num="numba" let-naoqi="nao"><div style="padding: 10px 20px;">{{num}} : {{naoqi}}</div></ng-template>
+
+<button (click)="append(sudo)">Append</button>
+
+<ng-content></ng-content>

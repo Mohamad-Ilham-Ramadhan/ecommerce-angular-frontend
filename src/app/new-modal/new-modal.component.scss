@@ -1,0 +1,11 @@
+.modal-backdrop {
+   position: fixed;
+   z-index: 1000;
+   background-color: rgba(128, 128, 128, 0.3);
+   inset: 0;
+}
+.modal {
+   position: fixed;
+   z-index: 1001;
+   background-color: white;
+}

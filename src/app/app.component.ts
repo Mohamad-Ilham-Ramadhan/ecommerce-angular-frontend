@@ -1,25 +1,86 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, TemplateRef, Input, OnChanges, SimpleChanges, AfterViewInit, AfterViewChecked, ViewChild, ElementRef, ViewContainerRef, ChangeDetectionStrategy} from '@angular/core';
 import { RouterOutlet, RouterLinkActive, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule  } from '@angular/forms';
 
+import { PortalOutlet, PortalModule, ComponentPortal } from '@angular/cdk/portal';
+
 import { SellerFormComponent } from './seller-form/seller-form.component';
 import { HeaderComponent } from './header/header.component';
 
+import { TeleportService } from './teleport.service';
+import { NewModalService } from './services/new-modal.service';
+import { CustomModalContentComponent } from './custom-modal-content/custom-modal-content.component';
+import { NewModalComponent } from './new-modal/new-modal.component';
+
+import { ModalComponent } from './modal/modal.component';
+import { CobaComponent } from './coba/coba.component';
+import { VcrComponent } from './vcr/vcr.component';
+import { CustomPortalOutletDirective } from './custom-portal-outlet.directive';
+import { CobaDirective } from './coba.directive';
+import { CobaService } from './services/coba.service';
+import { FooComponent } from './foo/foo.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLinkActive, RouterLink, FormsModule, SellerFormComponent, HeaderComponent],
+  imports: [FooComponent, CobaDirective, NewModalComponent, CustomModalContentComponent, CustomPortalOutletDirective, PortalModule, RouterOutlet, RouterLinkActive, RouterLink, FormsModule, SellerFormComponent, HeaderComponent, CobaComponent, VcrComponent, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
+  constructor(private http: HttpClient, private vcr: ViewContainerRef, private modalService: NewModalService, private cobaService: CobaService) {}
 
+  openCoba(name: string, contentTemplate?: TemplateRef<any>, footerTemplate?: TemplateRef<any>) {
+    this.cobaService.open(name, contentTemplate, footerTemplate)
+  }
+  removeCoba(name: string) {
+    this.cobaService.detach(name);
+  }
+  openCoba2(name: string, contentTemplate?: TemplateRef<any>, footerTemplate?: TemplateRef<any>) {
+    this.cobaService.open(name, contentTemplate, footerTemplate)
+  }
+  removeCoba2(name: string) {
+    this.cobaService.detach(name);
+  }
+
+  showFoo = true;
+  toggleFoo() {
+    this.showFoo = !this.showFoo;
+  }
+  
+  @ViewChild('cardContent', { read: ViewContainerRef}) cardContent?: ViewContainerRef;
+  @ViewChild('cardTemplate') cardTemplate?: TemplateRef<any>;
+  
+  openModal(modalTemplate?: TemplateRef<any>) {
+    this.modalService.open(modalTemplate, {size: 'xl', title: 'Fus'}).subscribe(action => {
+      console.log('modalAction', action);
+    });
+  }
+  
+  
+  counter: number = 0;
+  increment() {
+    this.counter = this.counter + 1;
+  }
+  ngAfterViewInit(): void {
+    // this.modalPortal = new ComponentPortal(ModalComponent);
+    if (this.cardTemplate !== undefined) {
+      this.cardContent?.createEmbeddedView(this.cardTemplate)
+    }
+  }
+
+
+  ilham?: string;
+  inputIlham: string = '';
+  changeCobaIlham() {
+    this.ilham = this.inputIlham;
+  }
+  
   dataName = '';
   dataEmail = '';
 
-  constructor(private http: HttpClient) {}
+  modalPortal?: ComponentPortal<ModalComponent>;
 
   getData() {
     this.http.get('http://localhost:3000/').subscribe( (data: any)  => {

@@ -8,3 +8,9 @@ features:
 
 component:
    - create modal component
+      - belajar angular/cdk portal
+
+
+==========================
+
+change detection strategy

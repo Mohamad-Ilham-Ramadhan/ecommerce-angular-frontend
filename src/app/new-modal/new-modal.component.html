@@ -1,0 +1,19 @@
+<div class="modal">
+   <!-- default header and custom header -->
+   <div class="modal-header">
+      <ng-content select="header"></ng-content>
+      {{ title }}
+      <span class="modal-close" (click)="close()">x</span>
+   </div>
+   <!-- default content and custom content -->
+   <div class="modal-content">
+      <ng-content select="content"></ng-content>
+   </div>
+   <!-- default footer and custom footer -->
+   <div class="modal-footer">
+      <ng-content select="footer"></ng-content>
+      <button (click)="submit()">submit</button>
+   </div>
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>
