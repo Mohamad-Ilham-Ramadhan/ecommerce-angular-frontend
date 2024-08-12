@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, OnDestroy, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, OnDestroy, ViewContainerRef, ViewChild, Self } from '@angular/core';
 import { CobaService } from '../services/coba.service';
 
 @Component({
@@ -6,7 +6,8 @@ import { CobaService } from '../services/coba.service';
   standalone: true,
   imports: [],
   templateUrl: './coba.component.html',
-  styleUrl: './coba.component.scss'
+  styleUrl: './coba.component.scss',
+  providers: []
 })
 export class CobaComponent implements AfterViewInit, OnDestroy {
   constructor(private vcr: ViewContainerRef, private cobaService: CobaService){

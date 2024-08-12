@@ -1,3 +1,5 @@
+bugs:
+   - seller-form ketika di enter berkali2 ngirim request berkali2 [done]
 features:
    - seller-form clear inputs after submit success
 

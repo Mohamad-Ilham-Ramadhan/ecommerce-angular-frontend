@@ -1,0 +1,38 @@
+<div>
+   <label for="input-hero">Hero name:</label>
+   <input type="text" id="input-hero" [(ngModel)]="inputHero">
+   <button (click)="addHero()">Add hero</button>
+</div>
+<div>
+   <label for="criteria">Search heroes:</label>
+   <input type="text" id="search" #criteria (input)="updateCriteria(criteria.value)" (focusout)="resetHeroes()" placeholder="Search heroes" />
+</div>
+<!-- <div>
+   <button (click)="toggleAnimation()">Toggle animation</button>
+   <div>Animation is {{ disableAnimation ? 'disabled' : 'enabled' }}</div>
+</div> -->
+<!-- <div>
+   <button (click)="toggleShrink()">Shrink out</button>
+   @if(!isShrink) {
+      <div class="shrink" @shrinkOut></div>
+   }
+</div> -->
+<ul 
+   class="list" 
+>
+   @for (item of heroes; track $index) {
+      <li class="list-item" @inOut [attr.data-index]="$index">
+         <span class="list-item-text">{{ item.name }}</span>
+         <button (click)="deleteHero($index)">Delete</button>
+      </li>
+   }
+   <!-- *ngFor="let item of items; index as i; -->
+   <!-- <li 
+      class="list-item " 
+      *ngFor="let item of heroes; index as $index" 
+      [@.disabled]="disableAnimation"
+   >
+      <span class="list-item-text">{{ item.name }}</span>
+      <button (click)="deleteHero($index)">Delete</button>
+   </li> -->
+</ul>

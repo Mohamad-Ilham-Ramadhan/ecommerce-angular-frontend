@@ -74,9 +74,7 @@ export class SellerFormComponent {
     }
   }
 
-  submitForm() {
-    this.isFormLoading = true;
-
+  submitForm(e: Event) {
     const {name, email, password} = this.sellerForm.controls;
     const data = new FormData();
     data.append('name', name.value !== null ? name.value : '')
@@ -85,10 +83,17 @@ export class SellerFormComponent {
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
 
+    if (this.isFormLoading) {
+      return;
+    }
+    
     if (this.sellerForm.invalid) {
       this.isFormLoading = false;
       return;
     }
+
+    this.isFormLoading = true;
+
 
     this.http.post('http://localhost:3000/sellers/create', data).subscribe({
       next: (res: any) => {

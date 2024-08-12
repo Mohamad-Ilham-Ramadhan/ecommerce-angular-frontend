@@ -1,0 +1,25 @@
+.list {
+   list-style-type: none;
+   padding: 16px;
+   border-radius: 8px;
+   border: 1px solid black;
+
+   .list-item {
+      padding: 8px;
+      border-radius: 8px;
+      background-color: rgb(161, 242, 215);
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      
+      .list-item-text {
+         margin-right: auto
+      }
+   }
+}
+.shrink {
+   height: 250px;
+   width: 500px;
+   background-color: crimson;
+   border-radius: 8px;
+}

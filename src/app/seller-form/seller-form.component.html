@@ -1,7 +1,7 @@
 <div class="container">
 
    <h1>Create Account for Seller</h1>
-   <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm()">
+   <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm($event)">
       <app-label for="name" text="Name" className="mb-4">
          <app-input id="name" [control]="sellerForm.controls.name" className="mb-1" />
          @if (name?.invalid) {

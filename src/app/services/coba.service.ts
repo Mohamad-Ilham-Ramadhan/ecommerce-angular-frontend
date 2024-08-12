@@ -70,6 +70,7 @@ export class CobaService implements AfterViewInit {
     const storeItem: StoreItem | undefined = this.store.get(name);
     storeItem?.componentRef.location.nativeElement.remove();
     storeItem?.componentRef.destroy();
+    this.store.delete(name);
   }
 
   ngAfterViewInit(): void {

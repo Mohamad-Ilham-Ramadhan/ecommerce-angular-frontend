@@ -1,0 +1,9 @@
+@use '@angular/cdk' as cdk;
+@include cdk.overlay();
+
+:host {
+   display: block;
+   background: #fff;
+   border-radius: 8px;
+   padding: 8px 16px 16px;
+}

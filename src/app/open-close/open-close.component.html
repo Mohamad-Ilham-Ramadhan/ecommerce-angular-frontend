@@ -1,0 +1,7 @@
+<nav>
+   <button type="button" (click)="toggle()">Toggle open/close</button>
+</nav>
+
+<div [@openClose]="isOpen ? 'open' : 'closed'">
+   <p>This box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+</div>

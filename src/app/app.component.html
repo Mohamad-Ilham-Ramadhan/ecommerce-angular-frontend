@@ -2,67 +2,8 @@
   <app-header />
 
   <a routerLink="/seller">Seller list</a>
-
-  <ng-template #cobaContent>
-    <div>This is the custom content &lt;ng-content&gt;</div>
-  </ng-template>
-  <ng-template #cobaFooter>
-    <div>This is the custom footer &lt;ng-container&gt;</div>
-  </ng-template>
-
-  <button (click)="openCoba('ilham', cobaContent, cobaFooter)">Open coba component</button>
-  <button (click)="removeCoba('ilham')">Remove coba component</button>
-
-  <hr>
-
-  <ng-template #coba2Content>
-    <div>This is the custom content COBA2 &lt;ng-content&gt;</div>
-  </ng-template>
-  <ng-template #coba2Footer>
-    <div>This is the custom footer COBA2 &lt;ng-container&gt;</div>
-  </ng-template>
-
-  <button (click)="openCoba2('coba2', coba2Content, coba2Footer)">Open coba component</button>
-  <button (click)="removeCoba2('coba2')">Remove coba component</button>
-
-  <hr>
-  <button (click)="toggleFoo()">Toggle foo</button>
-  @if (showFoo) {
-    <app-foo></app-foo>
-  }
-
-  <!-- <div>
-    <div>Card Header</div>
-    <ng-template #cardContent></ng-template>
-    <div>Card Footer</div>
-  </div>
-
-  <ng-template #cardTemplate>
-    <div>Count: {{ counter }}</div>
-    <p>Israel is demon country.</p>
-    <p>It's a white supermacy project from global elite.</p>
-  </ng-template> -->
-
-   <!-- <button (click)="increment()">Increment</button>
-
-  <app-new-modal>
-    <app-custom-modal-content ngProjectAs="header"></app-custom-modal-content>
-  </app-new-modal> -->
-
-  <!-- <button (click)="openModal(modalTemplate)">Open Modal</button>
-
-  <ng-template #modalTemplate>
-    <app-custom-modal-content ngProjectAs="footer"></app-custom-modal-content>
-  </ng-template> -->
-  <!-- <ng-template #modalTemplate>
-    <div>This is our custom modal content</div>
-  </ng-template> -->
+  
 
   <router-outlet />
 
 </main>
-
-<!-- <div #portalOutlet></div> -->
-<!-- <ng-template #cdkOutlet></ng-template> -->
-<!-- <h1 app-coba wkwk="wkwkwkwwk">Coba directive</h1>
-<ng-container customTeleportOutlet="default-modal1" name="modal1"></ng-container> -->
