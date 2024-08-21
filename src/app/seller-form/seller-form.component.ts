@@ -8,7 +8,7 @@ import { ButtonComponent } from '../button/button.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 import { HighlightDirective } from './highlight.directive';
-import { matchPasswordsValidator } from './password.validator';
+import { matchPasswordsValidator } from '../validators/password.validator';
 
 
 @Component({

@@ -1,0 +1,75 @@
+<div class="container">
+
+   <h1>Create New Admin</h1>
+   <form action="" [formGroup]="form" (ngSubmit)="submitForm($event)">
+      <app-label for="name" text="Name" className="mb-4">
+         <app-input id="name" [control]="form.controls.name" className="mb-1" />
+         @if (name?.invalid) {
+            @if (name?.hasError('required')) {
+               <div  class="form-alert">Name is required.</div>
+            } @else if (name?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            } @else if (name?.hasError('maxlength')) {
+               <div  class="form-alert">Minimum 40 characters.</div>
+            }
+         }
+      </app-label>
+
+      <app-label for="username" text="Username" className="mb-4">
+         <app-input id="username" [control]="form.controls.username" className="mb-1" />
+         @if (username?.invalid) {
+            @if (username?.hasError('required')) {
+               <div  class="form-alert">Username is required.</div>
+            } @else if (username?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            } @else if (username?.hasError('maxlength')) {
+               <div  class="form-alert">Minimum 40 characters.</div>
+            }
+         }
+      </app-label>
+   
+      <app-label for="email" text="Email" className="mb-4">
+         <app-input id="email" [control]="form.controls.email" className="mb-1"/>
+         @if (email?.invalid) {
+            @if (email?.hasError('required')) {
+               <div  class="form-alert">Email is required.</div>
+            } @else if (email?.hasError('email')) {
+               <div  class="form-alert">Should be valid email address.</div>
+            }
+         }
+      </app-label>
+   
+      <app-label for="password" text="Password" className="mb-4">
+         <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="form.controls.password" className="mb-1"/>
+         <button (click)="toggleShowPassword('password')">{{showPassword ? 'hide' : 'show'}}</button>
+         @if (password?.invalid) {
+            <div  class="form-alert">Password is required and min 4 characters.</div>
+         }
+      </app-label>
+   
+      <app-label for="re-password" text="Re-type password" className="mb-2">
+         <app-input id="re-password" [type]="showRePassword ? 'text' : 'password'" [control]="form.controls.rePassword" className="mb-1"/>
+         <button (click)="toggleShowPassword('re-password')">{{showRePassword ? 'hide' : 'show'}}</button>
+         @if (form.hasError('passwordsDoesNotMatch') && (form.touched || form.dirty)) {
+            <div  class="form-alert">Password does not match.</div>
+         }
+         @if (rePassword?.invalid) {
+            <div  class="form-alert">Re-password is required and min 4 characters.</div>
+         }
+      </app-label>
+
+   
+      <app-button text="Submit" [disabled]="isFormLoading" />
+   </form>
+
+   @if (showAlert) {
+      <div>
+         <app-alert 
+            [text]="alertText" 
+            (onCloseClick)="closeAlert($event)" 
+            [variant]="alertVariant"
+            [onSale]="true"
+         />      
+      </div>
+   }
+</div>
