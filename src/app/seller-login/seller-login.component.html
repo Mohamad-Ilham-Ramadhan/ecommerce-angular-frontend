@@ -8,8 +8,6 @@
                <div  class="form-alert">Email is required.</div>
             } @else if (email?.hasError('minlength')) {
                <div  class="form-alert">Minimum 4 characters.</div>
-            } @else if (email?.hasError('maxlength')) {
-               <div  class="form-alert">Minimum 40 characters.</div>
             }
          }
       </app-label>
@@ -21,8 +19,6 @@
                <div  class="form-alert">Password is required.</div>
             } @else if (password?.hasError('minlength')) {
                <div  class="form-alert">Minimum 4 characters.</div>
-            } @else if (password?.hasError('maxlength')) {
-               <div  class="form-alert">Minimum 40 characters.</div>
             }
          }
       </app-label>

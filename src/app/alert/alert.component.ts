@@ -12,7 +12,6 @@ export type AlertVariant = 'primary' | 'danger';
 export class AlertComponent implements OnChanges {
   @Input() variant: AlertVariant = 'primary';
   @Input() text: string = '';
-  @Input() onSale: boolean = false;
   classes: string[] = ['alert']; 
 
   setCurrentClasses() {

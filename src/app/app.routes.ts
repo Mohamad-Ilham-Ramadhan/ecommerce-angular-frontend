@@ -17,7 +17,6 @@ import { adminAuthGuard } from './guards/admin-auth.guard';
 
 export const routes: Routes = [
    {path: 'seller/create', component: SellerFormComponent},
-   {path: 'seller', component: SellerListComponent},
    {path: 'seller/login', component: SellerLoginComponent},
    {path: 'vcr', component: VcrComponent},
    // 
@@ -26,6 +25,7 @@ export const routes: Routes = [
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard]},
    {path: 'admin/create', component: AdminCreateComponent, canActivate: [adminAuthGuard]},
    {path: 'admin/login', component: AdminLoginComponent,},
+   {path: 'admin/sellers', component: SellerListComponent, canActivate: [adminAuthGuard]},
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: '**', component: NotfoundComponent}
 

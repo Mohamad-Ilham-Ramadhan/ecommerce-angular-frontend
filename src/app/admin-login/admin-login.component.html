@@ -1,1 +1,32 @@
-<p>admin-login works!</p>
+<div class="wrapper">
+   <h1>Admin Login Form</h1>
+   <form action="" [formGroup]="form" (ngSubmit)="submit($event)">
+      <app-label for="username">
+         <div class="label">Username</div>
+         <app-input id="username" type="username" [control]="form.controls.username"></app-input>
+         @if (username?.invalid) {
+            @if (username?.hasError('required')) {
+               <div  class="form-alert">username is required.</div>
+            } @else if (username?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            }
+         }
+      </app-label>
+      <app-label for="password">
+         <div class="label">Password</div>
+         <app-input id="password" type="password" [control]="form.controls.password"></app-input>
+         @if (password?.invalid) {
+            @if (password?.hasError('required')) {
+               <div  class="form-alert">Password is required.</div>
+            } @else if (password?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            }
+         }
+      </app-label>
+      <button [disabled]="isFormLoading">Login</button>
+   </form>
+
+   @if (showAlert) {
+      <app-alert [variant]="alertVariant" [text]="alertText" (onCloseClick)="closeAlert()" />
+   }
+</div>
