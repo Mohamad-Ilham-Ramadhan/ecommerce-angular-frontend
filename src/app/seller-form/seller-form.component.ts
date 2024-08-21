@@ -10,6 +10,7 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 import { HighlightDirective } from './highlight.directive';
 import { matchPasswordsValidator } from './password.validator';
 
+
 @Component({
   selector: 'app-seller-form',
   standalone: true,
@@ -117,5 +118,6 @@ export class SellerFormComponent {
         this.isFormLoading = false;
       },
     })
+
   }
 }

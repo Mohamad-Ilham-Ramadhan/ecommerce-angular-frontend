@@ -1,12 +1,9 @@
 bugs:
-   - seller-form ketika di enter berkali2 ngirim request berkali2 [done]
 features:
    - seller-form clear inputs after submit success
 
-   - seller-list delete single item (done)
    - selelr-list update list after delete
-   - seller-list open modal confirmation before delete item
-   - seller-list show "No seller yet" if no seller in database (done)
+   - seller-list open modal confirmation before delete item [onprogress]
 
 component:
    - create modal component

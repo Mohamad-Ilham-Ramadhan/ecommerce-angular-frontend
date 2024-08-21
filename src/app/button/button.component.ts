@@ -1,13 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
   @Input() text = '';
   @Input() disabled?: boolean;
+  @Input() color: 'danger' | 'primary' = 'primary';
+  @Input() classes: string = '';
+  onClick = output();
+
+  get classArray() {
+    return [this.color, this.classes]
+  }
 }

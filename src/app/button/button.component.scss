@@ -3,12 +3,23 @@
 button {
    padding: 8px;
    display: block;
-   background-color: $primary;
    border-radius: 8px;
    border: none;
 
+   &.primary {
+      background-color: $primary;
+   }
+   &.danger {
+      background-color: $danger;
+   }
+
    &:active:not(:disabled) {
-      background-color: darken($color: $primary, $amount: 5);
+      &.primary {
+         background-color: darken($color: $primary, $amount: 5);
+      }
+      &.danger {
+         background-color: darken($color: $danger, $amount: 5);
+      }
    }
    &:hover {
       cursor: pointer;

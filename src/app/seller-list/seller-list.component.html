@@ -34,7 +34,8 @@
                   <td>{{seller.email}}</td>
                   <td>
                      <button>Edit</button>
-                     <button (click)="deleteSingle(seller.id)" [disabled]="deleteLoading">Delete</button>
+                     <!-- <button (click)="deleteSingle(seller.id)" [disabled]="deleteLoading">Delete</button> -->
+                     <button (click)="openDialog(seller)" [disabled]="deleteLoading">Delete</button>
                   </td>
                </tr>
             }

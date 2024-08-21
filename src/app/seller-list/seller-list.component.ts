@@ -4,11 +4,13 @@ import { NgIf } from '@angular/common';
 import { environment as env } from '../../environments/environment.development';
 
 import { ModalComponent } from '../modal/modal.component';
+import { Dialog, DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
+import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 
 @Component({
   selector: 'app-seller-list',
   standalone: true,
-  imports: [ModalComponent, NgIf],
+  imports: [DialogModule, ModalComponent, NgIf],
   templateUrl: './seller-list.component.html',
   styleUrl: './seller-list.component.scss'
 })
@@ -24,7 +26,7 @@ export class SellerListComponent  {
   deleteLoading: boolean = false;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public dialog: Dialog) {
     console.log('constructor called')
     http.get(env.apiUrl+'/sellers').subscribe({
       next: (response) => {
@@ -72,4 +74,21 @@ export class SellerListComponent  {
     });
   }
 
+  openDialog(seller: any): void {
+    const dialogRef = this.dialog.open<string>(ModalDeleteComponent, {
+      width: '450px',
+      data: {
+        seller,
+        text: `Delete seller with name "${seller.name}"`
+      }
+    });
+    
+    dialogRef.closed.subscribe( result => {
+      if (result === 'delete') {
+        console.log('lets go delete record', seller)
+        this.deleteSingle(seller.id)
+      }
+    });
+    // dialogRef.eve
+  }
 }

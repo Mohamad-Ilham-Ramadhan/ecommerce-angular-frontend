@@ -1,0 +1,16 @@
+<div class="modal-text mb-4">{{data.text}}</div>
+
+<div class="btn-wrapper">
+   <!-- <button (click)="dialogRef.close()">Cancel</button> -->
+   <app-button
+      text="Cancel"
+      classes="mr-2"
+      (onClick)="onCancel()"
+   />
+   <!-- <button (click)="dialogRef.close('delete')">Delete</button> -->
+   <app-button
+      text="Delete"
+      color="danger"
+      (onClick)="onDelete()"
+   />
+</div>
