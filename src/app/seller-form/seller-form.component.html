@@ -25,6 +25,10 @@
             }
          }
       </app-label>
+
+      <app-label for="image" text="Image" className="mb-4">
+         <app-input id="image" [control]="sellerForm.controls.image" type="file" (onChange)="imageChange($event)"  className="mb-1"/>
+      </app-label>
    
       <app-label for="password" text="Password" className="mb-4">
          <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="sellerForm.controls.password" className="mb-1"/>

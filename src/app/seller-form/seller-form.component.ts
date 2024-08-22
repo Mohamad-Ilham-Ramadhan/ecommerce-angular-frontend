@@ -62,9 +62,15 @@ export class SellerFormComponent {
   // shorten formControl
   get name() { return this.sellerForm.get('name')}
   get email() { return this.sellerForm.get('email')}
+  get image() { return this.sellerForm.get('image')}
   get password() { return this.sellerForm.get('password')}
   get rePassword() { return this.sellerForm.get('rePassword')}
 
+  imageChange(e: any) {
+    console.log('imageChange e', e.target.files[0])
+    this.sellerForm.controls.image.patchValue(e.target.files[0]);
+  }
+  
   checkValue() {
     for (const key in this.sellerForm.controls) {
       if (Object.prototype.hasOwnProperty.call(this.sellerForm.controls, key)) {
@@ -76,11 +82,15 @@ export class SellerFormComponent {
   }
 
   submitForm(e: Event) {
-    const {name, email, password} = this.sellerForm.controls;
+    const {name, email, password, image} = this.sellerForm.controls;
     const data = new FormData();
     data.append('name', name.value !== null ? name.value : '')
     data.append('email', email.value !== null ? email.value : '')
+    data.append('image', image.value !== null ? image.value : '')
     data.append('password', password.value !== null ? password.value : '');
+
+    // console.log('image', image.value);
+    // return;
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
 

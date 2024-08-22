@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
@@ -14,4 +14,9 @@ export class InputComponent {
   @Input() control!: FormControl;
   @Input() className!: string;
   @Input() type: string = 'text';
+  
+  onChange = output();
+  change(e: any) {
+    this.onChange.emit(e)
+  }
 }
