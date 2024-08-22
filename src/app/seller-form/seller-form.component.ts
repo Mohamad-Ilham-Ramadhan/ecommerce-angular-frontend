@@ -130,7 +130,8 @@ export class SellerFormComponent {
         this.isFormLoading = false;
 
         this.sellerForm.reset();
-        this.router.navigate(['/seller/home'])
+        console.log('create seller success response', res);
+        this.router.navigate(['/seller', res.seller.id])
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);

@@ -14,14 +14,15 @@ import { SellerLoginComponent } from './seller-login/seller-login.component';
 
 import { authGuard } from './guards/auth.guard';
 import { adminAuthGuard } from './guards/admin-auth.guard';
+import { SellerHomeComponent } from './seller-home/seller-home.component';
 
 export const routes: Routes = [
    // {path: '', redirectTo: 'home', pathMatch: 'full'},
+   {path: '', component: HomeComponent, data: {animation: 'HomePage'}},
    {path: 'seller/create', component: SellerFormComponent},
    {path: 'seller/login', component: SellerLoginComponent},
-   {path: 'vcr', component: VcrComponent},
+   {path: 'seller/:sellerId', component: SellerHomeComponent},
    // 
-   {path: 'home', component: HomeComponent, data: {animation: 'HomePage'}},
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 
       children: [
