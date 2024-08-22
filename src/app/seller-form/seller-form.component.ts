@@ -131,6 +131,7 @@ export class SellerFormComponent {
 
         this.sellerForm.reset();
         console.log('create seller success response', res);
+        localStorage.setItem('sellerToken', res.token);
         this.router.navigate(['/seller', res.seller.id])
       },
       error: (e: HttpErrorResponse) => {
