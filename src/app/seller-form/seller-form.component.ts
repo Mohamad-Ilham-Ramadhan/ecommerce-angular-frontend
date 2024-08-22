@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
@@ -57,7 +58,7 @@ export class SellerFormComponent {
     image: new FormControl(null),
   }, { validators: matchPasswordsValidator});
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // shorten formControl
   get name() { return this.sellerForm.get('name')}
@@ -128,7 +129,8 @@ export class SellerFormComponent {
         this.showAlert = true;
         this.isFormLoading = false;
 
-        this.sellerForm.reset()
+        this.sellerForm.reset();
+        this.router.navigate(['/seller/home'])
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);
