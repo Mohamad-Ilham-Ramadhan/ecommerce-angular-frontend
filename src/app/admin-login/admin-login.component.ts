@@ -51,7 +51,7 @@ export class AdminLoginComponent {
           this.alertText = res.message;
           this.alertVariant = 'primary';
 
-          this.router.navigate(['/admin/sellers'])
+          this.router.navigate(['/admin']);
 
         } else {
           this.alertText = 'Login Failed. Something went wrong';

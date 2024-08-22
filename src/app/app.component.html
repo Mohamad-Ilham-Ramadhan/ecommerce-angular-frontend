@@ -1,9 +1,7 @@
 <main>
-  <app-header />
-  <a routerLink="/home">Go to Home Page.</a>
-  <a routerLink="/seller">Seller list</a>
-  
-
+  @if (showHeader) {
+    <app-header />
+  }
   <router-outlet />
 
 </main>

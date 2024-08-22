@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 import { environment as env } from '../../environments/environment.development';
 
 import { ModalComponent } from '../modal/modal.component';
 import { Dialog, DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller-list',
@@ -14,7 +15,7 @@ import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
   templateUrl: './seller-list.component.html',
   styleUrl: './seller-list.component.scss'
 })
-export class SellerListComponent  {
+export class SellerListComponent implements OnInit {
   
   showModal1 = true;
   toggleModal1() {
@@ -26,9 +27,14 @@ export class SellerListComponent  {
   deleteLoading: boolean = false;
 
 
-  constructor(private http: HttpClient, public dialog: Dialog) {
-    console.log('constructor called')
-    http.get(env.apiUrl+'/sellers').subscribe({
+  constructor(private http: HttpClient, private router: Router, public dialog: Dialog) {}
+
+  ngOnInit(): void {
+    console.log('constructor called');
+
+    const token = localStorage.getItem('adminToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.get(env.apiUrl+'/sellers', {headers}).subscribe({
       next: (response) => {
         console.log('response', response)
         this.sellers = response;
@@ -37,6 +43,10 @@ export class SellerListComponent  {
       error: (error) => {
         console.log('error', error);
         this.fetchLoading = false;
+        if (error.status === 401) {
+          localStorage.removeItem('tokenAdmin');
+          this.router.navigate(['/admin/login'])
+        }
       }
     })
   }

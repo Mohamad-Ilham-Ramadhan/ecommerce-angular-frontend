@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { RouterOutlet, RouterLinkActive, RouterLink } from '@angular/router';
+import { Component,OnInit} from '@angular/core';
+import { RouterOutlet, RouterLinkActive, RouterLink, Router, UrlSegment, ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
 @Component({
@@ -10,7 +10,19 @@ import { HeaderComponent } from './header/header.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent{
-  constructor() {}
+export class AppComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  showHeader = true;
+
+  ngOnInit(): void {
+    this.router.events.subscribe((val: any) => {
+      if (val?.url?.slice(1,6) === 'admin') {
+        this.showHeader = false;
+      } else {
+        this.showHeader = true;
+      }
+    });
+  }
   title = 'angular-e-commerce';
 }
