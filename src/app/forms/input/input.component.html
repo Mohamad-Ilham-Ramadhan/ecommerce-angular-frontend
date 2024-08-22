@@ -1,1 +1,5 @@
-<input [type]="type" [id]="id" [formControl]="control" [className]="className" (change)="change($event)" />
+@if (control) {
+   <input [type]="type" [id]="id" [formControl]="control" [className]="className" (change)="change($event)" />
+} @else {
+   <input [type]="type" [id]="id" [className]="className" (change)="change($event)" />
+}

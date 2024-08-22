@@ -54,7 +54,7 @@ export class SellerFormComponent {
     email: new FormControl('', [
       Validators.required, Validators.email
     ]),
-    image: new FormControl<File | null>(null),
+    image: new FormControl(null),
   }, { validators: matchPasswordsValidator});
 
   constructor(private http: HttpClient) {}
@@ -66,9 +66,21 @@ export class SellerFormComponent {
   get password() { return this.sellerForm.get('password')}
   get rePassword() { return this.sellerForm.get('rePassword')}
 
+  previewImage: File | undefined;
   imageChange(e: any) {
-    console.log('imageChange e', e.target.files[0])
-    this.sellerForm.controls.image.patchValue(e.target.files[0]);
+    const file = e.target.files;
+    // this.sellerForm.controls.image.patchValue(file[0]);
+    this.sellerForm.patchValue({image: file[0]});
+    if (file[0]) {
+      const fileReader = new FileReader();
+      fileReader.onload = (event: any) => {
+          this.previewImage = event.target.result;
+      }
+      fileReader.readAsDataURL(file[0]);
+    } else {
+      this.previewImage = undefined;
+    }
+
   }
   
   checkValue() {
@@ -89,8 +101,6 @@ export class SellerFormComponent {
     data.append('image', image.value !== null ? image.value : '')
     data.append('password', password.value !== null ? password.value : '');
 
-    // console.log('image', image.value);
-    // return;
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data')
 

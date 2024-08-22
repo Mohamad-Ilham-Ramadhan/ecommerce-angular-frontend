@@ -26,9 +26,14 @@
          }
       </app-label>
 
+
       <app-label for="image" text="Image" className="mb-4">
-         <app-input id="image" [control]="sellerForm.controls.image" type="file" (onChange)="imageChange($event)"  className="mb-1"/>
+         <app-input id="image" type="file" (onChange)="imageChange($event)"  className="mb-1"/>
       </app-label>
+
+      @if (previewImage) {
+         <div><img [src]="previewImage" alt="image preview" class="preview-image"></div>
+      }
    
       <app-label for="password" text="Password" className="mb-4">
          <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="sellerForm.controls.password" className="mb-1"/>
