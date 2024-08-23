@@ -30,10 +30,11 @@ export class SellerListComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, public dialog: Dialog) {}
 
   ngOnInit(): void {
-    console.log('constructor called');
+    console.log('seller-list ngOnInit()');
 
     const token = localStorage.getItem('adminToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
     this.http.get(env.apiUrl+'/sellers', {headers}).subscribe({
       next: (response) => {
         console.log('response', response)
