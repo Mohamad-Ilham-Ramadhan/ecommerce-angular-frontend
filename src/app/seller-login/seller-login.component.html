@@ -1,4 +1,5 @@
 <div>
+   <h1>Seller Login</h1>
    <form action="" [formGroup]="form" (ngSubmit)="submit($event)">
       <app-label for="email">
          Email
@@ -22,6 +23,13 @@
             }
          }
       </app-label>
-      <button>Login</button>
+      <button [disabled]="loading">Login</button>
    </form>
+   @if (showAlert) {
+      <app-alert
+         [text]="alertText"
+         [variant]="alertVariant"
+         (onCloseClick)="closeAlert()"
+      />
+   }
 </div>
