@@ -52,7 +52,7 @@ export class SellerLoginComponent {
           localStorage.setItem('sellerToken', res.token);
           this.alertText = res.message;
           this.alertVariant = 'primary';
-          // this.router.navigate([''])
+          this.router.navigate(['seller', res.seller.id])
         } else {
           this.alertText = 'Something went wrong';
           this.alertVariant = 'danger';
