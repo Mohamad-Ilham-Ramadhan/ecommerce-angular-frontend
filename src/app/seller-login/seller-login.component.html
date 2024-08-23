@@ -14,7 +14,8 @@
       </app-label>
       <app-label for="password">
          Password
-         <app-input id="password" type="password" [control]="form.controls.password"></app-input>
+         <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="form.controls.password"></app-input>
+         <button (click)="toggleShowPassword()">{{ showPassword ? 'Hide' : 'Show' }}</button>
          @if (password?.invalid) {
             @if (password?.hasError('required')) {
                <div  class="form-alert">Password is required.</div>

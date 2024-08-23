@@ -24,6 +24,11 @@ export class SellerLoginComponent {
   closeAlert() {
     this.showAlert = false;
   }
+
+  showPassword = false;
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
   
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
