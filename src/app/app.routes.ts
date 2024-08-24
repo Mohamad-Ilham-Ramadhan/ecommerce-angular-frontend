@@ -11,17 +11,19 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminCreateComponent } from './admin-create/admin-create.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
-
-import { authGuard } from './guards/auth.guard';
-import { adminAuthGuard } from './guards/admin-auth.guard';
+import { SellerEditComponent } from './seller-edit/seller-edit.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
+
+import { adminAuthGuard } from './guards/admin-auth.guard';
+import { sellerAuthGuard } from './guards/seller-auth.guard';
 
 export const routes: Routes = [
    // {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: '', component: HomeComponent, data: {animation: 'HomePage'}},
    {path: 'seller/create', component: SellerFormComponent},
    {path: 'seller/login', component: SellerLoginComponent},
-   {path: 'seller/:sellerId', component: SellerHomeComponent},
+   {path: 'seller/:sellerId', component: SellerHomeComponent, canActivate: [sellerAuthGuard]},
+   {path: 'seller/edit/:sellerId', component: SellerEditComponent, canActivate: [sellerAuthGuard]},
    // 
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 

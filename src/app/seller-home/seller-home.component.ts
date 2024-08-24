@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EnvironmentService } from '../services/environment.service';
 import { environment } from '../../environments/environment.development';
 @Component({
   selector: 'app-seller-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './seller-home.component.html',
   styleUrl: './seller-home.component.scss',
 })
