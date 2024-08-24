@@ -5,14 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-// import {
-//   trigger,
-//   state,
-//   style,
-//   transition,
-//   animate,
-// } from '@angular/animations';
-
+import { EnvironmentService } from '../services/environment.service';
 import { environment } from '../../environments/environment.development';
 @Component({
   selector: 'app-seller-home',
@@ -22,9 +15,10 @@ import { environment } from '../../environments/environment.development';
   styleUrl: './seller-home.component.scss',
 })
 export class SellerHomeComponent implements OnInit {
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, public env: EnvironmentService) {}
 
   loading = true;
+  seller:any = {};
 
   ngOnInit(): void {
     // this.http.get(environment.apiUrl + '/sellers/');
@@ -36,6 +30,7 @@ export class SellerHomeComponent implements OnInit {
         next: (response) => {
           console.log('next response', response)
           this.loading = false;
+          this.seller = response;
         },
         error: (error) => {
           console.log('error response', error);

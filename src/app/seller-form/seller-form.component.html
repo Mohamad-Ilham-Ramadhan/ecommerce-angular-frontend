@@ -28,7 +28,7 @@
 
 
       <app-label for="image" text="Image" className="mb-4">
-         <app-input id="image" type="file" (onChange)="imageChange($event)"  className="mb-1"/>
+         <app-input id="image" type="file" (onChange)="imageChange($event)"  className="mb-1" accept="image/*"/>
       </app-label>
 
       @if (previewImage) {

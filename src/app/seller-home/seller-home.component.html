@@ -2,4 +2,10 @@
 
 @if (loading) {
    <img src="/images/load-spinner.png" alt="" class="rotate">
+} @else {
+   <ul>
+      <img [src]="seller.image ? env.apiUrl() +'/'+ seller.image : env.apiUrl() + '/default-admin.jpg'" alt="profile picture" class="profile-picture">
+      <li>Name: {{seller.name}}</li>
+      <li>Email: {{seller.email}}</li>
+   </ul>
 }

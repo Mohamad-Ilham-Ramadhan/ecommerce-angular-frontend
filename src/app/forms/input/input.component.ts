@@ -14,6 +14,7 @@ export class InputComponent {
   @Input() control?: FormControl | undefined;
   @Input() className!: string;
   @Input() type: string = 'text';
+  @Input() accept?: string;
   
   onChange = output();
   change(e: any) {
