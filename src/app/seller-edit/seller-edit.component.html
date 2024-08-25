@@ -1,1 +1,77 @@
-<p>seller-edit works!</p>
+
+<div class="container">
+   <h1>Edit Profile</h1>
+
+   @if (pageLoading) {
+      <img src="/images/load-spinner.png" alt="" class="rotate">
+   } @else {
+      <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm($event)">
+         <app-label for="name" text="Name" className="mb-4">
+            <app-input id="name" [control]="sellerForm.controls.name" className="mb-1" />
+            @if (name?.invalid) {
+               @if (name?.hasError('required')) {
+                  <div  class="form-alert">Name is required.</div>
+               } @else if (name?.hasError('minlength')) {
+                  <div  class="form-alert">Minimum 4 characters.</div>
+               } @else if (name?.hasError('maxlength')) {
+                  <div  class="form-alert">Minimum 40 characters.</div>
+               }
+            }
+         </app-label>
+      
+         <app-label for="email" text="Email" className="mb-4">
+            <app-input id="email" [control]="sellerForm.controls.email" className="mb-1"/>
+            @if (email?.invalid) {
+               @if (email?.hasError('required')) {
+                  <div  class="form-alert">Email is required.</div>
+               } @else if (email?.hasError('email')) {
+                  <div  class="form-alert">Should be valid email address.</div>
+               }
+            }
+         </app-label>
+   
+   
+         <app-label for="image" text="Image" className="mb-4">
+            <app-input id="image" type="file" (onChange)="imageChange($event)"  className="mb-1" accept="image/*"/>
+            <div class="caution">Leave empty if you won't change profile picture</div>
+         </app-label>
+         @if (previewImage) {
+            <div><img [src]="previewImage" alt="image preview" class="preview-image"></div>
+         }
+         
+         <app-label for="password" text="Password" className="mb-4">
+            <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="sellerForm.controls.password" className="mb-1"/>
+            <button (click)="toggleShowPassword('password')">{{showPassword ? 'hide' : 'show'}}</button>
+            <div class="caution">Leave empty if you won't change password</div>
+            @if (password?.invalid) {
+               <div  class="form-alert">Password is required and min 4 characters.</div>
+            }
+         </app-label>
+      
+         <app-label for="re-password" text="Re-type password" className="mb-2">
+            <app-input id="re-password" [type]="showRePassword ? 'text' : 'password'" [control]="sellerForm.controls.rePassword" className="mb-1"/>
+            <button (click)="toggleShowPassword('re-password')">{{showRePassword ? 'hide' : 'show'}}</button>
+            @if (sellerForm.hasError('passwordsDoesNotMatch') && (sellerForm.touched || sellerForm.dirty)) {
+               <div  class="form-alert">Password does not match.</div>
+            }
+            @if (rePassword?.invalid) {
+               <div  class="form-alert">Re-password is required and min 4 characters.</div>
+            }
+         </app-label>
+   
+      
+         <app-button text="Submit" [disabled]="isFormLoading" />
+      </form>
+   }
+
+
+   @if (showAlert) {
+      <div>
+         <app-alert 
+            [text]="alertText" 
+            (onCloseClick)="closeAlert($event)" 
+            [variant]="alertVariant"
+         />      
+      </div>
+   }
+</div>

@@ -23,7 +23,7 @@ export const routes: Routes = [
    {path: 'seller/create', component: SellerFormComponent},
    {path: 'seller/login', component: SellerLoginComponent},
    {path: 'seller/:sellerId', component: SellerHomeComponent, canActivate: [sellerAuthGuard]},
-   {path: 'seller/edit/:sellerId', component: SellerEditComponent, canActivate: [sellerAuthGuard]},
+   {path: 'seller/edit/:sellerId', component: SellerEditComponent, canActivate: [sellerAuthGuard], data: {id: null}},
    // 
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 

@@ -8,14 +8,13 @@ import { InputComponent } from '../forms/input/input.component';
 import { ButtonComponent } from '../button/button.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
-import { HighlightDirective } from './highlight.directive';
 import { matchPasswordsValidator } from '../validators/password.validator';
 
 
 @Component({
   selector: 'app-seller-form',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent, HighlightDirective],
+  imports: [ReactiveFormsModule, FormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent],
   templateUrl: './seller-form.component.html',
   styleUrl: './seller-form.component.scss'
 })
