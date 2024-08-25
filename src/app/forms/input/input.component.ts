@@ -1,5 +1,6 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, Input, output, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { After } from 'node:v8';
 
 @Component({
   selector: 'app-input',
@@ -20,4 +21,10 @@ export class InputComponent {
   change(e: any) {
     this.onChange.emit(e)
   }
+
+  inputFocus() {
+    this.inputEl?.nativeElement.focus();
+  }
+
+  @ViewChild('input') inputEl?: ElementRef<HTMLInputElement>;
 }
