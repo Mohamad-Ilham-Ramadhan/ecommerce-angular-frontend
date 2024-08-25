@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, AfterContentInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -14,8 +14,13 @@ import { InputComponent } from '../forms/input/input.component';
   templateUrl: './seller-login.component.html',
   styleUrl: './seller-login.component.scss'
 })
-export class SellerLoginComponent {
+export class SellerLoginComponent implements AfterViewInit {
   constructor(private http: HttpClient, private router: Router) {}
+
+  @ViewChild(InputComponent) emailContent?: InputComponent;
+  ngAfterViewInit(): void {
+      this.emailContent?.inputFocus();
+  }
 
   loading = false;
   alertText = '';
