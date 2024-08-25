@@ -56,9 +56,9 @@ export class SellerListComponent implements OnInit {
     this.deleteLoading = true;
 
     this.http.delete(env.apiUrl+'/sellers/truncate').subscribe({
-      next: (response) => {
+      next: (response: any) => {
         console.log('deleteAll() response', response)
-        this.sellers = [];
+        this.sellers = response.sellers;
         this.deleteLoading = false;
       },
       error: (error) => {
@@ -72,7 +72,7 @@ export class SellerListComponent implements OnInit {
     console.log('delete', id)
     this.deleteLoading = true;
 
-    this.http.delete(`http://localhost:3000/sellers/${id}`).subscribe({
+    this.http.delete(`http://localhost:3000/sellers/delete/${id}`).subscribe({
       next: (response: any) => {
         console.log('deleteSingle() response', response)
         this.deleteLoading = false;

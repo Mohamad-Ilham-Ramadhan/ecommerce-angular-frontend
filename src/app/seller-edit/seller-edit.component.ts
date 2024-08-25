@@ -16,7 +16,7 @@ import { EnvironmentService } from '../services/environment.service';
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent],
   templateUrl: './seller-edit.component.html',
-  styleUrl: './seller-edit.component.scss'
+  styleUrl: './seller-edit.component.scss',
 })
 export class SellerEditComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private env: EnvironmentService) {}
@@ -32,6 +32,7 @@ export class SellerEditComponent implements OnInit {
 
   showPassword = false;
   showRePassword = false;
+
   toggleShowPassword(controlName: 'password' | 're-password') {
     switch (controlName) {
       case 'password':
@@ -74,11 +75,11 @@ export class SellerEditComponent implements OnInit {
         this.sellerId = result.id;
       },
       error: (error) => {
-
+        this.pageLoading = false;
+        this.router.navigate(['/seller/login']);
       }
     });
   }
-
 
   // shorten formControl
   get name() { return this.sellerForm.get('name')}
@@ -86,7 +87,7 @@ export class SellerEditComponent implements OnInit {
   get image() { return this.sellerForm.get('image')}
   get password() { return this.sellerForm.get('password')}
   get rePassword() { return this.sellerForm.get('rePassword')}
-  // shorten
+  // shorten 
   set setName(value : string) {this.sellerForm.controls.name.patchValue(value)}
   set setEmail(value : string) {this.sellerForm.controls.email.patchValue(value)}
   // set set(value : string) {this.sellerForm.controls.email.patchValue(value)}
@@ -120,7 +121,9 @@ export class SellerEditComponent implements OnInit {
 
   submitForm(e: Event) {
     const {name, email, password, image} = this.sellerForm.controls;
+    console.log('image.value', image.value);
     const data = new FormData();
+    data.append('id', String(this.sellerId))
     data.append('name', name.value !== null ? name.value : '')
     data.append('email', email.value !== null ? email.value : '')
     data.append('image', image.value !== null ? image.value : '')
@@ -143,6 +146,7 @@ export class SellerEditComponent implements OnInit {
 
     this.http.patch('http://localhost:3000/sellers/edit/'+this.sellerId, data, {headers}).subscribe({
       next: (res: any) => {
+        console.log('this.http.patch next =>', res)
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';
@@ -155,7 +159,7 @@ export class SellerEditComponent implements OnInit {
 
         this.sellerForm.reset();
         console.log('create seller success response', res);
-        localStorage.setItem('sellerToken', res.token);
+        // localStorage.setItem('sellerToken', res.token);
         this.router.navigate(['/seller', res.seller.id])
       },
       error: (e: HttpErrorResponse) => {
@@ -164,8 +168,14 @@ export class SellerEditComponent implements OnInit {
         this.alertVariant = 'danger';
         this.showAlert = true;
         this.isFormLoading = false;
+
+        if (e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
+          localStorage.removeItem('sellerToken');
+          this.router.navigate(['/seller/login']);
+        }
       },
     })
 
   }
+
 }

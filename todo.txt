@@ -3,7 +3,9 @@ features:
    - seller-form clear inputs after submit success
 
    - selelr-list update list after delete
-   - seller-list open modal confirmation before delete item [onprogress]
+   - seller-list open modal confirmation before delete item [onprogress];
+
+   - open alert/modal/dialog when unauthorized and redirected to seller-login page(component/route)
 
 component:
    - create modal component
