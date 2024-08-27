@@ -1,0 +1,71 @@
+<div class="container">
+   <button routerLink="/seller">Home</button>
+   <h1>Create Product</h1>
+
+   <form action="" (ngSubmit)="submit($event)" [formGroup]="form">
+      <div class="mb-4">
+         <app-label>
+            <div>Name</div>
+            <app-input type="text" [control]="form.controls.name" />
+         </app-label>
+         @if (name?.invalid) {
+            <div class="form-alert">Product name is required.</div>
+         }
+      </div>
+      <div class="mb-4">
+         <app-label>
+            <div>Description</div>
+            <app-textarea [control]="form.controls.description" />
+         </app-label>
+         @if (description?.invalid) {
+            <div class="form-alert">Product description is required.</div>
+         }
+      </div>
+      <div class="mb-4">
+         <app-label>
+            <div>Stock</div>
+            <app-input type="number" [control]="form.controls.stock" />
+         </app-label>
+         @if (stock?.invalid) {
+            @if (stock?.hasError('required')) {
+               <div class="form-alert">Product stock is required.</div>
+            } @else if (stock?.hasError('min')) {
+               <div class="form-alert">Product stock minimum is 0.</div>
+            }
+         }
+      </div>
+      <div class="mb-4">
+         <app-label>
+            <div>Price</div>
+            <app-input type="number" [control]="form.controls.price" />
+            <span class="ml-2">{{ priceIdr}}</span>
+         </app-label>
+         @if (price?.invalid) {
+            @if (price?.hasError('required')) {
+               <div class="form-alert">Product price is required.</div>
+            } @else if (price?.hasError('min')) {
+               <div class="form-alert">Product price minimum is 0.</div>
+            }
+         }
+      </div>
+
+      <div class="mb-4">
+         <app-label>
+            <div>Image</div>
+            <app-input type="file" [control]="form.controls.image" (onChange)="onImageChange($event)" />
+         </app-label>
+         @if (image?.invalid) {
+            @if (image?.hasError('required')) {
+               <div class="form-alert">Product image is required.</div>
+            }
+         }
+      </div>
+      @if (imagePreview) {
+         <div>
+            <img [src]="imagePreview" alt="image preview" class="image-preview">
+         </div>
+      }
+
+      <button type="submit" [disabled]="formLoading">Submit</button>
+   </form>
+</div>

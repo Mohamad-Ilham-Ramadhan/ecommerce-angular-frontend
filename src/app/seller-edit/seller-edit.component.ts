@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
@@ -14,7 +14,7 @@ import { EnvironmentService } from '../services/environment.service';
 @Component({
   selector: 'app-seller-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, LabelComponent, InputComponent, ButtonComponent, AlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink, LabelComponent, InputComponent, ButtonComponent, AlertComponent],
   templateUrl: './seller-edit.component.html',
   styleUrl: './seller-edit.component.scss',
 })
@@ -66,7 +66,7 @@ export class SellerEditComponent implements OnInit {
   ngOnInit(): void {
     console.log('history.state', history.state);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('sellerToken')}`)
-    this.http.get(this.env.apiUrl() + '/sellers/'+ history.state.id, {headers}).subscribe({
+    this.http.get(this.env.apiUrl() + '/sellers/find-one', {headers}).subscribe({
       next: (result: any) => {
         this.pageLoading = false;
         console.log('get seller result', result);
@@ -144,7 +144,7 @@ export class SellerEditComponent implements OnInit {
     this.isFormLoading = true;
 
 
-    this.http.patch('http://localhost:3000/sellers/edit/'+this.sellerId, data, {headers}).subscribe({
+    this.http.patch('http://localhost:3000/sellers/edit', data, {headers}).subscribe({
       next: (res: any) => {
         console.log('this.http.patch next =>', res)
         if (res.message) {
@@ -160,7 +160,7 @@ export class SellerEditComponent implements OnInit {
         this.sellerForm.reset();
         console.log('create seller success response', res);
         // localStorage.setItem('sellerToken', res.token);
-        this.router.navigate(['/seller', res.seller.id])
+        this.router.navigate(['/seller'])
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);

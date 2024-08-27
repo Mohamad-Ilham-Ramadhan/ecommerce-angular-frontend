@@ -1,11 +1,9 @@
 bugs:
+   - gak usah pake param: sellerId, pake id dari token aja, nanti cek di server id nya.
 features:
-   - seller-form clear inputs after submit success
-
-   - selelr-list update list after delete
-   - seller-list open modal confirmation before delete item [onprogress];
-
+   - seller create product
    - open alert/modal/dialog when unauthorized and redirected to seller-login page(component/route)
+   - seller dengan id=1 gak bisa buka seller-home dengan id=2
 
 component:
    - create modal component

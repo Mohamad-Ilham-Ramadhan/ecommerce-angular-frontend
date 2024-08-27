@@ -118,6 +118,7 @@ export class SellerFormComponent {
 
     this.http.post('http://localhost:3000/sellers/create', data).subscribe({
       next: (res: any) => {
+        console.log('this.http.post res', res);
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';

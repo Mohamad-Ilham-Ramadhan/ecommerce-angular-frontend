@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/htt
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EnvironmentService } from '../services/environment.service';
 import { environment } from '../../environments/environment.development';
+
 @Component({
   selector: 'app-seller-home',
   standalone: true,
@@ -22,7 +23,7 @@ export class SellerHomeComponent implements OnInit {
     this.activatedRoute.url.subscribe( (urls) => {
       console.log('this.activatedRoute.url.subscribe', urls);
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('sellerToken')}`)
-      this.http.get(environment.apiUrl + '/sellers/' + urls[1].path, {headers}).subscribe({
+      this.http.get(environment.apiUrl + '/sellers/find-one', {headers}).subscribe({
         next: (response) => {
           console.log('next response', response)
           this.loading = false;

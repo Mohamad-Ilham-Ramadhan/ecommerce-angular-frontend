@@ -7,6 +7,8 @@ import { AlertComponent, AlertVariant} from '../alert/alert.component';
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
 
+import { SellerService } from '../services/seller.service';
+
 @Component({
   selector: 'app-seller-login',
   standalone: true,
@@ -15,7 +17,7 @@ import { InputComponent } from '../forms/input/input.component';
   styleUrl: './seller-login.component.scss'
 })
 export class SellerLoginComponent implements AfterViewInit {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private sellerService: SellerService) {}
 
   @ViewChild(InputComponent) emailContent?: InputComponent;
   ngAfterViewInit(): void {
@@ -62,7 +64,8 @@ export class SellerLoginComponent implements AfterViewInit {
           localStorage.setItem('sellerToken', res.token);
           this.alertText = res.message;
           this.alertVariant = 'primary';
-          this.router.navigate(['seller', res.seller.id])
+          this.sellerService.id = res.seller.id;
+          this.router.navigate(['seller'])
         } else {
           this.alertText = 'Something went wrong';
           this.alertVariant = 'danger';

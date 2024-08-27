@@ -1,5 +1,5 @@
-<button [routerLink]="['/seller/edit/', seller.id, {foo: seller.id}]" [state]="{id: seller.id}" routerLinkActive="router-link-active">Edit Profile</button>
-<!-- <button [routerLink]="['/seller/edit/', seller.id]" routerLinkActive="router-link-active">Edit Profile</button> -->
+<button [routerLink]="['/seller/edit']" [state]="{id: seller.id}" routerLinkActive="router-link-active">Edit Profile</button>
+<button [routerLink]="['/seller/product/create/']" [state]="{id: seller.id}" routerLinkActive="router-link-active">Create Product</button>
 
 <h1>Seller Home</h1>
 
@@ -7,7 +7,7 @@
    <img src="/images/load-spinner.png" alt="" class="rotate">
 } @else {
    <ul>
-      <img [src]="seller.image ? env.apiUrl() +'/'+ seller.image : env.apiUrl() + '/default-admin.jpg'" alt="profile picture" class="profile-picture">
+      <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : env.apiUrl() + '/default-admin.jpg'" alt="profile picture" class="profile-picture">
       <li>Name: {{seller.name}}</li>
       <li>Email: {{seller.email}}</li>
    </ul>
