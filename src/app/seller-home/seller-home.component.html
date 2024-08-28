@@ -6,18 +6,28 @@
 @if (loading) {
    <img src="/images/load-spinner.png" alt="" class="rotate">
 } @else {
-   <ul>
+   <ul class="list-none">
       <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : env.apiUrl() + '/default-admin.jpg'" alt="profile picture" class="profile-picture">
       <li>Name: {{seller.name}}</li>
       <li>Email: {{seller.email}}</li>
+      <li>Products: {{products.length}}</li>
    </ul>
 }
 
 <h2>List of Product</h2>
 @if (products.length > 0) {
-   <ul>
+   <ul class="list-none list-product">
       @for (product of products; track $index) {
-         <li>{{ product.name }}</li>
+         <li class="product">
+            <div class="btn-wrapper">
+               <app-button text="Edit" />
+               <app-button text="Delete" color="danger"/>
+            </div>
+            <div><img [src]="env.apiUrl() + '/product/'+product.image" [alt]="'Picture of ' + product.name" class="product-image"></div>
+            <div>Name: {{ product.name }}</div>
+            <div>Stock: {{ product.stock}}</div>
+            <div>Price: {{ product.price | idr }}</div>
+         </li>
       }
    </ul>
 }

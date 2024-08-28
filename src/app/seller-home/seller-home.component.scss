@@ -2,3 +2,27 @@
    width: 100px;
    display: block;
 }
+.product-image {
+   width: 100px;
+   display: block;
+}
+.list-product {
+   display: flex;
+   justify-content: space-between;
+}
+.product {
+   position: relative;
+   
+   &:hover {
+      .btn-wrapper {
+         display: flex;
+      }
+   }
+   
+   .btn-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+   }
+}

@@ -4,11 +4,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EnvironmentService } from '../services/environment.service';
 import { environment } from '../../environments/environment.development';
 
+import { ButtonComponent } from '../button/button.component';
+
 import { LocalStorageService } from '../services/local-storage.service';
+import { IdrPipe } from '../pipes/idr.pipe';
 @Component({
   selector: 'app-seller-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IdrPipe, ButtonComponent],
   templateUrl: './seller-home.component.html',
   styleUrl: './seller-home.component.scss',
 })

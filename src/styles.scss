@@ -37,6 +37,10 @@ a {
    animation: spinner 1.5s linear infinite;
 }
 
+.list-none {
+   list-style: none;
+}
+
 @for $i from 1 through 20 {
    .mr-#{$i} {
       margin-right: #{$i * 0.25}rem ;
