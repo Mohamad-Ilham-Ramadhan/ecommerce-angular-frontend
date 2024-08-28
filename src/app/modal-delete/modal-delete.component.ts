@@ -15,9 +15,7 @@ export interface ModalData {
   styleUrl: './modal-delete.component.scss'
 })
 export class ModalDeleteComponent {
-  constructor(public dialogRef: DialogRef<string>, @Inject(DIALOG_DATA) public data: ModalData) {
-    console.log('dialogRef', dialogRef);
-  }
+  constructor(public dialogRef: DialogRef<string>, @Inject(DIALOG_DATA) public data: ModalData) {}
 
   onDelete() {
     this.dialogRef.close('delete')
