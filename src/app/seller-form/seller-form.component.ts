@@ -10,6 +10,7 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 import { matchPasswordsValidator } from '../validators/password.validator';
 
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-seller-form',
@@ -57,7 +58,7 @@ export class SellerFormComponent {
     image: new FormControl(null),
   }, { validators: matchPasswordsValidator});
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
 
   // shorten formControl
   get name() { return this.sellerForm.get('name')}
@@ -131,8 +132,9 @@ export class SellerFormComponent {
 
         this.sellerForm.reset();
         console.log('create seller success response', res);
-        localStorage.setItem('sellerToken', res.token);
-        this.router.navigate(['/seller', res.seller.id])
+        // localStorage.setItem('sellerToken', res.token);
+        this.localStorageService.saveData('sellerToken', res.token)
+        this.router.navigate(['/seller'])
       },
       error: (e: HttpErrorResponse) => {
         console.log('THIS IS ERROR', e);

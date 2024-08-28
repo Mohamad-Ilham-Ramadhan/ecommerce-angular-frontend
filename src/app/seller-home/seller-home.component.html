@@ -12,3 +12,12 @@
       <li>Email: {{seller.email}}</li>
    </ul>
 }
+
+<h2>List of Product</h2>
+@if (products.length > 0) {
+   <ul>
+      @for (product of products; track $index) {
+         <li>{{ product.name }}</li>
+      }
+   </ul>
+}

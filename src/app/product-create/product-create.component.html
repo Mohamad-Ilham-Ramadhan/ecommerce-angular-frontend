@@ -1,5 +1,6 @@
 <div class="container">
    <button routerLink="/seller">Home</button>
+   <button (click)="consoleToken()">cek sellerTOken</button>
    <h1>Create Product</h1>
 
    <form action="" (ngSubmit)="submit($event)" [formGroup]="form">

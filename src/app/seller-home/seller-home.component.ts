@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EnvironmentService } from '../services/environment.service';
 import { environment } from '../../environments/environment.development';
 
+import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-seller-home',
   standalone: true,
@@ -12,22 +13,23 @@ import { environment } from '../../environments/environment.development';
   styleUrl: './seller-home.component.scss',
 })
 export class SellerHomeComponent implements OnInit {
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, public env: EnvironmentService) {}
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, public env: EnvironmentService, private localStorageService: LocalStorageService) {}
 
   loading = true;
   seller:any = {};
+  products: any[] = [];
 
   ngOnInit(): void {
     // this.http.get(environment.apiUrl + '/sellers/');
     console.log('seller-home ngOnInit');
     this.activatedRoute.url.subscribe( (urls) => {
-      console.log('this.activatedRoute.url.subscribe', urls);
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('sellerToken')}`)
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
       this.http.get(environment.apiUrl + '/sellers/find-one', {headers}).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           console.log('next response', response)
           this.loading = false;
-          this.seller = response;
+          this.seller = response.seller;
+          this.products = response.products;
         },
         error: (error) => {
           console.log('error response', error);
@@ -40,4 +42,5 @@ export class SellerHomeComponent implements OnInit {
       });
     });
   }
+
 }

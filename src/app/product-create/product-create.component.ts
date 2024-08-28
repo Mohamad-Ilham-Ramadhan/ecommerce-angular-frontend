@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, RouterLink} from '@angular/router';
@@ -11,6 +12,7 @@ import { TextareaComponent } from '../textarea/textarea.component';
 import { SellerService } from '../services/seller.service';
 import { IdrCurrencyService } from '../services/idr-currency.service';
 import { EnvironmentService } from '../services/environment.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-product-create',
@@ -20,7 +22,11 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './product-create.component.scss'
 })
 export class ProductCreateComponent {
-  constructor(private http: HttpClient, public idr: IdrCurrencyService, private env: EnvironmentService, private router: Router) {}
+  constructor(private http: HttpClient, public idr: IdrCurrencyService, private env: EnvironmentService, private router: Router, private localStorageService: LocalStorageService) {}
+
+  consoleToken() {
+    console.log(this.localStorageService.getData('sellerToken'))
+  }
   
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -72,7 +78,7 @@ export class ProductCreateComponent {
     data.append('price', String(price.value) !== null ? String(price.value) : '');
     data.append('image', image.value !== null ? image.value : '');
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('sellerToken')}`)
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
 
     this.http.post(this.env.apiUrl()+'/sellers/create-product/', data, {headers}).subscribe({
       next: response => {
@@ -82,8 +88,8 @@ export class ProductCreateComponent {
       error: (e: any) => {
         console.log('error', e)
         this.formLoading = false;
-        if (e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
-          localStorage.removeItem('sellerToken');
+        if (e.status === 401 || e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
+          this.localStorageService.removeData('sellerToken');
           this.router.navigate(['/seller/login']);
         }
       }

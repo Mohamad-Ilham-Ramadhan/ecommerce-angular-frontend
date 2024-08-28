@@ -1,25 +1,19 @@
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateFn,
-  GuardResult,
-  MaybeAsync,
-  RouterStateSnapshot,
-  Router
-} from '@angular/router';
-import { Injectable, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, GuardResult, MaybeAsync, RouterStateSnapshot, Router} from '@angular/router';
+import { Injectable, inject, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 class AdminAuthGuardService implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, @Inject(DOCUMENT) private document: Document) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): MaybeAsync<GuardResult> {
-    const adminToken = localStorage.getItem('adminToken');
+    console.log('admin auth guard canActivate')
+    const adminToken = this.document.defaultView?.localStorage.getItem('adminToken');
     if (adminToken) {
       return true;
     } else {
