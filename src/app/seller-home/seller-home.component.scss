@@ -8,11 +8,11 @@
 }
 .list-product {
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-start;
 }
 .product {
    position: relative;
-   
+   margin-right: 16px;
    &:hover {
       .btn-wrapper {
          display: flex;

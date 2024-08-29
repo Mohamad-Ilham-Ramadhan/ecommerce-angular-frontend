@@ -17,7 +17,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent, AlertComponent],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
 })
@@ -44,6 +44,10 @@ export class ProductCreateComponent {
 
   imagePreview: string | undefined= '';
   formLoading: boolean = false;
+
+  alertText: string = '';
+  alertVariant: AlertVariant = 'primary';
+  showAlert: boolean = false;
   
   onImageChange(e: any) {
     const file = e.target.files[0];
@@ -81,9 +85,14 @@ export class ProductCreateComponent {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
 
     this.http.post(this.env.apiUrl()+'/sellers/create-product/', data, {headers}).subscribe({
-      next: response => {
+      next: (response: any) => {
         console.log('response', response)
         this.formLoading = false;
+        this.form.reset();
+        this.alertText = response.message;
+        this.showAlert = true;
+        this.alertVariant = 'primary';
+        this.imagePreview = undefined;
       }, 
       error: (e: any) => {
         console.log('error', e)

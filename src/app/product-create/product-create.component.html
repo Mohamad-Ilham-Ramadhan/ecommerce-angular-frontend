@@ -69,4 +69,8 @@
 
       <button type="submit" [disabled]="formLoading">Submit</button>
    </form>
+
+   @if (showAlert) {
+      <app-alert [text]="alertText" [variant]="alertVariant" (onCloseClick)="showAlert = false" />
+   }
 </div>
