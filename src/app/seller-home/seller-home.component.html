@@ -20,7 +20,7 @@
       @for (product of products; track $index) {
          <li class="product">
             <div class="btn-wrapper">
-               <app-button text="Edit" />
+               <app-button text="Edit" (onClick)="editProduct(product)" />
                <app-button text="Delete" color="danger" (onClick)="openDialog(product)"/>
             </div>
             <div><img [src]="env.apiUrl() + '/product/'+product.image" [alt]="'Picture of ' + product.name" class="product-image"></div>

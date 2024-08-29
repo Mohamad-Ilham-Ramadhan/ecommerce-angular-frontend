@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, FormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, RouterLink} from '@angular/router';
@@ -9,7 +8,6 @@ import { LabelComponent } from '../forms/label/label.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
 import { TextareaComponent } from '../textarea/textarea.component';
 
-import { SellerService } from '../services/seller.service';
 import { IdrCurrencyService } from '../services/idr-currency.service';
 import { EnvironmentService } from '../services/environment.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -35,6 +33,7 @@ export class ProductCreateComponent {
     price: new FormControl(0, [Validators.required, Validators.min(0)]),
     image: new FormControl(null, [Validators.required])
   });
+  
   get name() { return this.form.get('name')}
   get description() { return this.form.get('description')}
   get stock() { return this.form.get('stock')}

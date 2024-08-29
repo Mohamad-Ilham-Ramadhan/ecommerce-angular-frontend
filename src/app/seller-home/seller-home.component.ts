@@ -75,4 +75,7 @@ export class SellerHomeComponent implements OnInit {
     });
   }
 
+  editProduct(product: any) {
+    this.router.navigate(['/seller/product/edit'], {state: {product}})
+  }
 }

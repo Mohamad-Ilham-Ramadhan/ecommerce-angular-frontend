@@ -14,6 +14,7 @@ import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { SellerEditComponent } from './seller-edit/seller-edit.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { sellerAuthGuard } from './guards/seller-auth.guard';
@@ -26,6 +27,7 @@ export const routes: Routes = [
    {path: 'seller', component: SellerHomeComponent, canActivate: [sellerAuthGuard]},
    {path: 'seller/edit', component: SellerEditComponent, canActivate: [sellerAuthGuard], data: {id: null}},
    {path: 'seller/product/create', component: ProductCreateComponent, canActivate: [sellerAuthGuard]},
+   {path: 'seller/product/edit', component: ProductEditComponent, canActivate: [sellerAuthGuard]},
    // 
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 

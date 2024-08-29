@@ -1,6 +1,7 @@
 <div class="container">
    <button routerLink="/seller">Home</button>
-   <h1>Create Product</h1>
+   <button (click)="consoleProduct()">Console Product</button>
+   <h1>Edit Product</h1>
 
    <form action="" (ngSubmit)="submit($event)" [formGroup]="form">
       <div class="mb-4">
@@ -54,11 +55,7 @@
             <div>Image</div>
             <app-input type="file" [control]="form.controls.image" (onChange)="onImageChange($event)" />
          </app-label>
-         @if (image?.invalid) {
-            @if (image?.hasError('required')) {
-               <div class="form-alert">Product image is required.</div>
-            }
-         }
+         <div>Leave image empty if you won't change product's image.</div>
       </div>
       @if (imagePreview) {
          <div>
