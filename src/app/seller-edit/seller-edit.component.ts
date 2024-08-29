@@ -70,9 +70,9 @@ export class SellerEditComponent implements OnInit {
       next: (result: any) => {
         this.pageLoading = false;
         console.log('get seller result', result);
-        this.setName = result.name;
-        this.setEmail = result.email;
-        this.sellerId = result.id;
+        this.setName = result.seller.name;
+        this.setEmail = result.seller.email;
+        this.sellerId = result.seller.id;
       },
       error: (error) => {
         this.pageLoading = false;

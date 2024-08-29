@@ -17,8 +17,8 @@ import { SellerService } from '../services/seller.service';
   styleUrl: './seller-login.component.scss'
 })
 export class SellerLoginComponent implements AfterViewInit {
-  constructor(private http: HttpClient, private router: Router, private sellerService: SellerService) {}
-
+  constructor(private http: HttpClient, private router: Router, public sellerService: SellerService) {}
+  
   @ViewChild(InputComponent) emailContent?: InputComponent;
   ngAfterViewInit(): void {
       this.emailContent?.inputFocus();
@@ -64,7 +64,7 @@ export class SellerLoginComponent implements AfterViewInit {
           localStorage.setItem('sellerToken', res.token);
           this.alertText = res.message;
           this.alertVariant = 'primary';
-          this.sellerService.id = res.seller.id;
+          this.sellerService.seller = res.seller;
           this.router.navigate(['seller'])
         } else {
           this.alertText = 'Something went wrong';

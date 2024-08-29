@@ -5,5 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class SellerService {
   constructor() { }
-  id: number | null | undefined;
+  
+  seller: any;
+  setSeller(seller: any) {
+    this.seller = seller
+  }
 }
