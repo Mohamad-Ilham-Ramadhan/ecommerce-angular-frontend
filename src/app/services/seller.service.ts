@@ -10,4 +10,7 @@ export class SellerService {
   setSeller(seller: any) {
     this.seller = seller
   }
+  reset() {
+    this.seller = undefined;
+  }
 }

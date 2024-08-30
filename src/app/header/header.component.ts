@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { SellerService } from '../services/seller.service';
@@ -13,7 +13,7 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router) {
   }
 
   isSellerLoggedIn = false;
@@ -40,6 +40,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    
+    this.sellerService.reset();
+    this.isSellerLoggedIn = false;
+    this.localStorageService.removeData('sellerToken');
+    this.router.navigate(['/seller/login']);
   }
 }
