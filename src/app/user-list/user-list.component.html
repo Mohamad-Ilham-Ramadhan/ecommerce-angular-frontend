@@ -1,0 +1,39 @@
+<div class="container">
+   <h1>List of users</h1>
+   
+   <div class="delete-wrapper">
+      <button (click)="deleteAll()" class="delete-btn">Delete all</button>
+   </div>
+   @if (fetchLoading) {
+      <h2>Fetching data...</h2>
+   }
+   @else if (users.length === 0) {
+      <h2>No user yet !</h2>
+   } @else {
+      <table>
+         <thead>
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            @for (user of users; track $index) {
+               <tr>
+                  <td>{{user.id}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>
+                     <button>Edit</button>
+                     <!-- <button (click)="deleteSingle(user.id)" [disabled]="deleteLoading">Delete</button> -->
+                     <button (click)="openDialog(user)" [disabled]="deleteLoading">Delete</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   }
+   
+</div>
