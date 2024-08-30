@@ -4,7 +4,7 @@
          <a routerLink="">Market Plaza</a>
       </div>
 
-      @if (isSellerLoggedIn) {
+      @if (sellerService.seller) {
          <div class="seller-dropdown dropdown">
             <div class="seller-image-wrapper"><img [src]="env.apiUrl() + '/seller/' + sellerService.seller.image" alt="seller image" class="seller-image"></div>
             <div class="seller-name">{{ sellerService.seller.name }}</div>
