@@ -5,7 +5,10 @@ features:
    - open alert/modal/dialog when unauthorized and redirected to seller-login page(component/route)
    - seller dengan id=1 gak bisa buka seller-home dengan id=2
 
-   - delete seller, otomatis delete product, delete photo seller, delete photo products
+   - delete seller, otomatis delete product, delete photo seller, delete photo products;
+
+   - userToken will delete sellerToken, i mean when user login sellerToken get deleted and vice versa.
+   - seller-login page, unavailabel kalo udah login
 component:
    - create modal component
       - belajar angular/cdk portal

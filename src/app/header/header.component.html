@@ -3,24 +3,38 @@
       <div class="logo">
          <a routerLink="">Market Plaza</a>
       </div>
-      <div class="accounts">
-         <div class="dropdown mr-2">
-            <div class="dropdown-text">
-               For Seller
-            </div>
+
+      @if (isSellerLoggedIn) {
+         <div class="seller-dropdown dropdown">
+            <div class="seller-image-wrapper"><img [src]="env.apiUrl() + '/seller/' + sellerService.seller.image" alt="seller image" class="seller-image"></div>
+            <div class="seller-name">{{ sellerService.seller.name }}</div>
+
             <nav class="dropdown-menu">
-               <li class="dropdown-item">
-                  <a routerLink="seller/create">Create Account</a>   
-               </li>
-               <li class="dropdown-item"><a routerLink="/seller/login">Sign In</a></li>
+               <li class="dropdown-item"><a routerLink="seller">Home</a></li>
+               <li class="dropdown-item logout" (click)="logout()">Logout</li>
             </nav>
          </div>
-
-         <div class="dropdown">
-            <div class="dropdown-text">
-               Sign Up/In
+      } @else {
+         <div class="accounts">
+            <div class="dropdown mr-2">
+               <div class="dropdown-text">
+                  For Seller
+               </div>
+               <nav class="dropdown-menu">
+                  <li class="dropdown-item">
+                     <a routerLink="seller/create">Create Account</a>   
+                  </li>
+                  <li class="dropdown-item"><a routerLink="/seller/login">Sign In</a></li>
+               </nav>
+            </div>
+   
+            <div class="dropdown">
+               <div class="dropdown-text">
+                  Sign Up/In
+               </div>
             </div>
          </div>
-      </div>
+      }
+
    </div>
 </header>
