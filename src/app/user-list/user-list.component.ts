@@ -48,13 +48,18 @@ export class UserListComponent {
   deleteAll() {
     this.deleteLoading = true;
 
-    this.http.delete(this.env.apiUrl()+'/users/truncate').subscribe({
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('adminToken')}`)
+    this.http.delete(this.env.apiUrl()+'/users/truncate', {headers}).subscribe({
       next: (response: any) => {
-        this.users = response.users;
+        this.users = [];
         this.deleteLoading = false;
       },
       error: (error) => {
         this.deleteLoading = false;
+        if (error.status === 401) {
+          this.localStorageService.removeData('adminToken');
+          this.router.navigate(['/admin/login'])
+        }
       }
     });
   }
@@ -70,6 +75,10 @@ export class UserListComponent {
       },
       error: (error) => {
         this.deleteLoading = false;
+        if (error.status === 401) {
+          this.localStorageService.removeData('adminToken')
+          this.router.navigate(['/admin/login'])
+        }
       }
     });
   }
