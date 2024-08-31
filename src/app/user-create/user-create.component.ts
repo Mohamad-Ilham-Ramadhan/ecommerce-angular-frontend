@@ -1,18 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { matchPasswordsValidator } from '../validators/password.validator';
 import { InputComponent } from '../forms/input/input.component';
 import { LabelComponent } from '../forms/label/label.component';
+import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 import { EnvironmentService } from '../services/environment.service';
 import { LocalStorageService } from '../services/local-storage.service';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-create',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, InputComponent, LabelComponent],
+  imports: [ReactiveFormsModule, FormsModule, InputComponent, LabelComponent, AlertComponent],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss'
 })
@@ -39,6 +40,10 @@ export class UserCreateComponent {
   imagePreview: any;
   isFormLoading: boolean = false;
 
+  alertText = '';
+  alertShow = false;
+  alertVariant: AlertVariant = 'primary';
+  
   imageOnChange(e: any) {
     const file = e.target.files[0];
     if (file) {
@@ -81,6 +86,9 @@ export class UserCreateComponent {
       error: (error) => {
         console.log('error', error);
         this.isFormLoading = false;
+        this.alertShow = true;
+        this.alertText = 'Create account failed.'
+        this.alertVariant = 'danger';
       }
     });
   }
