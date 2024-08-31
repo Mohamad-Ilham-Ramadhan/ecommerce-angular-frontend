@@ -52,7 +52,7 @@
       <div class="mb-4">
          <app-label>
             <div>Image</div>
-            <app-input type="file" [control]="form.controls.image" (onChange)="onImageChange($event)" />
+            <app-input type="file" accept="image/*" [control]="form.controls.image" (onChange)="onImageChange($event)" />
          </app-label>
          @if (image?.invalid) {
             @if (image?.hasError('required')) {
