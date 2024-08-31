@@ -66,18 +66,18 @@ $height: 64px;
    }
 }
 
-.seller-dropdown {
+.logged-in-dropdown {
    display: flex;
    justify-content: center;
    align-items: center;
 
-   .seller-name {
+   .logged-in-name {
       max-width: 100px;
       overflow: hidden;
       text-wrap: nowrap;
       text-overflow: hidden;
    }
-   .seller-image-wrapper {
+   .logged-in-image-wrapper {
       overflow: hidden;
       width: 60px;
       height: 60px;
@@ -86,7 +86,7 @@ $height: 64px;
       justify-content: center;
       align-items: center;
    }
-   .seller-image {
+   .logged-in-image {
       max-width: 60px;
       max-height: 60px;
    }

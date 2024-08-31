@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SellerService {
-  constructor() { }
-  
   seller: any;
   setSeller(seller: any) {
     this.seller = seller

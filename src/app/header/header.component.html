@@ -4,14 +4,24 @@
          <a routerLink="">Market Plaza</a>
       </div>
 
-      @if (sellerService.seller) {
-         <div class="seller-dropdown dropdown">
-            <div class="seller-image-wrapper"><img [src]="env.apiUrl() + '/seller/' + sellerService.seller.image" alt="seller image" class="seller-image"></div>
-            <div class="seller-name">{{ sellerService.seller.name }}</div>
+      @if (userService.user) {
+         <div class="logged-in-dropdown dropdown">
+            <div class="logged-in-image-wrapper"><img [src]="env.apiUrl() + '/user/' + userService.user.image" alt="user image" class="logged-in-image"></div>
+            <div class="logged-in-name">{{ userService.user.name }}</div>
+
+            <nav class="dropdown-menu">
+               <li class="dropdown-item"><a routerLink="user">Profile</a></li>
+               <li class="dropdown-item logout" (click)="userLogout()">Logout</li>
+            </nav>
+         </div>
+      } @else if (sellerService.seller) {
+         <div class="logged-in-dropdown dropdown">
+            <div class="logged-in-image-wrapper"><img [src]="env.apiUrl() + '/seller/' + sellerService.seller.image" alt="seller image" class="logged-in-image"></div>
+            <div class="logged-in-name">{{ sellerService.seller.name }}</div>
 
             <nav class="dropdown-menu">
                <li class="dropdown-item"><a routerLink="seller">Home</a></li>
-               <li class="dropdown-item logout" (click)="logout()">Logout</li>
+               <li class="dropdown-item logout" (click)="sellerLogout()">Logout</li>
             </nav>
          </div>
       } @else {
@@ -32,6 +42,12 @@
                <div class="dropdown-text">
                   Sign Up/In
                </div>
+               <nav class="dropdown-menu">
+                  <li class="dropdown-item">
+                     <a routerLink="/user/create">Create Account</a>   
+                  </li>
+                  <li class="dropdown-item"><a routerLink="/user/login">Sign In</a></li>
+               </nav>
             </div>
          </div>
       }

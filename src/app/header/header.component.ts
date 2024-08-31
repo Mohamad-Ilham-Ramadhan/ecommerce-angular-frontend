@@ -3,8 +3,10 @@ import { Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { SellerService } from '../services/seller.service';
+import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { EnvironmentService } from '../services/environment.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,17 +15,29 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router, public userService: UserService) {
   }
 
   isSellerLoggedIn = false;
+  isUserLoggedIn = false;
 
   ngOnInit(): void {
     console.log('seller', this.sellerService.seller)
 
     if (this.localStorageService.getData('userToken')) {
       console.log('user exist')
-
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
+      this.http.get(this.env.apiUrl()+'/users/find-one', {headers}).subscribe({
+        next: (response: any) => {
+          this.userService.setUser(response);
+          this.isUserLoggedIn = true;
+          this.sellerService.reset();
+          this.localStorageService.removeData('sellerToken');
+        },
+        error: (error) => {
+          console.log('get seller error', error)
+        }
+      })
     } else if (this.localStorageService.getData('sellerToken')) {
       console.log('seller exist')
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
@@ -31,6 +45,9 @@ export class HeaderComponent implements OnInit {
         next: (response: any) => {
           this.sellerService.setSeller(response.seller);
           this.isSellerLoggedIn = true;
+          this.userService.reset();
+          this.localStorageService.removeData('userToken');
+
         },
         error: (error) => {
           console.log('get seller error', error)
@@ -39,7 +56,13 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logout() {
+  userLogout() {
+    this.userService.reset();
+    this.isUserLoggedIn = false;
+    this.localStorageService.removeData('userToken');
+    this.router.navigate(['/user/login']);
+  }
+  sellerLogout() {
     this.sellerService.reset();
     this.isSellerLoggedIn = false;
     this.localStorageService.removeData('sellerToken');
