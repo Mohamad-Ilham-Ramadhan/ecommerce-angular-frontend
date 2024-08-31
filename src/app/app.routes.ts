@@ -17,6 +17,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { sellerAuthGuard } from './guards/seller-auth.guard';
@@ -33,6 +34,7 @@ export const routes: Routes = [
    {path: 'seller/product/edit', component: ProductEditComponent, canActivate: [sellerAuthGuard]},
    {path: 'user/create', component: UserCreateComponent},
    {path: 'user/login', component: UserLoginComponent},
+   {path: 'product/:id', component: ProductDetailComponent},
    // 
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { LocalStorageService } from '../services/local-storage.service';
@@ -14,7 +14,7 @@ import { IdrPipe } from '../pipes/idr.pipe';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -32,5 +32,9 @@ export class HomeComponent implements OnInit {
   }
 
   products: any[] = [];
+
+  goToDetail(id: string | number) {
+    this.router.navigate(['/product/', id])
+  }
 
 }

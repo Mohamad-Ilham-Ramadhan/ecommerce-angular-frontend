@@ -1,6 +1,6 @@
 <div class="container">
    @for (product of products; track $index) {
-      <div class="product">
+      <div class="product" (click)="goToDetail(product.id)">
          <div class="product-image-wrapper">
             <img class="product-image" [src]="env.apiUrl()+'/product/'+product.image" alt="">
          </div>
