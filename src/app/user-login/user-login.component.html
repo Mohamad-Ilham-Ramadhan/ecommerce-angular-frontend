@@ -1,0 +1,36 @@
+<div>
+   <h1>User Login</h1>
+   <form action="" [formGroup]="form" (ngSubmit)="submit($event)">
+      <app-label for="email">
+         Email
+         <app-input id="email" type="email" [control]="form.controls.email"></app-input>
+         @if (email?.invalid) {
+            @if (email?.hasError('required')) {
+               <div  class="form-alert">Email is required.</div>
+            } @else if (email?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            }
+         }
+      </app-label>
+      <app-label for="password">
+         Password
+         <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="form.controls.password"></app-input>
+         <button (click)="toggleShowPassword()" type="button">{{ showPassword ? 'Hide' : 'Show' }}</button>
+         @if (password?.invalid) {
+            @if (password?.hasError('required')) {
+               <div  class="form-alert">Password is required.</div>
+            } @else if (password?.hasError('minlength')) {
+               <div  class="form-alert">Minimum 4 characters.</div>
+            }
+         }
+      </app-label>
+      <button [disabled]="loading">Login</button>
+   </form>
+   @if (showAlert) {
+      <app-alert
+         [text]="alertText"
+         [variant]="alertVariant"
+         (onCloseClick)="closeAlert()"
+      />
+   }
+</div>
