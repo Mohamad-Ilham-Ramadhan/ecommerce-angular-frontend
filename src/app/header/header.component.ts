@@ -25,24 +25,26 @@ export class HeaderComponent implements OnInit {
     console.log('seller', this.sellerService.seller)
 
     if (this.localStorageService.getData('userToken')) {
-      console.log('user exist')
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
       this.http.get(this.env.apiUrl()+'/users/find-one', {headers}).subscribe({
         next: (response: any) => {
+          console.log('header fetch user')
           this.userService.setUser(response);
           this.isUserLoggedIn = true;
           this.sellerService.reset();
           this.localStorageService.removeData('sellerToken');
         },
         error: (error) => {
+          console.log('header fetch user')
           console.log('get seller error', error)
         }
       })
     } else if (this.localStorageService.getData('sellerToken')) {
-      console.log('seller exist')
+
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
       this.http.get(this.env.apiUrl()+'/sellers/find-one', {headers}).subscribe({
         next: (response: any) => {
+          console.log('header fetch seller')
           this.sellerService.setSeller(response.seller);
           this.isSellerLoggedIn = true;
           this.userService.reset();
@@ -50,6 +52,7 @@ export class HeaderComponent implements OnInit {
 
         },
         error: (error) => {
+          console.log('header fetch seller')
           console.log('get seller error', error)
         }
       })

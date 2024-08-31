@@ -17,11 +17,6 @@ import { Router } from '@angular/router';
 })
 export class SellerListComponent implements OnInit {
   
-  showModal1 = true;
-  toggleModal1() {
-    this.showModal1 = !this.showModal1;
-  }
-
   sellers: any = [];
   fetchLoading: boolean = true;
   deleteLoading: boolean = false;

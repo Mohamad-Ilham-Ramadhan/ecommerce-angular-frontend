@@ -78,7 +78,6 @@ export class UserCreateComponent {
     
     this.http.post(this.env.apiUrl()+'/users/create', data).subscribe({
       next: (response: any) => {
-        console.log('response', response);
         this.isFormLoading = false;
         this.localStorageService.saveData('userToken', response.token)
         this.router.navigate(['/']);

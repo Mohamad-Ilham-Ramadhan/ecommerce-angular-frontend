@@ -28,6 +28,9 @@ export class SellerFormComponent {
 
   showPassword = false;
   showRePassword = false;
+  
+
+
   toggleShowPassword(controlName: 'password' | 're-password') {
     switch (controlName) {
       case 'password':
