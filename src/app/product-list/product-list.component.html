@@ -1,0 +1,40 @@
+<div class="container">
+   <p>Product List</p>
+   <div class="truncate-wrapper"><button (click)="truncateProducts()">Truncate products</button></div>
+
+   @if (fetchLoading) {
+      <h2>Fetching data...</h2>
+   }
+   @else if (products.length === 0) {
+      <h2>No product yet !</h2>
+   } @else {
+      <table>
+         <thead>
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Image</th>
+               <th>Price</th>
+               <th>Stock</th>
+               <th>Seller Name</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            @for (product of products; track $index) {
+               <tr>
+                  <td>{{product.id}}</td>
+                  <td>{{product.name}}</td>
+                  <td><img class="image" [src]="env.apiUrl()+'/product/'+ product.image" alt=""></td>
+                  <td>{{product.price}}</td>
+                  <td>{{product.stock}}</td>
+                  <td>{{product.Seller.name}}</td>
+                  <td>
+                     <button (click)="openDialog(product)" [disabled]="deleteLoading">Delete</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   }
+</div>

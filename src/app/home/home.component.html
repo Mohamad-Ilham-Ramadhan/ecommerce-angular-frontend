@@ -1,4 +1,7 @@
 <div class="container">
+   @if (products.length === 0) {
+      <div class="no-products">No Products</div>
+   }
    @for (product of products; track $index) {
       <div class="product" (click)="goToDetail(product.id)">
          <div class="product-image-wrapper">

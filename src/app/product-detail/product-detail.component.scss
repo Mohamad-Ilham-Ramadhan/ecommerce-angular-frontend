@@ -1,0 +1,113 @@
+.container {
+   padding: 40px 160px;
+}
+.wrapper { 
+   display: flex;
+   position: relative;
+   gap: 16px;
+   margin-bottom: 32px;
+}
+.image-wrapper {
+   width: 300px;
+   height: 300px;
+   border-radius: 24px;
+   overflow: hidden;
+   position: sticky;
+   top: 0;
+
+   .image {
+      width: 100%;
+   }
+}
+.name {
+   font-size: 22px;
+   font-weight: bold;
+   margin-bottom: 32px;
+}
+.price {
+   font-size: 48px;
+   font-weight: bold;
+   margin-bottom: 32px;
+}
+.detail-heading {
+   font-size: 18px;
+   font-weight: 500;
+}
+.seller-wrapper {
+   display: flex;
+   margin-bottom: 32px;
+   gap: 8px;
+
+   .seller-image-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      .seller-image {
+         width: 100%;
+      }
+   }
+   .seller-name {
+      font-weight: bold;
+   }
+}
+.lorem {
+   margin-bottom: 32px;
+}
+.review {
+   height: 700px;
+}
+
+
+.col-3 {
+   height: fit-content;
+   min-width: 200px;
+   padding: 16px;
+   border-radius: 8px;
+   border: 1px solid black;
+
+   .heading {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+   }
+}
+.input-quantity-wrapper {
+   display: flex;
+   position: relative;
+   margin-bottom: 8px;
+
+   .input-quantity {
+      padding-left: 40px;
+      height:  30px;
+      width: 100%;
+      
+   }
+   .button-quantity {
+      position: absolute;
+      display: block;
+      width: 30px;
+      height: 30px;
+      font-size: 22px;
+   }
+   .button-decrement {
+      left: 0;
+   }
+   .button-increment {
+      right: 0;
+   }
+}
+.stock-wrapper {
+   margin-bottom: 16px;
+   .stock {
+      font-weight: bold;
+   }
+}
+.subtotal {
+   font-weight: bold;
+}
+
+.transaction-wrapper {
+   display: flex;
+   justify-content: space-between;
+}

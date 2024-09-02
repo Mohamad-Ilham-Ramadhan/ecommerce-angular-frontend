@@ -13,6 +13,10 @@ body, textarea {
    font-family: Arial, Helvetica, sans-serif;
 }
 
+* {
+   box-sizing: border-box;
+}
+
 a { 
    color: inherit;
    text-decoration: inherit;

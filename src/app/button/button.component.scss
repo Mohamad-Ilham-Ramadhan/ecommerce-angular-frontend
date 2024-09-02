@@ -12,6 +12,11 @@ button {
    &.danger {
       background-color: $danger;
    }
+   &.outline {
+      background-color: transparent;
+      border: 2px solid $primary;
+      // color: $primary;
+   }
 
    &:active:not(:disabled) {
       &.primary {
@@ -25,6 +30,6 @@ button {
       cursor: pointer;
    }
    &:disabled {
-      cursor: wait;
+      cursor: not-allowed;
    }
 }

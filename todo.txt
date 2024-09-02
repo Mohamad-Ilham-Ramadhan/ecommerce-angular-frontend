@@ -1,5 +1,5 @@
 bugs:
-   - gak usah pake param: sellerId, pake id dari token aja, nanti cek di server id nya.
+   - nav user/seller gak muncul ketika berhasil create akun, kalo login seller ada, 
 features:
    - seller create product
    - open alert/modal/dialog when unauthorized and redirected to seller-login page(component/route)
@@ -8,7 +8,8 @@ features:
    - delete seller, otomatis delete product, delete photo seller, delete photo products;
 
    - userToken will delete sellerToken, i mean when user login sellerToken get deleted and vice versa.
-   - seller-login page, unavailabel kalo udah login
+   - verify token user dulu sebelum "buy now"
+
 component:
    - create modal component
       - belajar angular/cdk portal

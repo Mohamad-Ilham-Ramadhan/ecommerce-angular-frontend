@@ -11,7 +11,7 @@ import { NgClass } from '@angular/common';
 export class ButtonComponent {
   @Input() text = '';
   @Input() disabled?: boolean;
-  @Input() color: 'danger' | 'primary' = 'primary';
+  @Input() color: 'danger' | 'primary' | 'outline' = 'primary';
   @Input() classes: string = '';
   onClick = output();
 

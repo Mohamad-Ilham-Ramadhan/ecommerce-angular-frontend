@@ -22,6 +22,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { sellerAuthGuard } from './guards/seller-auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 export const routes: Routes = [
    // {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -41,6 +42,7 @@ export const routes: Routes = [
       children: [
          {path: 'sellers', component: SellerListComponent, canActivate: [adminAuthGuard]},
          {path: 'users', component: UserListComponent, canActivate: [adminAuthGuard]},
+         {path: 'products', component: ProductListComponent, canActivate: [adminAuthGuard]},
       ],
    },
    {path: 'admin/create', component: AdminCreateComponent, canActivate: [adminAuthGuard]},
