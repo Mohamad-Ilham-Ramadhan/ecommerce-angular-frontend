@@ -7,7 +7,7 @@
    <img src="/images/load-spinner.png" alt="" class="rotate">
 } @else {
    <ul class="list-none">
-      <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : env.apiUrl() + '/default-admin.jpg'" alt="profile picture" class="profile-picture">
+      <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : '/images/store.png'" alt="profile picture" class="profile-picture">
       <li>Name: {{seller.name}}</li>
       <li>Email: {{seller.email}}</li>
       <li>Products: {{products.length}}</li>

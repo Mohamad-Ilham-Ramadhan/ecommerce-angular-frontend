@@ -16,7 +16,7 @@
          </div>
       } @else if (sellerService.seller) {
          <div class="logged-in-dropdown dropdown">
-            <div class="logged-in-image-wrapper"><img [src]="env.apiUrl() + '/seller/' + sellerService.seller.image" alt="seller image" class="logged-in-image"></div>
+            <div class="logged-in-image-wrapper"><img [src]="sellerService.seller.image ? env.apiUrl() + '/seller/' + sellerService.seller.image : '/images/store.png'" alt="seller image" class="logged-in-image"></div>
             <div class="logged-in-name">{{ sellerService.seller.name }}</div>
 
             <nav class="dropdown-menu">
