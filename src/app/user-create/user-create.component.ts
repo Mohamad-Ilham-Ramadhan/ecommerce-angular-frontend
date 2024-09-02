@@ -10,6 +10,7 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 import { EnvironmentService } from '../services/environment.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-user-create',
   standalone: true,
@@ -18,7 +19,7 @@ import { LocalStorageService } from '../services/local-storage.service';
   styleUrl: './user-create.component.scss'
 })
 export class UserCreateComponent {
-  constructor(private http: HttpClient, private env: EnvironmentService, private localStorageService: LocalStorageService, private router: Router){}
+  constructor(private http: HttpClient, private env: EnvironmentService, private localStorageService: LocalStorageService, private router: Router, private userService: UserService){}
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -78,8 +79,10 @@ export class UserCreateComponent {
     
     this.http.post(this.env.apiUrl()+'/users/create', data).subscribe({
       next: (response: any) => {
+        console.log('create-user response', response)
         this.isFormLoading = false;
-        this.localStorageService.saveData('userToken', response.token)
+        this.localStorageService.saveData('userToken', response.token);
+        this.userService.setUser(response.user);
         this.router.navigate(['/']);
       },
       error: (error) => {
