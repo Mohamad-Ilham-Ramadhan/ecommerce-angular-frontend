@@ -11,7 +11,7 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 import { matchPasswordsValidator } from '../validators/password.validator';
 
 import { LocalStorageService } from '../services/local-storage.service';
-
+import { SellerService } from '../services/seller.service';
 @Component({
   selector: 'app-seller-form',
   standalone: true,
@@ -61,7 +61,7 @@ export class SellerFormComponent {
     image: new FormControl(null),
   }, { validators: matchPasswordsValidator});
 
-  constructor(private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private http: HttpClient, private router: Router, private localStorageService: LocalStorageService, private sellerService: SellerService) {}
 
   // shorten formControl
   get name() { return this.sellerForm.get('name')}
@@ -122,7 +122,6 @@ export class SellerFormComponent {
 
     this.http.post('http://localhost:3000/sellers/create', data).subscribe({
       next: (res: any) => {
-        console.log('this.http.post res', res);
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';
@@ -135,8 +134,8 @@ export class SellerFormComponent {
 
         this.sellerForm.reset();
         console.log('create seller success response', res);
-        // localStorage.setItem('sellerToken', res.token);
-        this.localStorageService.saveData('sellerToken', res.token)
+        this.localStorageService.saveData('sellerToken', res.token);
+        this.sellerService.setSeller(res.seller);
         this.router.navigate(['/seller'])
       },
       error: (e: HttpErrorResponse) => {
