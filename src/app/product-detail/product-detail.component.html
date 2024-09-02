@@ -40,6 +40,9 @@
                   <input type="number" [formControl]="quantity" (keypress)="preventMinus($event)" class="input-quantity" >
                   <button (click)="increment()" class="button-quantity button-increment">+</button>
                </div>
+               @if ((quantity.value ? quantity.value : 0) > product.stock) {
+                  <div class="maximum-purchase-alert">Maximum purchase is {{product.stock}}</div>
+               }
                <div class="stock-wrapper">
                   <div>Stock: <span class="stock">{{ product.stock }}</span></div>
                </div>

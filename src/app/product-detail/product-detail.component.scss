@@ -110,7 +110,10 @@
 .subtotal {
    font-weight: bold;
 }
-
+.maximum-purchase-alert {
+   font-size: 12px;
+   color: red;
+}
 .transaction-wrapper {
    display: flex;
    justify-content: space-between;

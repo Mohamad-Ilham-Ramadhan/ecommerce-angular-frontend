@@ -41,8 +41,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   product: any = {
+    id: 0,
     name: '',
-    image: '',
+    description: '',
+    stock: 0,
+    price: 0,
+
   };
 
   quantity = new FormControl<number>(0);
@@ -68,7 +72,10 @@ export class ProductDetailComponent implements OnInit {
 
   buyNow() {
     const data = new FormData();
-    data.append('product', this.product)
+    if ((this.quantity.value ? this.quantity.value : 0) > this.product.stock) return;
+    data.append('product', JSON.stringify(this.product));
+    data.append('quantity', String(this.quantity.value));
+    data.append('totalPrice', String((this.quantity.value ? this.quantity.value : 0) * this.product.price))
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.post(this.env.apiUrl()+'/products/buy-now', data, { headers}).subscribe({
       next: (response: any) => {
