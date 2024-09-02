@@ -1,60 +1,67 @@
 <div class="container">
-   <div class="wrapper">
-      <div class="col-1">
-         <div class="image-wrapper">
-            <!-- <img class="image" [src]="env.apiUrl() + '/product/'+product.image" alt=""> -->
-         </div>
+   @if (loading) {
+      <div class="spinner-wrapper">
+         <img src="/images/load-spinner.png" alt="" class="rotate">
       </div>
-
-      <div class="col-2">
-         <div class="name">{{ product.name }}</div>
-         <div class="price">{{product.price | idr}}</div>
-         <div class="detail-wrapper">
-            <div class="detail-heading">Detail</div>
-            <div class="detail">{{ product.detail }}</div>
-         </div>
-         
-         <div class="seller-wrapper">
-            <div class="seller-image-wrapper">
-               <!-- <img class="seller-image" [src]="env.apiUrl() + '/seller/' + product.Seller.image" alt=""> -->
-            </div>
-            <div class="seller-name">{{ product.Seller.name }}</div>
-         </div>
-
-         <div class="lorem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur totam placeat error illo ipsam saepe cupiditate laboriosam ab hic vel distinctio culpa doloremque ullam iste vero explicabo, reiciendis in earum?</div>
-         <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
-         <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
-         <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
-      </div>
-
-      <div class="col-3">
-         <div class="heading">Set Quantity</div>
-         <div class="quantity-wrapper">
-            <div class="input-quantity-wrapper">
-               <button [disabled]="quantity.value === 0" (click)="decrement()" class="button-quantity button-decrement">-</button>
-               <input type="number" [formControl]="quantity" (keypress)="preventMinus($event)" class="input-quantity" >
-               <button (click)="increment()" class="button-quantity button-increment">+</button>
-            </div>
-            <div class="stock-wrapper">
-               <div>Stock: <span class="stock">{{ product.stock }}</span></div>
+   } @else {
+      <div class="wrapper">
+         <div class="col-1">
+            <div class="image-wrapper">
+               <img class="image" [src]="env.apiUrl() + '/product/'+product.image" alt="">
             </div>
          </div>
-
-         <div class="mb-2">
-            <div>Subtotal</div>
-            <div class="subtotal">{{ subtotal | idr }}</div>
-         </div>
-         
-         <div class="transaction-wrapper">
-            <app-button text="Buy now" color="outline" [disabled]="quantity.value === 0" (onClick)="buyNow()"></app-button>
-            <app-button text="Add to cart"></app-button>
-         </div>
-      </div>
-
-
-   </div>
-
    
-   <div>Product Review</div>
-   <div class="review">...</div>
+         <div class="col-2">
+            <div class="name">{{ product.name }}</div>
+            <div class="price">{{product.price | idr}}</div>
+            <div class="detail-wrapper">
+               <div class="detail-heading">Detail</div>
+               <div class="detail">{{ product.detail }}</div>
+            </div>
+            
+            <div class="seller-wrapper">
+               <div class="seller-image-wrapper">
+                  <!-- <img class="seller-image" [src]="env.apiUrl() + '/seller/' + product.Seller.image" alt=""> -->
+               </div>
+               <div class="seller-name">{{ product.Seller.name }}</div>
+            </div>
+   
+            <div class="lorem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur totam placeat error illo ipsam saepe cupiditate laboriosam ab hic vel distinctio culpa doloremque ullam iste vero explicabo, reiciendis in earum?</div>
+            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
+            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
+            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
+         </div>
+   
+         <div class="col-3">
+            <div class="heading">Set Quantity</div>
+            <div class="quantity-wrapper">
+               <div class="input-quantity-wrapper">
+                  <button [disabled]="quantity.value === 0" (click)="decrement()" class="button-quantity button-decrement">-</button>
+                  <input type="number" [formControl]="quantity" (keypress)="preventMinus($event)" class="input-quantity" >
+                  <button (click)="increment()" class="button-quantity button-increment">+</button>
+               </div>
+               <div class="stock-wrapper">
+                  <div>Stock: <span class="stock">{{ product.stock }}</span></div>
+               </div>
+            </div>
+   
+            <div class="mb-2">
+               <div>Subtotal</div>
+               <div class="subtotal">{{ subtotal | idr }}</div>
+            </div>
+            
+            <div class="transaction-wrapper">
+               <app-button text="Buy now" color="outline" [disabled]="quantity.value === 0" (onClick)="buyNow()"></app-button>
+               <app-button text="Add to cart"></app-button>
+            </div>
+         </div>
+   
+   
+      </div>
+   
+      
+      <div>Product Review</div>
+      <div class="review">...</div>
+   }
+
 </div>

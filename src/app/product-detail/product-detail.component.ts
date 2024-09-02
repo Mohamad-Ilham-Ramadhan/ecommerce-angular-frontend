@@ -19,6 +19,8 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class ProductDetailComponent implements OnInit {
   constructor(private http: HttpClient, public env: EnvironmentService, private route: ActivatedRoute, private router: Router, private localStorageService: LocalStorageService) {}
 
+  loading: boolean = true;
+  
   ngOnInit(): void {
     this.route.params.subscribe( params => {
       this.http.get(this.env.apiUrl()+'/products/'+params['id']).subscribe({
@@ -28,9 +30,11 @@ export class ProductDetailComponent implements OnInit {
             this.router.navigate(['/'])
           }
           this.product = response;
+          this.loading = false;
         },
         error: (error) => {
-          console.log('error', error)
+          console.log('error', error);
+          this.loading = false;
         }
       })
     });
