@@ -58,9 +58,7 @@
 .lorem {
    margin-bottom: 32px;
 }
-.review {
-   height: 700px;
-}
+
 
 
 .col-3 {
@@ -117,4 +115,29 @@
 .transaction-wrapper {
    display: flex;
    justify-content: space-between;
+}
+
+// reviews
+.reviews-heading {
+   font-size: 48px;
+   margin-bottom: 8px;
+}
+.reviews {
+   // height: 700px;
+}
+.review {
+   margin-bottom: 16px;
+}
+.user {
+   display: flex;
+   align-items: center;
+   margin-bottom: 8px;
+   .user-name {
+      font-size: 18px;
+   }
+   .user-image {
+      width: 54px;
+      margin-right: 8px;
+      border-radius: 100%;
+   }
 }

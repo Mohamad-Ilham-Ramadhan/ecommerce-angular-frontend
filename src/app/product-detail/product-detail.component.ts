@@ -8,6 +8,7 @@ import { IdrPipe } from '../pipes/idr.pipe';
 
 import { ButtonComponent } from '../button/button.component';
 import { LocalStorageService } from '../services/local-storage.service';
+import { ReviewNotifService } from '../services/review-notif.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,13 +18,13 @@ import { LocalStorageService } from '../services/local-storage.service';
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  constructor(private http: HttpClient, public env: EnvironmentService, private route: ActivatedRoute, private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private http: HttpClient, public env: EnvironmentService, private route: ActivatedRoute, private router: Router, private localStorageService: LocalStorageService, private notifService: ReviewNotifService) {}
 
   loading: boolean = true;
-  
+  reviewsLoading: boolean = true;
   ngOnInit(): void {
     this.route.params.subscribe( params => {
-      this.http.get(this.env.apiUrl()+'/products/'+params['id']).subscribe({
+      this.http.get(this.env.apiUrl()+'/products/single/'+params['id']).subscribe({
         next: (response: any) => {
           console.log('response', response)
           if (response === null) {
@@ -36,10 +37,30 @@ export class ProductDetailComponent implements OnInit {
           console.log('error', error);
           this.loading = false;
         }
-      })
+      });
+      this.http.get(this.env.apiUrl()+'/products/review/'+params['id']).subscribe({
+        next: (response: any) => {
+          console.log('get reviews response', response);
+          this.reviews = response;
+          this.reviewsLoading = false;
+          this.reviews = this.reviews.map( r => {
+            let stars : boolean[] = [];
+            for (let i = 1; i <= 5; i++) {
+              stars[i-1] = i <= r.rate ? true : false
+            }
+            return {...r, stars};
+          });
+          console.log('new reviews', this.reviews);
+        },
+        error: (error) => {
+          console.log('get reviews error', error);
+          this.reviewsLoading = false;
+        }
+      });
     });
   }
 
+  reviews: any[] = [];
   product: any = {
     id: 0,
     name: '',
@@ -79,7 +100,9 @@ export class ProductDetailComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.post(this.env.apiUrl()+'/products/buy-now', data, { headers}).subscribe({
       next: (response: any) => {
-        console.log('response', response)
+        console.log('response', response);
+        this.notifService.setNotif(response);
+        this.router.navigate(['/product/review', this.product.id], {state: {notif: response}})
       },
       error: (error: any) => {
         console.log('error', error)

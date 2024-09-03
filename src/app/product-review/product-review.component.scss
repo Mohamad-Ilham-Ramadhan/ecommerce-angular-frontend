@@ -1,0 +1,23 @@
+.star-icon {
+   &:hover {
+      cursor: pointer;
+   }
+}
+
+.wrapper {
+   display: flex;
+   justify-content: space-between;
+}
+.product-image-wrapper {
+   .product-image {
+      width: 200px;
+   }
+}
+.product-name {
+   font-size: 20px;
+   margin-bottom: 8px;
+}
+.product-price {
+   font-weight: bold;
+   margin-bottom: 24px;
+}

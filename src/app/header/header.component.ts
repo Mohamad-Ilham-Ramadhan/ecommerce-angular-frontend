@@ -6,7 +6,7 @@ import { SellerService } from '../services/seller.service';
 import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { EnvironmentService } from '../services/environment.service';
-
+import { ReviewNotifService } from '../services/review-notif.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,7 +15,7 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router, public userService: UserService) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router, public userService: UserService, public notifService: ReviewNotifService) {
   }
 
   isSellerLoggedIn = false;
@@ -23,9 +23,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('seller', this.sellerService.seller)
-
-    if (this.localStorageService.getData('userToken')) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
+    const userToken = this.localStorageService.getData('userToken');
+    if (userToken) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${userToken}`)
       this.http.get(this.env.apiUrl()+'/users/find-one', {headers}).subscribe({
         next: (response: any) => {
           console.log('header fetch user')
@@ -38,7 +38,18 @@ export class HeaderComponent implements OnInit {
           console.log('header fetch user')
           console.log('get seller error', error)
         }
+      });
+
+      this.http.get(this.env.apiUrl() + '/products/review-notif', {headers}).subscribe({
+        next: (response: any) => {
+          console.log('review notif response', response);
+          this.notifService.setNotifs(response)
+        },
+        error: (error: any) => {
+          console.log('error', error)
+        }
       })
+
     } else if (this.localStorageService.getData('sellerToken')) {
 
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)

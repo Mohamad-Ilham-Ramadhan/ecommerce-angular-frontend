@@ -10,6 +10,9 @@ features:
    - userToken will delete sellerToken, i mean when user login sellerToken get deleted and vice versa.
    - verify token user dulu sebelum "buy now"
 
+   - setiap response error yang menghapus token/ maka pastikan nav seller/user ilang.
+   - notifikasi review hanya ada pada nav user.
+
 component:
    - create modal component
       - belajar angular/cdk portal

@@ -65,7 +65,6 @@ $height: 64px;
       }
    }
 }
-
 .logged-in-dropdown {
    display: flex;
    justify-content: center;
@@ -95,4 +94,27 @@ $height: 64px;
       background-color: rgb(250, 229, 223);
       color: rgb(155, 155, 155)
    }
+}
+
+.envelope-image-wrapper {
+   margin-left: auto;
+   margin-right: 8px;
+   position: relative;
+   padding: 4px;
+}
+.envelope-image {
+   width: 32px;
+}
+.notif-count {
+   position: absolute;
+   top: 0;
+   right: 0;
+   background-color: tomato;
+   border-radius: 100%;
+   width: 20px;
+   height: 20px;
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

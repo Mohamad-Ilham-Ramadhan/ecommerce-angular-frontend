@@ -4,6 +4,10 @@
          <a routerLink="">Market Plaza</a>
       </div>
 
+      <div class="envelope-image-wrapper">
+         <img class="envelope-image" src="/images/envelope.png" alt="">
+         <div class="notif-count">{{notifService.notifs.length}}</div>
+      </div>
       @if (userService.user) {
          <div class="logged-in-dropdown dropdown">
             <div class="logged-in-image-wrapper"><img [src]="env.apiUrl() + '/user/' + userService.user.image" alt="user image" class="logged-in-image"></div>
