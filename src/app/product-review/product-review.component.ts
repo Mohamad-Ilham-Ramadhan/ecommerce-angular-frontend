@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { TextareaComponent } from '../textarea/textarea.component';
 import { LabelComponent } from '../forms/label/label.component';
@@ -17,7 +18,8 @@ import { IdrPipe } from '../pipes/idr.pipe';
   styleUrl: './product-review.component.scss'
 })
 export class ProductReviewComponent implements OnInit {
-  constructor(private notifService: ReviewNotifService, private http: HttpClient, public env: EnvironmentService, private localStorageService: LocalStorageService) {}
+  constructor(private notifService: ReviewNotifService, private http: HttpClient, public env: EnvironmentService, private localStorageService: LocalStorageService, private router: Router) {}
+
   ngOnInit(): void {
       console.log('history.state', history.state);
       console.log('notifService', this.notifService.notif);
@@ -72,6 +74,8 @@ export class ProductReviewComponent implements OnInit {
     this.http.post(this.env.apiUrl()+'/products/review', data, {headers}).subscribe({
       next: (response: any) => {
         console.log('submit review response', response);
+        this.notifService.setNotifs(response.notifs);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         console.log('error', error)
