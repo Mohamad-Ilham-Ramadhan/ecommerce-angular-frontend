@@ -6,7 +6,7 @@
       </div>
    } @else {
       @for (notif of notifs; track $index) {
-         <div class="notif">
+         <div class="notif" [routerLink]="['/product/review/', notif.ProductId]" [state]="{notif}">
             <div class="notif-date">{{notif.createdAt | date :'mediumDate'}}</div>
             <div class="flex justify-center items-center">
                <div class="notif-image-wrapper">
