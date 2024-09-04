@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ReviewNotifService {
-  constructor() { }
+  constructor() {}
   notifs: any[] = [];
+
   setNotifs(notifs: any[]) {
     this.notifs = notifs;
   }

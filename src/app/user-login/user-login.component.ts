@@ -9,6 +9,7 @@ import { InputComponent } from '../forms/input/input.component';
 
 import { UserService } from '../services/user.service';
 import { EnvironmentService } from '../services/environment.service';
+import { ReviewNotifService } from '../services/review-notif.service';
 @Component({
   selector: 'app-user-login',
   standalone: true,
@@ -17,7 +18,7 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './user-login.component.scss'
 })
 export class UserLoginComponent {
-  constructor(private http: HttpClient, private router: Router, public userService: UserService, private env: EnvironmentService) {}
+  constructor(private http: HttpClient, private router: Router, public userService: UserService, private env: EnvironmentService, private notifService: ReviewNotifService) {}
   
   @ViewChild(InputComponent) emailContent?: InputComponent;
   ngAfterViewInit(): void {
@@ -61,13 +62,14 @@ export class UserLoginComponent {
     this.http.post(this.env.apiUrl() + '/users/login', data).subscribe({
       next: (res: any) => {
         this.loading = false;
-        console.log('response', res)
+        console.log('/user/login response', res)
         this.showAlert = true;
         if (res.token) {
           localStorage.setItem('userToken', res.token);
           this.alertText = res.message;
           this.alertVariant = 'primary';
           this.userService.user = res.user;
+          this.notifService.setNotifs(res.user.ProductReviewNotifs);
           this.router.navigate(['/'])
         } else {
           this.alertText = 'Something went wrong';
