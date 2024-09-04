@@ -85,7 +85,7 @@ export class ProductCreateComponent {
 
     this.http.post(this.env.apiUrl()+'/sellers/create-product/', data, {headers}).subscribe({
       next: (response: any) => {
-        console.log('response', response)
+        console.log('create-product response', response)
         this.formLoading = false;
         this.form.reset();
         this.alertText = response.message;

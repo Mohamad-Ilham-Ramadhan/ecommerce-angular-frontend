@@ -14,4 +14,8 @@ export class ReviewNotifService {
   setNotif(notif: any) {
     this.notif = notif;
   }
+
+  pushNotif(notif: any) {
+    this.notifs = [...this.notifs, notif];
+  }
 }

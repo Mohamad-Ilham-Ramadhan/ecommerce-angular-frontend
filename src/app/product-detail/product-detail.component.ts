@@ -100,8 +100,9 @@ export class ProductDetailComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.post(this.env.apiUrl()+'/products/buy-now', data, { headers}).subscribe({
       next: (response: any) => {
-        console.log('response', response);
+        console.log('buy-now response', response);
         this.notifService.setNotif(response);
+        this.notifService.pushNotif(response);
         this.router.navigate(['/product/review', this.product.id], {state: {notif: response}})
       },
       error: (error: any) => {
