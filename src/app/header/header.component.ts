@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
 
       this.http.get(this.env.apiUrl() + '/products/review-notif', {headers}).subscribe({
         next: (response: any) => {
-          console.log('review notif response', response);
+          // console.log('review notif response', response);
           this.notifService.setNotifs(response)
         },
         error: (error: any) => {

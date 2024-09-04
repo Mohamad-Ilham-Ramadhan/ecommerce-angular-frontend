@@ -19,11 +19,15 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductReviewComponent } from './product-review/product-review.component';
+import { ReviewNotifListComponent } from './review-notif-list/review-notif-list.component';
 
+// admin
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { sellerAuthGuard } from './guards/seller-auth.guard';
+import { userAuthGuard } from './guards/user-auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
 import { ProductListComponent } from './product-list/product-list.component';
+
 
 export const routes: Routes = [
    // {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -38,6 +42,7 @@ export const routes: Routes = [
    {path: 'user/login', component: UserLoginComponent},
    {path: 'product/:id', component: ProductDetailComponent},
    {path: 'product/review/:id', component: ProductReviewComponent},
+   {path: 'review-notif-list', component: ReviewNotifListComponent, canActivate: [userAuthGuard]},
    // 
    {path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
    {path: 'admin', component: AdminComponent, canActivate: [adminAuthGuard], 

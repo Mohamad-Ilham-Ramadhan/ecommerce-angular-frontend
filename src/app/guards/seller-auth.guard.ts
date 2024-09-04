@@ -12,7 +12,7 @@ class SellerAuthGuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): MaybeAsync<GuardResult> {
-    console.log('seller auth guard canActivate')
+    // console.log('seller auth guard canActivate')
     const sellerToken = this.document.defaultView?.localStorage.getItem('sellerToken');
     if (sellerToken) {
       return true;

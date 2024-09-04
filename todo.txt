@@ -1,5 +1,7 @@
 bugs:
    - nav user/seller gak muncul ketika berhasil create akun, kalo login seller ada, 
+   - habis login user, notif review tidak keisi
+   - habis buy now, notif harus langsung nambah tapi tidak.
 features:
    - seller create product
    - open alert/modal/dialog when unauthorized and redirected to seller-login page(component/route)
@@ -12,6 +14,7 @@ features:
 
    - setiap response error yang menghapus token/ maka pastikan nav seller/user ilang.
    - notifikasi review hanya ada pada nav user.
+
 
 component:
    - create modal component

@@ -101,6 +101,9 @@ $height: 64px;
    margin-right: 8px;
    position: relative;
    padding: 4px;
+   &:hover {
+      cursor: pointer;
+   }
 }
 .envelope-image {
    width: 32px;

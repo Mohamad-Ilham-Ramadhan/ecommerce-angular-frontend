@@ -21,15 +21,37 @@
             
             <div class="seller-wrapper">
                <div class="seller-image-wrapper">
-                  <!-- <img class="seller-image" [src]="env.apiUrl() + '/seller/' + product.Seller.image" alt=""> -->
+                  <img class="seller-image" [src]="product.Seller.image ? env.apiUrl() + '/seller/' + product.Seller.image : '/images/store.png'" alt="">
                </div>
                <div class="seller-name">{{ product.Seller.name }}</div>
             </div>
-   
-            <div class="lorem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur totam placeat error illo ipsam saepe cupiditate laboriosam ab hic vel distinctio culpa doloremque ullam iste vero explicabo, reiciendis in earum?</div>
-            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
-            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
-            <div class="lorem">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ratione autem quasi a pariatur numquam natus, aspernatur ea voluptatum possimus mollitia accusamus reprehenderit sed inventore, accusantium eos, architecto hic veritatis!</div>
+
+            <div>
+               <div class="reviews-heading">Product Review</div>
+               <div class="reviews">
+                  @for (r of reviews; track $index) {
+                     <div class="review-wrapper">
+                        <div class="rate">
+                           @for (lit of r.stars; track $index) {
+                              @if (lit) {
+                                 <!-- bintang gold -->
+                                 <svg class="star-icon" viewBox="0 0 24 24" width="18" height="18" fill="var(--YN300, #FFC400)" aria-hidden="true" style="display: inline-block; margin-right: 2px; vertical-align: middle;"><path d="M21.57 9.14a2.37 2.37 0 0 0-1.93-1.63L15.9 7l-1.68-3.4a2.38 2.38 0 0 0-4.27 0L8.27 7l-3.75.54a2.39 2.39 0 0 0-1.32 4.04l2.71 2.64L5.27 18a2.38 2.38 0 0 0 2.35 2.79 2.42 2.42 0 0 0 1.11-.27l3.35-1.76 3.35 1.76a2.41 2.41 0 0 0 2.57-.23 2.369 2.369 0 0 0 .89-2.29l-.64-3.73L21 11.58a2.38 2.38 0 0 0 .57-2.44Z"></path></svg>
+                              } @else {
+                                 <!-- bintang abu -->
+                                 <svg class="star-icon" viewBox="0 0 24 24" width="18" height="18" fill="var(--NN200, #D6DFEB)" aria-hidden="true" style="display: inline-block; margin-right: 2px; vertical-align: middle;"><path d="M21.57 9.14a2.37 2.37 0 0 0-1.93-1.63L15.9 7l-1.68-3.4a2.38 2.38 0 0 0-4.27 0L8.27 7l-3.75.54a2.39 2.39 0 0 0-1.32 4.04l2.71 2.64L5.27 18a2.38 2.38 0 0 0 2.35 2.79 2.42 2.42 0 0 0 1.11-.27l3.35-1.76 3.35 1.76a2.41 2.41 0 0 0 2.57-.23 2.369 2.369 0 0 0 .89-2.29l-.64-3.73L21 11.58a2.38 2.38 0 0 0 .57-2.44Z"></path></svg>
+                              }
+                           }
+                        </div>
+                        <div class="user">
+                           <img class="user-image" [src]="env.apiUrl()+'/user/'+r.User.image" alt="User image"/>
+                           <div class="user-name">{{ r.User.name }}</div>
+                        </div>
+                        <div class="review">{{ r.review }}</div>
+                     </div>
+                  }
+               </div>
+            </div>
+
          </div>
    
          <div class="col-3">
@@ -58,34 +80,12 @@
                <app-button text="Add to cart"></app-button>
             </div>
          </div>
-   
-   
+
       </div>
+
+      
    
       
-      <div class="reviews-heading">Product Review</div>
-      <div class="reviews">
-         @for (r of reviews; track $index) {
-            <div class="review-wrapper">
-               <div class="rate">
-                  @for (lit of r.stars; track $index) {
-                     @if (lit) {
-                        <!-- bintang gold -->
-                        <svg class="star-icon" viewBox="0 0 24 24" width="18" height="18" fill="var(--YN300, #FFC400)" aria-hidden="true" style="display: inline-block; margin-right: 2px; vertical-align: middle;"><path d="M21.57 9.14a2.37 2.37 0 0 0-1.93-1.63L15.9 7l-1.68-3.4a2.38 2.38 0 0 0-4.27 0L8.27 7l-3.75.54a2.39 2.39 0 0 0-1.32 4.04l2.71 2.64L5.27 18a2.38 2.38 0 0 0 2.35 2.79 2.42 2.42 0 0 0 1.11-.27l3.35-1.76 3.35 1.76a2.41 2.41 0 0 0 2.57-.23 2.369 2.369 0 0 0 .89-2.29l-.64-3.73L21 11.58a2.38 2.38 0 0 0 .57-2.44Z"></path></svg>
-                     } @else {
-                        <!-- bintang abu -->
-                        <svg class="star-icon" viewBox="0 0 24 24" width="18" height="18" fill="var(--NN200, #D6DFEB)" aria-hidden="true" style="display: inline-block; margin-right: 2px; vertical-align: middle;"><path d="M21.57 9.14a2.37 2.37 0 0 0-1.93-1.63L15.9 7l-1.68-3.4a2.38 2.38 0 0 0-4.27 0L8.27 7l-3.75.54a2.39 2.39 0 0 0-1.32 4.04l2.71 2.64L5.27 18a2.38 2.38 0 0 0 2.35 2.79 2.42 2.42 0 0 0 1.11-.27l3.35-1.76 3.35 1.76a2.41 2.41 0 0 0 2.57-.23 2.369 2.369 0 0 0 .89-2.29l-.64-3.73L21 11.58a2.38 2.38 0 0 0 .57-2.44Z"></path></svg>
-                     }
-                  }
-               </div>
-               <div class="user">
-                  <img class="user-image" [src]="env.apiUrl()+'/user/'+r.User.image" alt="User image"/>
-                  <div class="user-name">{{ r.User.name }}</div>
-               </div>
-               <div class="review">{{ r.review }}</div>
-            </div>
-         }
-      </div>
    }
 
 </div>
