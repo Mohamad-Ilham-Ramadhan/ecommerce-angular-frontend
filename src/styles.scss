@@ -61,6 +61,12 @@ a {
       margin-bottom: #{$i * 0.25}rem ;
    }
 }
+@for $i from 1 through 20 {
+   .mt-#{$i} {
+      margin-top: #{$i * 0.25}rem ;
+   }
+}
+.mt-auto {margin-top: auto;}
 .flex {display: flex;}
 .flex-column { flex-direction: column;}
 .flex-wrap {flex-wrap: wrap;}

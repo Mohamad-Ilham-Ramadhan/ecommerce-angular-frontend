@@ -11,7 +11,6 @@ import { EnvironmentService } from '../services/environment.service';
 import { ReviewNotifService } from '../services/review-notif.service';
 import { CartService } from '../services/cart.service';
 import { IdrPipe } from '../pipes/idr.pipe';
-import { response } from 'express';
 
 @Component({
   selector: 'app-header',

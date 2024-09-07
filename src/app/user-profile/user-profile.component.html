@@ -1,0 +1,16 @@
+@if (userService.user) {
+   <div class="container">
+      <div class="wrapper flex">
+         <div>
+            <img class="image" [src]="userService.user?.image ? env.apiUrl()+'/user/'+userService.user.image : '/images/default.jpg'" alt="">
+         </div>
+         <div class="flex flex-column w-full">
+            <div class="txt name">Name: {{ userService.user.name }} </div>
+            <div class="txt username">Username: {{ userService.user.username }} </div>
+            <div class="txt email">Email: {{ userService.user.email }} </div>
+            
+            <app-button text="Edit" (onClick)="edit()" classes="mt-auto" hostClasses="mt-auto" />
+         </div> 
+      </div>
+   </div>
+}
