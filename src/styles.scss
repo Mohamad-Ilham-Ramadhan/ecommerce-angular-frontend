@@ -63,6 +63,9 @@ a {
 }
 .flex {display: flex;}
 .flex-column { flex-direction: column;}
+.flex-wrap {flex-wrap: wrap;}
+.flex-nowrap {flex-wrap: nowrap;}
+
 .justify-normal	{justify-content: normal;}
 .justify-start	{justify-content: flex-start;}
 .justify-end	{justify-content: flex-end;}
