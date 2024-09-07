@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/htt
 
 import { LocalStorageService } from './local-storage.service';
 import { EnvironmentService } from './environment.service';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,6 @@ export class CartService {
   buy() {
     const data = new FormData();
     data.append('hoho', 'hihi');
-    let observable;
     let sub = new Subject()
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     const post = this.http.post(this.env.apiUrl()+'/users/cart/buy', data, {headers}).subscribe({
@@ -47,8 +46,7 @@ export class CartService {
         this.products = [];
         this.total = 0;
         sub.next('subject from this.http.post.subscribe.next')
-        this.afterBuy.next('after buy');
-        return 'next return';
+        this.afterBuy.next(response);
       },
       error: (error: any) => {
         console.log('cart buy error', error);
