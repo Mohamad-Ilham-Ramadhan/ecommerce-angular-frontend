@@ -75,7 +75,7 @@ export class ProductReviewComponent implements OnInit {
       next: (response: any) => {
         console.log('submit review response', response);
         this.notifService.setNotifs(response.notifs);
-        this.router.navigate(['/']);
+        this.router.navigate(['/review-notif-list']);
       },
       error: (error) => {
         console.log('error', error)
