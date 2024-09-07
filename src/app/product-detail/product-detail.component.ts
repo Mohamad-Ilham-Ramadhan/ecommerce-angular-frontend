@@ -9,7 +9,7 @@ import { IdrPipe } from '../pipes/idr.pipe';
 import { ButtonComponent } from '../button/button.component';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ReviewNotifService } from '../services/review-notif.service';
-
+import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -18,26 +18,34 @@ import { ReviewNotifService } from '../services/review-notif.service';
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  constructor(private http: HttpClient, public env: EnvironmentService, private route: ActivatedRoute, private router: Router, private localStorageService: LocalStorageService, private notifService: ReviewNotifService) {}
+  constructor(private http: HttpClient, public env: EnvironmentService, private route: ActivatedRoute, private router: Router, private localStorageService: LocalStorageService, private notifService: ReviewNotifService, private cartService: CartService) {}
 
   loading: boolean = true;
   reviewsLoading: boolean = true;
-  ngOnInit(): void {
-    this.route.params.subscribe( params => {
-      this.http.get(this.env.apiUrl()+'/products/single/'+params['id']).subscribe({
-        next: (response: any) => {
-          console.log('response', response)
-          if (response === null) {
-            this.router.navigate(['/'])
-          }
-          this.product = response;
-          this.loading = false;
-        },
-        error: (error) => {
-          console.log('error', error);
-          this.loading = false;
+
+  fetchSingleProduct(id: any) {
+    this.http.get(this.env.apiUrl()+'/products/single/'+id).subscribe({
+      next: (response: any) => {
+        console.log('response', response)
+        if (response === null) {
+          this.router.navigate(['/'])
         }
+        this.product = response;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.log('error', error);
+        this.loading = false;
+      }
+    });
+  }
+  ngOnInit(): void {
+    
+    this.route.params.subscribe( params => {
+      this.cartService.afterBuy.subscribe((val) => {
+        this.fetchSingleProduct(params['id'])
       });
+      this.fetchSingleProduct(params['id'])
       this.http.get(this.env.apiUrl()+'/products/review/'+params['id']).subscribe({
         next: (response: any) => {
           console.log('get reviews response', response);
@@ -109,5 +117,21 @@ export class ProductDetailComponent implements OnInit {
         console.log('error', error)
       }
     });
+  }
+
+  addToCart() {
+    const data = new FormData();
+    data.append('productId', this.product.id);
+    data.append('quantity', String(this.quantity.value))
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
+    this.http.post(this.env.apiUrl()+'/users/cart/add', data , {headers}).subscribe({
+      next: (response: any) => {
+        console.log('add to cart response', response )
+        this.cartService.setProducts(response);
+      },
+      error: (error) => {
+        console.log('error', error)
+      }
+    })
   }
 }

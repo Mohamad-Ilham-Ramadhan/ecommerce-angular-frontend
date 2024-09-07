@@ -5,6 +5,34 @@
       </div>
 
       @if (userService.user) {
+         <div class="cart-wrapper dropdown">
+            <img class="cart-image" src="/images/cart.png" alt="">
+            <div class="cart-count">{{ cartService.products.length }}</div>
+            <div class="dropdown-menu cart-menu">
+               <div>Cart ({{cartService.products.length}})</div>
+               @for (product of cartService.products; track $index) {
+                  <div class="cart-product">
+                     <div class="flex items-center">
+                        <img class="cart-product-image" [src]="env.apiUrl()+'/product/'+product.image" alt="">
+                        <div class="flex flex-column">
+                           <div class="cart-name">{{ product.name }}</div>
+                           <div class="cart-price">{{ product.price | idr}} x {{ product.CartProducts.ProductQuantity}}</div>
+                        </div>
+
+                        <div class="cart-subtotal ml-auto">
+                           {{product.price * product.CartProducts.ProductQuantity | idr}}
+                        </div>
+                     </div>
+                  </div>
+               }
+               @if (cartService.products.length) {
+                  <div class="flex justify-between items-center cart-footer">
+                     <div class="cart-total">Total: {{ cartService.total | idr}}</div>
+                     <app-button text="Buy" (onClick)="buy()" />
+                  </div>
+               }
+            </div>
+         </div>
          <div class="envelope-image-wrapper" routerLink="/review-notif-list">
             <img class="envelope-image" src="/images/envelope.png" alt="">
             <div class="notif-count">{{notifService.notifs.length}}</div>

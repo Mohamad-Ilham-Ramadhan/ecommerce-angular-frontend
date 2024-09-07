@@ -2,20 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { ButtonComponent } from '../button/button.component';
+
 import { SellerService } from '../services/seller.service';
 import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { EnvironmentService } from '../services/environment.service';
 import { ReviewNotifService } from '../services/review-notif.service';
+import { CartService } from '../services/cart.service';
+import { IdrPipe } from '../pipes/idr.pipe';
+import { response } from 'express';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IdrPipe, ButtonComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router, public userService: UserService, public notifService: ReviewNotifService) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, public env: EnvironmentService, public sellerService: SellerService, private router: Router, public userService: UserService, public notifService: ReviewNotifService, public cartService: CartService) {
   }
 
   isSellerLoggedIn = false;
@@ -25,6 +31,8 @@ export class HeaderComponent implements OnInit {
     console.log('seller', this.sellerService.seller)
     const userToken = this.localStorageService.getData('userToken');
     if (userToken) {
+      this.cartService.fetchProducts();
+
       const headers = new HttpHeaders().set('Authorization', `Bearer ${userToken}`)
       this.http.get(this.env.apiUrl()+'/users/find-one', {headers}).subscribe({
         next: (response: any) => {
@@ -81,5 +89,12 @@ export class HeaderComponent implements OnInit {
     this.isSellerLoggedIn = false;
     this.localStorageService.removeData('sellerToken');
     this.router.navigate(['/seller/login']);
+  }
+
+  buy() {
+    // @ts-ignore
+    this.cartService.buy().subscribe((val) => {
+      console.log('val', val)
+    })
   }
 }
