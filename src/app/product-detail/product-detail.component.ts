@@ -108,7 +108,8 @@ export class ProductDetailComponent implements OnInit {
         this.router.navigate(['/product/review', this.product.id], {state: {notif: response}})
       },
       error: (error: any) => {
-        console.log('error', error)
+        console.log('error', error);
+        this.router.navigate(['/user/login'])
       }
     });
   }
@@ -123,7 +124,8 @@ export class ProductDetailComponent implements OnInit {
         this.cartService.setProducts(response);
       },
       error: (error) => {
-        console.log('error', error)
+        console.log('error', error);
+        this.router.navigate(['/user/login'])
       }
     })
   }
