@@ -88,8 +88,9 @@ export class HeaderComponent implements OnInit {
   buy() {
     // @ts-ignore
     this.cartService.buy()
-    this.cartService.afterBuy.subscribe((val) => {
-      this.notifService.pushNotif(val);
+    this.cartService.afterBuy.subscribe((val: any) => {
+      console.log('header buy() val', val)
+      this.notifService.setNotifs(val);
     })
   }
 }
