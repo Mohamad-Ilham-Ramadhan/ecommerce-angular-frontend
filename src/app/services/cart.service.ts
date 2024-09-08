@@ -16,7 +16,6 @@ export class CartService {
   setProducts(products: any) {
     this.products = products;
     this.total = products.reduce( (acc: number, cv: any) => {
-      console.log('this.total reduce', cv);
       return acc + (cv.price * cv.CartProducts.ProductQuantity)
     }, 0)
   }
@@ -24,7 +23,6 @@ export class CartService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.get(this.env.apiUrl()+'/users/cart/', {headers}).subscribe({
       next: (response: any) => {
-        console.log('cart service fetch products response', response);
         this.total = response.reduce( (acc: number, cv: any) => {
           return acc + (cv.price * cv.CartProducts.ProductQuantity)
         }, this.total)
@@ -42,7 +40,6 @@ export class CartService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     const post = this.http.post(this.env.apiUrl()+'/users/cart/buy', data, {headers}).subscribe({
       next: (response: any) => {
-        console.log('cart buy response', response)  
         this.products = [];
         this.total = 0;
         sub.next('subject from this.http.post.subscribe.next')

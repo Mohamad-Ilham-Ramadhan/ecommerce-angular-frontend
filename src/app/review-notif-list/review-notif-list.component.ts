@@ -20,7 +20,6 @@ export class ReviewNotifListComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
       this.http.get(this.env.apiUrl()+'/products/review-notif-list', {headers}).subscribe({
         next: (response: any) => {
-          console.log('review-notif-list response', response);
           this.notifs = response;
           this.loading = false;
         },

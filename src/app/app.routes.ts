@@ -21,6 +21,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { ReviewNotifListComponent } from './review-notif-list/review-notif-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserEditProfileComponent } from './user-edit-profile/user-edit-profile.component';
 
 // admin
 import { adminAuthGuard } from './guards/admin-auth.guard';
@@ -42,6 +43,7 @@ export const routes: Routes = [
    {path: 'user/create', component: UserCreateComponent},
    {path: 'user/login', component: UserLoginComponent},
    {path: 'user/profile', component: UserProfileComponent},
+   {path: 'user/profile/edit', component: UserEditProfileComponent, canActivate: [userAuthGuard]},
    {path: 'product/:id', component: ProductDetailComponent},
    {path: 'product/review/:id', component: ProductReviewComponent},
    {path: 'review-notif-list', component: ReviewNotifListComponent, canActivate: [userAuthGuard]},

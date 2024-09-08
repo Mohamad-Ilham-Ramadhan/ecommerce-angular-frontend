@@ -23,5 +23,5 @@ class SellerAuthGuardService implements CanActivate {
   }
 }
 export const sellerAuthGuard: CanActivateFn = (route, state) => {
-  return inject(SellerAuthGuardService).canActivate(route, state)
+  return inject(SellerAuthGuardService).canActivate(route, state);
 };

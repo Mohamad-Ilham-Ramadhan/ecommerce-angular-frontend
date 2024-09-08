@@ -1,0 +1,78 @@
+@if (userService.user) {
+   <div class="container">
+      <h1>Edit your profile</h1>
+      <form action="" (ngSubmit)="submit($event)" [formGroup]="form">
+         <div class="mb-4">
+            <app-label for="name">
+               Name: 
+               <app-input [control]="form.controls.name" id="name" />
+            </app-label>
+            @if (name?.invalid) {
+               <div class="form-alert">Name is required.</div>
+            }
+
+         </div>
+         <div class="mb-4">
+            <app-label for="username">
+               Username: 
+               <app-input [control]="form.controls.username" id="username"/>
+            </app-label>
+            @if (username?.invalid) {
+               <div class="form-alert">Username is required.</div>
+            }
+         </div>
+         <div class="mb-4">
+            <app-label for="email">
+               Email: 
+               <app-input [control]="form.controls.email" for="email"/>
+            </app-label>
+            @if (email?.invalid) {
+               @if (email?.hasError('required')) {
+                  <div class="form-alert">Email is required.</div>
+               } @else if (email?.hasError('email')) {
+                  <div class="form-alert">Email must be in the correct format.</div>
+               }
+            }
+         </div>
+         <div class="mb-4">
+            <app-label for="image">
+               Image: 
+               <app-input type="file" (onChange)="changeImage($event)" accept="image/*" id="image" />
+               *empty image if you won't change it.
+            </app-label>
+            @if(imagePreview) {
+               <div><img [src]="imagePreview" alt="image preview" class="image-preview"></div>
+            }
+         </div>
+   
+         <div class="mb-4">
+            <app-label for="password">
+               Password: 
+               <app-input [control]="form.controls.password" type="password" id="password" />
+               *empty password if you won't change it.
+            </app-label>
+            @if (password?.invalid) {
+               <div class="form-alert">Password minimal length is 4.</div>
+            }
+         </div>
+         <div class="mb-4">
+            <app-label for="re-password">
+               Re-password: 
+               <app-input [control]="form.controls.rePassword" type="password" id="re-password" />
+               *empty password if you won't change it.
+            </app-label>
+            @if (rePassword?.invalid) {
+               <div class="form-alert">Re-password minimal length is 4.</div>
+            }
+            @if (form.hasError('passwordsDoesNotMatch') && (form.touched || form.dirty)) {
+               <div  class="form-alert">Password does not match.</div>
+            }
+         </div>
+   
+         <app-button text="Submit" (onClick)="submit($event)" type="submit" [disabled]="isLoading"/>
+      </form>
+      @if (isAlertShow) {
+         <app-alert [text]="alertText" [variant]="alertVariant" (onCloseClick)="isAlertShow = false" />
+      }
+   </div>
+}

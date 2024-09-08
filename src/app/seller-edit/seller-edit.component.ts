@@ -64,12 +64,10 @@ export class SellerEditComponent implements OnInit {
   }, { validators: matchPasswordsValidator});
 
   ngOnInit(): void {
-    console.log('history.state', history.state);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('sellerToken')}`)
     this.http.get(this.env.apiUrl() + '/sellers/find-one', {headers}).subscribe({
       next: (result: any) => {
         this.pageLoading = false;
-        console.log('get seller result', result);
         this.setName = result.seller.name;
         this.setEmail = result.seller.email;
         this.sellerId = result.seller.id;
@@ -114,14 +112,12 @@ export class SellerEditComponent implements OnInit {
       if (Object.prototype.hasOwnProperty.call(this.sellerForm.controls, key)) {
         // @ts-ignore
         const element = this.sellerForm.controls[key];
-        console.log(element.value)
       }
     }
   }
 
   submitForm(e: Event) {
     const {name, email, password, image} = this.sellerForm.controls;
-    console.log('image.value', image.value);
     const data = new FormData();
     data.append('id', String(this.sellerId))
     data.append('name', name.value !== null ? name.value : '')
@@ -146,7 +142,6 @@ export class SellerEditComponent implements OnInit {
 
     this.http.patch('http://localhost:3000/sellers/edit', data, {headers}).subscribe({
       next: (res: any) => {
-        console.log('this.http.patch next =>', res)
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';
@@ -158,12 +153,10 @@ export class SellerEditComponent implements OnInit {
         this.isFormLoading = false;
 
         this.sellerForm.reset();
-        console.log('create seller success response', res);
         // localStorage.setItem('sellerToken', res.token);
         this.router.navigate(['/seller'])
       },
       error: (e: HttpErrorResponse) => {
-        console.log('THIS IS ERROR', e);
         this.alertText = e.error.message;
         this.alertVariant = 'danger';
         this.showAlert = true;

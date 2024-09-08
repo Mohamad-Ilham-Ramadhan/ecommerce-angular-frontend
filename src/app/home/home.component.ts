@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     
     this.http.get(this.env.apiUrl()+'/products', {headers}).subscribe({
       next: (response: any) => {
-        console.log('get all products response', response);
         this.products = response;
       },
       error: (error) => {

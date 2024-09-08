@@ -26,7 +26,6 @@ export class ProductDetailComponent implements OnInit {
   fetchSingleProduct(id: any) {
     this.http.get(this.env.apiUrl()+'/products/single/'+id).subscribe({
       next: (response: any) => {
-        console.log('response', response)
         if (response === null) {
           this.router.navigate(['/'])
         }
@@ -48,8 +47,6 @@ export class ProductDetailComponent implements OnInit {
       this.fetchSingleProduct(params['id'])
       this.http.get(this.env.apiUrl()+'/products/review/'+params['id']).subscribe({
         next: (response: any) => {
-          console.log('get reviews response', response);
-          this.reviews = response;
           this.reviewsLoading = false;
           this.reviews = this.reviews.map( r => {
             let stars : boolean[] = [];
@@ -58,10 +55,8 @@ export class ProductDetailComponent implements OnInit {
             }
             return {...r, stars};
           });
-          console.log('new reviews', this.reviews);
         },
         error: (error) => {
-          console.log('get reviews error', error);
           this.reviewsLoading = false;
         }
       });
@@ -108,7 +103,6 @@ export class ProductDetailComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.post(this.env.apiUrl()+'/products/buy-now', data, { headers}).subscribe({
       next: (response: any) => {
-        console.log('buy-now response', response);
         this.notifService.setNotif(response);
         this.notifService.pushNotif(response);
         this.router.navigate(['/product/review', this.product.id], {state: {notif: response}})
@@ -126,7 +120,6 @@ export class ProductDetailComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`)
     this.http.post(this.env.apiUrl()+'/users/cart/add', data , {headers}).subscribe({
       next: (response: any) => {
-        console.log('add to cart response', response )
         this.cartService.setProducts(response);
       },
       error: (error) => {

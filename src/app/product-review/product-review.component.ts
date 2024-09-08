@@ -21,13 +21,10 @@ export class ProductReviewComponent implements OnInit {
   constructor(private notifService: ReviewNotifService, private http: HttpClient, public env: EnvironmentService, private localStorageService: LocalStorageService, private router: Router) {}
 
   ngOnInit(): void {
-      console.log('history.state', history.state);
-      console.log('notifService', this.notifService.notif);
       this.notif = history.state.notif;
 
       this.http.get(this.env.apiUrl() + '/products/single/' + this.notif.ProductId).subscribe({
         next: (response: any) => {
-          console.log('get products/single response', response);
           this.product = response;
           this.productLoading = false;
         },
@@ -56,13 +53,10 @@ export class ProductReviewComponent implements OnInit {
   
   submit(e: Event) {
     e.preventDefault();
-    console.log('this.notif', this.notif);
     const { review } = this.form.controls;
     const rate = this.rate.reduce((acc, cv) => {
-      console.log('cv', cv);
       return acc + (cv ? 1 : 0);
     },0)
-    console.log('rate', rate);
     const data = new FormData();
     data.append('review', review.value !== null ? review.value : '' );
     data.append('rate', String(rate) );
@@ -73,7 +67,6 @@ export class ProductReviewComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('userToken')}`);
     this.http.post(this.env.apiUrl()+'/products/review', data, {headers}).subscribe({
       next: (response: any) => {
-        console.log('submit review response', response);
         this.notifService.setNotifs(response.notifs);
         this.router.navigate(['/review-notif-list']);
       },

@@ -45,14 +45,12 @@ export class UserLoginComponent {
 
   submit(e: any) {
     e.preventDefault();
-    console.log('submit', this.form.valid);
     if (!this.form.valid) return;
 
     this.loading = true;
 
     
     const {email, password} = this.form.controls;
-    console.log('email', email.value, 'password', password.value);
     const data = new FormData();
     // @ts-ignore
     data.append('email', email.value !== null ? email.value : '')
@@ -62,7 +60,6 @@ export class UserLoginComponent {
     this.http.post(this.env.apiUrl() + '/users/login', data).subscribe({
       next: (res: any) => {
         this.loading = false;
-        console.log('/user/login response', res)
         this.showAlert = true;
         if (res.token) {
           localStorage.setItem('userToken', res.token);

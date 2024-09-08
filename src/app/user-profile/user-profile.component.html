@@ -9,7 +9,7 @@
             <div class="txt username">Username: {{ userService.user.username }} </div>
             <div class="txt email">Email: {{ userService.user.email }} </div>
             
-            <app-button text="Edit" (onClick)="edit()" classes="mt-auto" hostClasses="mt-auto" />
+            <app-button text="Edit" (onClick)="edit()" routerLinkActive="router-link-active"  classes="mt-auto" hostClasses="mt-auto" />
          </div> 
       </div>
    </div>

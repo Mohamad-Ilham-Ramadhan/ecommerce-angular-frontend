@@ -66,7 +66,6 @@ export class UserCreateComponent {
 
     this.isFormLoading = true;
     
-    console.log('submit form', this.image?.value);
     const { name, username, email, password, rePassword } = this.form.controls;
     const data = new FormData();
     data.append('name', name.value !== null ? name.value : '');
@@ -79,7 +78,6 @@ export class UserCreateComponent {
     
     this.http.post(this.env.apiUrl()+'/users/create', data).subscribe({
       next: (response: any) => {
-        console.log('create-user response', response)
         this.isFormLoading = false;
         this.localStorageService.saveData('userToken', response.token);
         this.userService.setUser(response.user);

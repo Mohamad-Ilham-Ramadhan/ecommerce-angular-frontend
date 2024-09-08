@@ -1,1 +1,1 @@
-<button [disabled]="disabled" [ngClass]="[color, classes]" (click)="onClick.emit()">{{ text }}</button>
+<button [disabled]="disabled" [ngClass]="[color, classes]" (click)="onClick.emit($event)">{{ text }}</button>

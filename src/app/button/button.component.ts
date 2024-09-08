@@ -13,7 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input() disabled?: boolean;
   @Input() color: 'danger' | 'primary' | 'outline' = 'primary';
   @Input() classes: string = '';
-  @Input() hostClasses: string = '';
+  @Input() hostClasses: string = 'x';
 
   constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
   }
@@ -21,7 +21,7 @@ export class ButtonComponent implements OnInit {
     this.renderer.addClass(this.elementRef.nativeElement, this.hostClasses)
   }
 
-  onClick = output();
+  onClick = output<Event>();
 
   get classArray() {
     return [this.color, this.classes]

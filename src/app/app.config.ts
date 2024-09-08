@@ -1,11 +1,10 @@
 import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { loggingInterceptor } from './interceptors/logging.interceptor';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -23,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     })),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi(), withInterceptors([loggingInterceptor]), withFetch(),),
+    provideHttpClient(withInterceptorsFromDi(), withFetch(),),
     provideClientHydration(),
     provideAnimationsAsync(),
   ],

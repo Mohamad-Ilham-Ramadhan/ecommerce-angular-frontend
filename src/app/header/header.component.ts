@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
   isUserLoggedIn = false;
 
   ngOnInit(): void {
-    console.log('seller', this.sellerService.seller)
     const userToken = this.localStorageService.getData('userToken');
     if (userToken) {
       this.cartService.fetchProducts();
@@ -35,14 +34,12 @@ export class HeaderComponent implements OnInit {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${userToken}`)
       this.http.get(this.env.apiUrl()+'/users/find-one', {headers}).subscribe({
         next: (response: any) => {
-          console.log('header fetch user')
           this.userService.setUser(response);
           this.isUserLoggedIn = true;
           this.sellerService.reset();
           this.localStorageService.removeData('sellerToken');
         },
         error: (error) => {
-          console.log('header fetch user')
           console.log('get seller error', error)
         }
       });
@@ -62,7 +59,6 @@ export class HeaderComponent implements OnInit {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
       this.http.get(this.env.apiUrl()+'/sellers/find-one', {headers}).subscribe({
         next: (response: any) => {
-          console.log('header fetch seller')
           this.sellerService.setSeller(response.seller);
           this.isSellerLoggedIn = true;
           this.userService.reset();
@@ -70,7 +66,6 @@ export class HeaderComponent implements OnInit {
 
         },
         error: (error) => {
-          console.log('header fetch seller')
           console.log('get seller error', error)
         }
       })
@@ -94,7 +89,6 @@ export class HeaderComponent implements OnInit {
     // @ts-ignore
     this.cartService.buy()
     this.cartService.afterBuy.subscribe((val) => {
-      console.log('afterbuy().subscribe val', val)
       this.notifService.pushNotif(val);
     })
   }
