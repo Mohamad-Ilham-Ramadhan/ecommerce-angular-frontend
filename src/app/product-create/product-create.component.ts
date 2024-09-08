@@ -73,7 +73,6 @@ export class ProductCreateComponent {
     this.formLoading = true;
     
     const { name, description, stock, price, image} = this.form.controls;
-    console.log('image.value', image.value)
     const data = new FormData();
     data.append('name', name.value !== null ? name.value : '')
     data.append('description', description.value !== null ? description.value : '')
@@ -85,7 +84,6 @@ export class ProductCreateComponent {
 
     this.http.post(this.env.apiUrl()+'/sellers/create-product/', data, {headers}).subscribe({
       next: (response: any) => {
-        console.log('create-product response', response)
         this.formLoading = false;
         this.form.reset();
         this.alertText = response.message;

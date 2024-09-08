@@ -54,20 +54,22 @@ export class SellerHomeComponent implements OnInit {
       },
     });
     dialogRef.closed.subscribe(result => {
-      const data = new FormData();
-      data.append('id', product.id);
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
-      this.http.delete(this.env.apiUrl()+'/sellers/delete-product', {
-        body: {productId: product.id},
-        headers,
-      }).subscribe({
-        next: (response: any) => {
-          this.products = response.products;
-        }, 
-        error: error => {
-          console.log('delete product error', error);
-        }
-      })
+      if (result === 'delete') {
+        const data = new FormData();
+        data.append('id', product.id);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
+        this.http.delete(this.env.apiUrl()+'/sellers/delete-product', {
+          body: {productId: product.id},
+          headers,
+        }).subscribe({
+          next: (response: any) => {
+            this.products = response.products;
+          }, 
+          error: error => {
+            console.log('delete product error', error);
+          }
+        })
+      }
     });
   }
 

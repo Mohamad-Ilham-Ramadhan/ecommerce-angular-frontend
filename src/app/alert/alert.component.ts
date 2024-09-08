@@ -24,7 +24,6 @@ export class AlertComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const variant = changes['variant'];
-    console.log('alert ngOnChanges variant', variant);
     if (variant?.currentValue !== variant?.previousValue) {
       this.classes = ['alert', variant.currentValue]
     }
