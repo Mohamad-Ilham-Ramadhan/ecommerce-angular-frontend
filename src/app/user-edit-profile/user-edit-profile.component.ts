@@ -71,7 +71,7 @@ export class UserEditProfileComponent implements OnInit {
   isLoading: boolean = false;
   alertText: string = '';
   alertVariant: AlertVariant = 'primary';
-  isAlertShow: boolean = true;
+  isAlertShow: boolean = false;
   
   submit(e: Event) {
     e.preventDefault();
