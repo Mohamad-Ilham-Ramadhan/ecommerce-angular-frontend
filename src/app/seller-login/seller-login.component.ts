@@ -44,7 +44,6 @@ export class SellerLoginComponent implements AfterViewInit {
 
   submit(e: any) {
     e.preventDefault();
-    console.log('submit', this.form.valid);
     if (!this.form.valid) return;
 
     this.loading = true;
@@ -58,7 +57,6 @@ export class SellerLoginComponent implements AfterViewInit {
     this.http.post('http://localhost:3000/sellers/login', data).subscribe({
       next: (res: any) => {
         this.loading = false;
-        console.log('response', res)
         this.showAlert = true;
         if (res.token) {
           localStorage.setItem('sellerToken', res.token);

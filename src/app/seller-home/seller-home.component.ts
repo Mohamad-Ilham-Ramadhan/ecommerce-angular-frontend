@@ -26,12 +26,10 @@ export class SellerHomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.http.get(environment.apiUrl + '/sellers/');
-    console.log('seller-home ngOnInit');
     this.activatedRoute.url.subscribe( (urls) => {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
       this.http.get(environment.apiUrl + '/sellers/find-one', {headers}).subscribe({
         next: (response: any) => {
-          console.log('next response', response)
           this.loading = false;
           this.seller = response.seller;
           this.products = response.products;
@@ -56,7 +54,6 @@ export class SellerHomeComponent implements OnInit {
       },
     });
     dialogRef.closed.subscribe(result => {
-      console.log('result', result);
       const data = new FormData();
       data.append('id', product.id);
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getData('sellerToken')}`)
@@ -65,7 +62,6 @@ export class SellerHomeComponent implements OnInit {
         headers,
       }).subscribe({
         next: (response: any) => {
-          console.log('delete product response', response);
           this.products = response.products;
         }, 
         error: error => {

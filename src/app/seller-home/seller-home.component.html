@@ -16,7 +16,7 @@
 
 <h2>List of Product</h2>
 @if (products.length > 0) {
-   <ul class="list-none list-product">
+   <ul class="list-none list-product flex-wrap">
       @for (product of products; track $index) {
          <li class="product">
             <div class="btn-wrapper">
@@ -24,9 +24,9 @@
                <app-button text="Delete" color="danger" (onClick)="openDialog(product)"/>
             </div>
             <div><img [src]="env.apiUrl() + '/product/'+product.image" [alt]="'Picture of ' + product.name" class="product-image"></div>
-            <div>Name: {{ product.name }}</div>
-            <div>Stock: {{ product.stock}}</div>
-            <div>Price: {{ product.price | idr }}</div>
+            <div class="name">{{ product.name }}</div>
+            <div class="stock">Stock: <span class="font-bold">{{ product.stock}}</span></div>
+            <div class="price">Price: <span class="font-bold">{{ product.price | idr }}</span></div>
          </li>
       }
    </ul>
