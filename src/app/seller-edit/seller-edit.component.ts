@@ -20,9 +20,6 @@ import { SellerService } from '../services/seller.service';
 })
 export class SellerEditComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private env: EnvironmentService, public sellerService: SellerService) {}
-  increment() {
-    this.sellerService.coba++;
-  }
   sellerId: null | number = null;
   
   pageLoading: boolean = true;
