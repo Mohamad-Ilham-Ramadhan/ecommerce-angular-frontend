@@ -97,7 +97,11 @@ export class UserEditProfileComponent implements OnInit {
         this.alertVariant = 'primary';
       },
       error: (error: any) => {
-        console.log('error', error)
+        console.log('error', error);
+        if (error.status === 401) {
+          this.userService.reset();
+          this.router.navigate(['/user/login']);
+        }
         this.isLoading = false;
         this.isAlertShow = true;
         this.alertText = error.error.message;

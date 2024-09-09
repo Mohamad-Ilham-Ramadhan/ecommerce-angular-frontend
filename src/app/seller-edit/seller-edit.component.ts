@@ -157,13 +157,16 @@ export class SellerEditComponent implements OnInit {
         this.router.navigate(['/seller'])
       },
       error: (e: HttpErrorResponse) => {
+        console.log('error', e);
+
         this.alertText = e.error.message;
         this.alertVariant = 'danger';
         this.showAlert = true;
         this.isFormLoading = false;
 
-        if (e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
+        if (e.status === 401 || e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
           localStorage.removeItem('sellerToken');
+          this.sellerService.reset();
           this.router.navigate(['/seller/login']);
         }
       },
