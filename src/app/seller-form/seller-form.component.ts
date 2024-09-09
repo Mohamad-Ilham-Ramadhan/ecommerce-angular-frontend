@@ -92,7 +92,6 @@ export class SellerFormComponent {
       if (Object.prototype.hasOwnProperty.call(this.sellerForm.controls, key)) {
         // @ts-ignore
         const element = this.sellerForm.controls[key];
-        console.log(element.value)
       }
     }
   }
@@ -133,7 +132,6 @@ export class SellerFormComponent {
         this.isFormLoading = false;
 
         this.sellerForm.reset();
-        console.log('create seller success response', res);
         this.localStorageService.saveData('sellerToken', res.token);
         this.sellerService.setSeller(res.seller);
         this.router.navigate(['/seller'])

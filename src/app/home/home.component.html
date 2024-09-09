@@ -4,7 +4,7 @@
    }
    @for (product of products; track $index) {
       <div class="product" (click)="goToDetail(product.id)">
-         <div class="product-image-wrapper">
+         <div class="product-image-wrapper mb-4">
             <img class="product-image" [src]="env.apiUrl()+'/product/'+product.image" alt="">
          </div>
 
