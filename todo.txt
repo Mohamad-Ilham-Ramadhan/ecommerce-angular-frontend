@@ -29,10 +29,12 @@ component:
       - form become empty (should not)
 
 - Upload image fail on the process
-   - seller image (progress)
+   - seller image (done)
       - create (done)
       - edit (done)
    - user image (progress)
+      - create (done)
+      - edit (done)
    - product (progress)
 
 - setelah edit image seller, image di header juga harusnya ikut berubah 

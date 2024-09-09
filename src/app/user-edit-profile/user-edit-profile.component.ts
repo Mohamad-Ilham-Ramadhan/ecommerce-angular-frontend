@@ -11,8 +11,8 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { EnvironmentService } from '../services/environment.service';
-
 import { matchPasswordsValidator } from '../validators/password.validator';
+
 @Component({
   selector: 'app-user-edit-profile',
   standalone: true,
@@ -90,6 +90,7 @@ export class UserEditProfileComponent implements OnInit {
     this.http.patch(this.env.apiUrl()+'/users/profile/edit', data, {headers}).subscribe({
       next: (response: any) => {
         console.log('user-edit-profile response', response);
+        this.userService.setUser(response);
         this.isLoading = false;
         this.isAlertShow = true;
         this.alertText = 'Edit your profile success!';
