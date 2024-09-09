@@ -101,11 +101,12 @@ export class ProductEditComponent {
         next: (response: any) => {
           console.log('response', response);
           this.formLoading = false;
-          this.form.reset();
+          // this.form.reset();
           this.alertText = response.message;
           this.showAlert = true;
           this.alertVariant = 'primary';
           this.imagePreview = undefined;
+          this.router.navigate(['/seller'])
         },
         error: (e: any) => {
           console.log('error', e);

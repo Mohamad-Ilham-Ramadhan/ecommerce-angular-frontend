@@ -10,7 +10,7 @@ import { AlertComponent, AlertVariant } from '../alert/alert.component';
 
 import { matchPasswordsValidator } from '../validators/password.validator';
 import { EnvironmentService } from '../services/environment.service';
-
+import { SellerService } from '../services/seller.service';
 @Component({
   selector: 'app-seller-edit',
   standalone: true,
@@ -19,8 +19,10 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrl: './seller-edit.component.scss',
 })
 export class SellerEditComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router, private env: EnvironmentService) {}
-
+  constructor(private http: HttpClient, private router: Router, private env: EnvironmentService, public sellerService: SellerService) {}
+  increment() {
+    this.sellerService.coba++;
+  }
   sellerId: null | number = null;
   
   pageLoading: boolean = true;
@@ -142,6 +144,7 @@ export class SellerEditComponent implements OnInit {
 
     this.http.patch('http://localhost:3000/sellers/edit', data, {headers}).subscribe({
       next: (res: any) => {
+        this.sellerService.setSeller(res.seller)
         if (res.message) {
           this.alertText = res.message;
           this.alertVariant = 'primary';

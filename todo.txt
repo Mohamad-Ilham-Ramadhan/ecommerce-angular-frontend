@@ -22,5 +22,18 @@ component:
 
 
 ==========================
+- Edit image
+   - seller image (done)
+   - user image (done)
+   - product (done)
+      - form become empty (should not)
 
-change detection strategy
+- Upload image fail on the process
+   - seller image (progress)
+      - create (done)
+      - edit (done)
+   - user image (progress)
+   - product (progress)
+
+- setelah edit image seller, image di header juga harusnya ikut berubah 
+- kalo ada error ketika edit seller di redirect ke seller login dan auto logout
