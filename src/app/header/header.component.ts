@@ -85,12 +85,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/seller/login']);
   }
 
+  // cart buy
   buy() {
     // @ts-ignore
     this.cartService.buy()
     this.cartService.afterBuy.subscribe((val: any) => {
-      console.log('header buy() val', val)
-      this.notifService.setNotifs(val);
+      this.notifService.pushNotifs(val);
+      this.router.navigate(['/review-notif-list']);
     })
   }
 }
