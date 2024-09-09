@@ -59,7 +59,7 @@ export class ProductDetailComponent implements OnInit {
             }
             return {...r, stars};
           });
-          avarageRate = avarageRate / this.reviews.length;
+          if (this.reviews.length) avarageRate = avarageRate / this.reviews.length;
           this.avarageRate = Number(avarageRate.toPrecision(2));
         },
         error: (error) => {
