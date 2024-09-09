@@ -28,9 +28,18 @@
       font-weight: bold;
       margin-bottom: 4px
    }
-   .seller-name {
-      font-size: 14px;
-      color: gray;
+   .seller {
+      display: flex;
+      align-items: center;
+      .seller-image {
+         width: 16px;
+         height: 16px;
+         margin-right: 4px;
+      }
+      .seller-name {
+         font-size: 14px;
+         color: gray;
+      }
    }
 }
 .no-products {
