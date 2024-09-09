@@ -92,8 +92,11 @@ export class ProductCreateComponent {
         this.imagePreview = undefined;
       }, 
       error: (e: any) => {
-        console.log('error', e)
+        console.log('product create error', e)
         this.formLoading = false;
+        this.alertText = 'Something wrong in the server!';
+        this.showAlert = true;
+        this.alertVariant = 'danger';
         if (e.status === 401 || e?.error?.name === 'JsonWebTokenError' || e?.error?.name === 'TokenExpiredError') {
           this.localStorageService.removeData('sellerToken');
           this.router.navigate(['/seller/login']);
