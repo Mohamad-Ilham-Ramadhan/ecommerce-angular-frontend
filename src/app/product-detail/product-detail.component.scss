@@ -28,7 +28,11 @@
    .name {
       font-size: 22px;
       font-weight: bold;
-      margin-bottom: 32px;
+   }
+   .rate {
+      display: flex;
+      align-items: center;
+      margin-bottom:24px
    }
    .price {
       font-size: 48px;

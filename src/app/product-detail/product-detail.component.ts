@@ -22,7 +22,8 @@ export class ProductDetailComponent implements OnInit {
 
   loading: boolean = true;
   reviewsLoading: boolean = true;
-
+  avarageRate: number = 0;
+  
   fetchSingleProduct(id: any) {
     this.http.get(this.env.apiUrl()+'/products/single/'+id).subscribe({
       next: (response: any) => {
@@ -47,15 +48,19 @@ export class ProductDetailComponent implements OnInit {
       this.fetchSingleProduct(params['id'])
       this.http.get(this.env.apiUrl()+'/products/review/'+params['id']).subscribe({
         next: (response: any) => {
-          console.log('product-detail /products/review/ response', response);
+          // console.log('product-detail /products/review/ response', response);
           this.reviewsLoading = false;
+          let avarageRate = 0;
           this.reviews = response.map( (r: any) => {
             let stars : boolean[] = [];
+            avarageRate += r.rate;
             for (let i = 1; i <= 5; i++) {
               stars[i-1] = i <= r.rate ? true : false
             }
             return {...r, stars};
           });
+          avarageRate = avarageRate / this.reviews.length;
+          this.avarageRate = Number(avarageRate.toPrecision(2));
         },
         error: (error) => {
           this.reviewsLoading = false;
