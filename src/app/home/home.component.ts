@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
               return acc + cv.rate;
             },0);
             avarageRate = avarageRate / product.ProductReviews.length;
+            avarageRate = avarageRate.toPrecision(2);
           } else {
             avarageRate = 0;
           }
