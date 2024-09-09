@@ -22,6 +22,19 @@ export class HomeComponent implements OnInit {
     
     this.http.get(this.env.apiUrl()+'/products', {headers}).subscribe({
       next: (response: any) => {
+        for (let i = 0; i < response.length; i++) {
+          let product = response[i];
+          let avarageRate;
+          if (product.ProductReviews.length) {
+            avarageRate = product.ProductReviews.reduce( (acc: any, cv:any) => {
+              return acc + cv.rate;
+            },0);
+            avarageRate = avarageRate / product.ProductReviews.length;
+          } else {
+            avarageRate = 0;
+          }
+          response[i].avarageRate = avarageRate
+        }
         this.products = response;
       },
       error: (error) => {

@@ -47,8 +47,9 @@ export class ProductDetailComponent implements OnInit {
       this.fetchSingleProduct(params['id'])
       this.http.get(this.env.apiUrl()+'/products/review/'+params['id']).subscribe({
         next: (response: any) => {
+          console.log('product-detail /products/review/ response', response);
           this.reviewsLoading = false;
-          this.reviews = this.reviews.map( r => {
+          this.reviews = response.map( (r: any) => {
             let stars : boolean[] = [];
             for (let i = 1; i <= 5; i++) {
               stars[i-1] = i <= r.rate ? true : false
