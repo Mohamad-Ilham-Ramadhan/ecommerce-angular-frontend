@@ -7,6 +7,7 @@ import { matchPasswordsValidator } from '../validators/password.validator';
 import { InputComponent } from '../forms/input/input.component';
 import { LabelComponent } from '../forms/label/label.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
+import { ButtonComponent } from '../button/button.component';
 
 import { EnvironmentService } from '../services/environment.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -14,7 +15,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-user-create',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, InputComponent, LabelComponent, AlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, InputComponent, LabelComponent, AlertComponent, ButtonComponent],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss'
 })
@@ -44,6 +45,9 @@ export class UserCreateComponent {
   alertText = '';
   alertShow = false;
   alertVariant: AlertVariant = 'primary';
+
+  showPassword = false;
+  showRePassword = false;
   
   imageOnChange(e: any) {
     const file = e.target.files[0];
