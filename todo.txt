@@ -36,8 +36,9 @@ component:
       - create (done)
       - edit (done)
    - product (progress)
-      - create (progress)
-      - edit (progress)
+      - create (done)
+      - edit (done)
+      - delete (progress)
 
 - setelah edit image seller, image di header juga harusnya ikut berubah 
 - kalo ada error ketika edit seller di redirect ke seller login dan auto logout
