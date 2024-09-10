@@ -1,4 +1,4 @@
-<div>
+<div class="container flex flex-column items-center">
    <h1>User Login</h1>
    <form action="" [formGroup]="form" (ngSubmit)="submit($event)">
       <app-label for="email">
@@ -12,7 +12,7 @@
             }
          }
       </app-label>
-      <app-label for="password">
+      <app-label for="password" className="mb-4">
          Password
          <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="form.controls.password"></app-input>
          <button (click)="toggleShowPassword()" type="button">{{ showPassword ? 'Hide' : 'Show' }}</button>
@@ -24,7 +24,8 @@
             }
          }
       </app-label>
-      <button [disabled]="loading">Login</button>
+      <!-- <button [disabled]="loading">Login</button> -->
+      <app-button text="Login" [disabled]="loading" type="submit" className="ml-auto" classes="ml-auto" />
    </form>
    @if (showAlert) {
       <app-alert

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertComponent, AlertVariant} from '../alert/alert.component';
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
+import { ButtonComponent } from '../button/button.component';
 
 import { UserService } from '../services/user.service';
 import { EnvironmentService } from '../services/environment.service';
@@ -13,7 +14,7 @@ import { ReviewNotifService } from '../services/review-notif.service';
 @Component({
   selector: 'app-user-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, LabelComponent, InputComponent, AlertComponent],
+  imports: [FormsModule, ReactiveFormsModule, LabelComponent, InputComponent, AlertComponent, ButtonComponent],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.scss'
 })
