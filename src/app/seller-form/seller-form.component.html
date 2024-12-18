@@ -1,6 +1,6 @@
 <div class="container flex flex-column items-center">
 
-   <h1>Create Account for Seller</h1>
+   <h1 class="h1">Create Account for Seller</h1>
    <form action="" [formGroup]="sellerForm" (ngSubmit)="submitForm($event)">
       <app-label for="name" text="Name" className="mb-4">
          <app-input id="name" [control]="sellerForm.controls.name" className="mb-1" />
@@ -37,7 +37,7 @@
    
       <app-label for="password" text="Password" className="mb-4">
          <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="sellerForm.controls.password" className="mb-1"/>
-         <button (click)="toggleShowPassword('password')">{{showPassword ? 'hide' : 'show'}}</button>
+         <app-button [text]="showPassword ? 'hide' : 'show'" (onClick)="toggleShowPassword('password')" class="inline-block" />
          @if (password?.invalid) {
             <div  class="form-alert">Password is required and min 4 characters.</div>
          }
@@ -45,7 +45,9 @@
    
       <app-label for="re-password" text="Re-type password" className="mb-2">
          <app-input id="re-password" [type]="showRePassword ? 'text' : 'password'" [control]="sellerForm.controls.rePassword" className="mb-1"/>
-         <button (click)="toggleShowPassword('re-password')">{{showRePassword ? 'hide' : 'show'}}</button>
+         <!-- <button (click)="toggleShowPassword('re-password')">{{showRePassword ? 'hide' : 'show'}}</button> -->
+         <app-button [text]="showRePassword ? 'hide' : 'show'" (onClick)="toggleShowPassword('re-password')" class="inline-block" />
+
          @if (sellerForm.hasError('passwordsDoesNotMatch') && (sellerForm.touched || sellerForm.dirty)) {
             <div  class="form-alert">Password does not match.</div>
          }

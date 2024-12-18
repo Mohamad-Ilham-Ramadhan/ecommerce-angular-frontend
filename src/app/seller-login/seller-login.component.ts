@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { AlertComponent, AlertVariant} from '../alert/alert.component';
 import { LabelComponent } from '../forms/label/label.component';
 import { InputComponent } from '../forms/input/input.component';
+import { ButtonComponent } from '../button/button.component';
 
 import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-seller-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, LabelComponent, InputComponent, AlertComponent],
+  imports: [FormsModule, ReactiveFormsModule, LabelComponent, InputComponent, AlertComponent, ButtonComponent],
   templateUrl: './seller-login.component.html',
   styleUrl: './seller-login.component.scss'
 })

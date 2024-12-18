@@ -1,5 +1,5 @@
 <div class="container">
-   <h1>Seller Login</h1>
+   <h1 class="h1">Seller Login</h1>
    <form action="" [formGroup]="form" (ngSubmit)="submit($event)">
       <app-label for="email">
          Email
@@ -15,7 +15,7 @@
       <app-label for="password">
          Password
          <app-input id="password" [type]="showPassword ? 'text' : 'password'" [control]="form.controls.password"></app-input>
-         <button (click)="toggleShowPassword()" type="button">{{ showPassword ? 'Hide' : 'Show' }}</button>
+         <app-button [text]="showPassword ? 'Hide' : 'Show'" (onClick)="toggleShowPassword()" class="inline-block"/>
          @if (password?.invalid) {
             @if (password?.hasError('required')) {
                <div  class="form-alert">Password is required.</div>
@@ -24,7 +24,7 @@
             }
          }
       </app-label>
-      <button [disabled]="loading">Login</button>
+      <app-button [disabled]="loading" text="Login" />
    </form>
    @if (showAlert) {
       <app-alert

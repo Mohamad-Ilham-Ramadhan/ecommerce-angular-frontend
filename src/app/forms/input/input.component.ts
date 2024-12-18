@@ -1,6 +1,5 @@
 import { Component, Input, output, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { After } from 'node:v8';
+import {  ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input',

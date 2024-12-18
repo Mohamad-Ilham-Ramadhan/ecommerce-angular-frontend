@@ -7,6 +7,7 @@ import { InputComponent } from '../forms/input/input.component';
 import { LabelComponent } from '../forms/label/label.component';
 import { AlertComponent, AlertVariant } from '../alert/alert.component';
 import { TextareaComponent } from '../textarea/textarea.component';
+import { ButtonComponent } from '../button/button.component';
 
 import { IdrCurrencyService } from '../services/idr-currency.service';
 import { EnvironmentService } from '../services/environment.service';
@@ -15,7 +16,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent, AlertComponent, ],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent, AlertComponent, ButtonComponent],
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.scss',
 })

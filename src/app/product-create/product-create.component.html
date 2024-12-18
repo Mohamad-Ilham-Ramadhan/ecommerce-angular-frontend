@@ -1,6 +1,7 @@
 <div class="container">
-   <button routerLink="/seller">Home</button>
-   <h1>Create Product</h1>
+   <app-button text="Home" routerLink="/seller" />
+
+   <h1 class="h1 mb-4">Create Product</h1>
 
    <form action="" (ngSubmit)="submit($event)" [formGroup]="form">
       <div class="mb-4">
@@ -66,7 +67,7 @@
          </div>
       }
 
-      <button type="submit" [disabled]="formLoading">Submit</button>
+      <app-button text="Submit" type="submit" [disabled]="formLoading" />
    </form>
 
    @if (showAlert) {

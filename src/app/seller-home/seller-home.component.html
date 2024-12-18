@@ -1,33 +1,40 @@
-<button [routerLink]="['/seller/edit']" [state]="{id: seller.id}" routerLinkActive="router-link-active">Edit Profile</button>
-<button [routerLink]="['/seller/product/create/']" [state]="{id: seller.id}" routerLinkActive="router-link-active">Create Product</button>
+<div class="container">
 
-<h1>Seller Home</h1>
+   <div class="button-wrapper">
+      <app-button text="Edit Profile" [routerLink]="['/seller/edit']" [state]="{id: seller.id}" routerLinkActive="router-link-active" class="mr-2"/>
+      <app-button text="Create Product" [routerLink]="['/seller/product/create/']" [state]="{id: seller.id}" routerLinkActive="router-link-active"/>
+   </div>
+   
+   <h1 class="text-2xl mb-4 font-semibold">Seller Home</h1>
+   
+   @if (loading) {
+      <img src="/images/load-spinner.png" alt="" class="rotate">
+   } @else {
+      <ul class="list-none">
+         <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : '/images/store.png'" alt="profile picture" class="profile-picture">
+         <li>Name: {{seller.name}}</li>
+         <li>Email: {{seller.email}}</li>
+         <li>Products: {{products.length}}</li>
+      </ul>
+   }
 
-@if (loading) {
-   <img src="/images/load-spinner.png" alt="" class="rotate">
-} @else {
-   <ul class="list-none">
-      <img [src]="seller.image ? env.apiUrl() +'/seller/'+ seller.image : '/images/store.png'" alt="profile picture" class="profile-picture">
-      <li>Name: {{seller.name}}</li>
-      <li>Email: {{seller.email}}</li>
-      <li>Products: {{products.length}}</li>
-   </ul>
-}
-
-<h2>List of Product</h2>
-@if (products.length > 0) {
-   <ul class="list-none list-product flex-wrap">
-      @for (product of products; track $index) {
-         <li class="product">
-            <div class="btn-wrapper">
-               <app-button text="Edit" (onClick)="editProduct(product)" />
-               <app-button text="Delete" color="danger" (onClick)="openDialog(product)"/>
-            </div>
-            <div><img [src]="env.apiUrl() + '/product/'+product.image" [alt]="'Picture of ' + product.name" class="product-image"></div>
-            <div class="name">{{ product.name }}</div>
-            <div class="stock">Stock: <span class="font-bold">{{ product.stock}}</span></div>
-            <div class="price">Price: <span class="font-bold">{{ product.price | idr }}</span></div>
-         </li>
-      }
-   </ul>
-}
+   <br>
+   
+   <h2 class="text-2xl mb-4 font-semibold">List of Product</h2>
+   @if (products.length > 0) {
+      <ul class="list-none list-product flex-wrap">
+         @for (product of products; track $index) {
+            <li class="product">
+               <div class="btn-wrapper">
+                  <app-button text="Edit" (onClick)="editProduct(product)" />
+                  <app-button text="Delete" color="danger" (onClick)="openDialog(product)"/>
+               </div>
+               <div><img [src]="env.apiUrl() + '/product/'+product.image" [alt]="'Picture of ' + product.name" class="product-image"></div>
+               <div class="name">{{ product.name }}</div>
+               <div class="stock">Stock: <span class="font-bold">{{ product.stock}}</span></div>
+               <div class="price">Price: <span class="font-bold">{{ product.price | idr }}</span></div>
+            </li>
+         }
+      </ul>
+   }
+</div>

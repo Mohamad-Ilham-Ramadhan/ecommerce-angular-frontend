@@ -6,11 +6,12 @@ import { Dialog } from '@angular/cdk/dialog';
 import { EnvironmentService } from '../services/environment.service';
 
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
+import { ButtonComponent } from '../button/button.component';
 import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [ModalDeleteComponent],
+  imports: [ModalDeleteComponent, ButtonComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })

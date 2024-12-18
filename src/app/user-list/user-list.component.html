@@ -29,6 +29,7 @@
                      <button>Edit</button>
                      <!-- <button (click)="deleteSingle(user.id)" [disabled]="deleteLoading">Delete</button> -->
                      <button (click)="openDialog(user)" [disabled]="deleteLoading">Delete</button>
+                     <app-button text="Delete" (onClick)="openDialog(user)" [disabled]="deleteLoading" />
                   </td>
                </tr>
             }

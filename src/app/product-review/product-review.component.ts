@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { TextareaComponent } from '../textarea/textarea.component';
 import { LabelComponent } from '../forms/label/label.component';
+import { ButtonComponent } from '../button/button.component';
 
 import { ReviewNotifService } from '../services/review-notif.service';
 import { EnvironmentService } from '../services/environment.service';
@@ -13,7 +14,7 @@ import { IdrPipe } from '../pipes/idr.pipe';
 @Component({
   selector: 'app-product-review',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, TextareaComponent, LabelComponent, IdrPipe],
+  imports: [ReactiveFormsModule, FormsModule, TextareaComponent, LabelComponent, ButtonComponent, IdrPipe],
   templateUrl: './product-review.component.html',
   styleUrl: './product-review.component.scss'
 })

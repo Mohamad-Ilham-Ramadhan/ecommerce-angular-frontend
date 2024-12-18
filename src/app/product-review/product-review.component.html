@@ -1,5 +1,5 @@
 <div class="container">
-   <h1>Write your review</h1>
+   <h1 class="h1 mt-2 mb-4">Write your review</h1>
    <div class="wrapper">
       <form action="" [formGroup]="form" (submit)="submit($event)">
    
@@ -19,9 +19,10 @@
                }
             }
          </app-label>
-         <button type="submit" [disabled]="form.invalid">
+         <!-- <button type="submit" [disabled]="form.invalid">
             Save
-         </button>
+         </button> -->
+         <app-button text="Save" type="submit" [disabled]="form.invalid" />
       </form>
       @if (productLoading) {
          <div class="spinner-wrapper">

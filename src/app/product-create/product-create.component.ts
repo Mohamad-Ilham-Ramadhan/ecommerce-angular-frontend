@@ -11,11 +11,12 @@ import { TextareaComponent } from '../textarea/textarea.component';
 import { IdrCurrencyService } from '../services/idr-currency.service';
 import { EnvironmentService } from '../services/environment.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent, AlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink, InputComponent, LabelComponent, TextareaComponent, AlertComponent, ButtonComponent],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
 })

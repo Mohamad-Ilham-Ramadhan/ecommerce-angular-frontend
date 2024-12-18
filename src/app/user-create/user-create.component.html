@@ -1,5 +1,5 @@
 <div class="container flex flex-column items-center">
-   <h1>Create Account for User</h1>
+   <h1 class="h1 mb-4 mt-2 ">Create Account for User</h1>
    <form action="" (ngSubmit)="submit($event)">
       <div class="mb-2">
          <app-label for="name">
@@ -49,7 +49,7 @@
          <app-label for="password">
             <div>Password</div>
             <app-input id="password" [control]="form.controls.password" type="password" />
-            <button (click)="showPassword = !showPassword">{{showPassword ? 'Hide' : 'Show'}}</button>
+            <app-button [text]="showPassword ? 'Hide' : 'Show'" (onClick)="showPassword = !showPassword" class="inline-block" />
          </app-label>
          @if (password?.invalid) {
             @if (password?.hasError('required')) {
@@ -61,7 +61,7 @@
          <app-label for="re-password">
             <div>Re-Password</div>
             <app-input id="re-password" [control]="form.controls.rePassword" type="password" />
-            <button (click)="showRePassword = !showRePassword">{{showRePassword ? 'Hide' : 'Show'}}</button>
+            <app-button [text]="showRePassword ? 'Hide' : 'Show'" (onClick)="showRePassword = !showRePassword" class="inline-block" />
          </app-label>
          @if (rePassword?.invalid) {
             @if (rePassword?.hasError('required')) {

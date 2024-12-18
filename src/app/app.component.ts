@@ -1,4 +1,4 @@
-import { Component,OnInit} from '@angular/core';
+import { Component,inject,OnInit} from '@angular/core';
 import { RouterOutlet, RouterLinkActive, RouterLink, Router, UrlSegment, ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
